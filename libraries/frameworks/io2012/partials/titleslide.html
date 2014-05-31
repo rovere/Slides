@@ -1,25 +1,8 @@
 <slide class="title-slide segue nobackground">
-  {{# page.logo }}
-  <aside class="gdbar">
-    <img src="{{page.url.assets}}/img/{{{ page.logo }}}">
-  </aside>
-  {{/ page.logo }}
+  <aside class="gdbar"><img src="images/CERN-logo_128.png" style="width:85px; height:85px;"></aside>
   <hgroup class="auto-fadein">
-    <h1>{{ page.title }}</h1>
-    <h2>{{ page.subtitle }}</h2>
-    <p>{{ page.author }}<br/>{{ page.job }}</p>
+    <h1 data-config-title>{{ page.title }}</h1>
+    <h2 data-config-subtitle>{{ page.subtitle }}</h2>
+    <p data-config-presenter>{{ page.author }}</p>
   </hgroup>
-  {{# page.github }}
-    <a href="https://github.com/{{user}}/{{repo}}/zipball/gh-pages" class="example">
-     Download
-    </a>
-  {{/ page.github }}
-  <article></article>  
-  {{# page.license }}    
-  <footer class = 'license'>
-    <a href='http://creativecommons.org/licenses/{{{ page.license }}}/3.0/'>
-    <img width = '80px' src = 'http://mirrors.creativecommons.org/presskit/buttons/88x31/png/{{{ page.license }}}.png'>
-    </a>
-  </footer>
-  {{/ page.license }}
 </slide>
