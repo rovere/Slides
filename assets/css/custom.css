@@ -36,3 +36,9 @@ article p, article li, article li.build, section p, section li{
 slide:not(.segue) h1, slide:not(.segue) h2, slide:not(.segue) h3 {
   color: #515151;
 }
+
+.prettyprint {
+  padding: 10px 0 10px 60px;
+  background-color: #f7f7f9;
+  border: 1px solid #e1e1e8;
+}
