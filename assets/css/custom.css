@@ -1,0 +1,38 @@
+slides > slide:not(.nobackground):before {
+  font-size: 12pt;
+  content: attr(data-hashtag);
+  position: absolute;
+  bottom: 20px;
+  left: 60px;
+  background: url("../../images/CERN-logo_outline_128.png") no-repeat 0 50%;
+  -webkit-background-size: 30px 30px;
+  -moz-background-size: 30px 30px;
+  -o-background-size: 30px 30px;
+  background-size: 30px 30px;
+  padding-left: 40px;
+  height: 30px;
+  line-height: 1.9;
+}
+
+article p, article li, article li.build, section p, section li{
+ line-height: 1em;
+}
+
+.title-slide {
+  background-color: #fff;
+}
+
+
+
+.title-slide {
+  background-color: #fff;
+}
+
+.title-slide hgroup > h1,
+.title-slide hgroup > h2 {
+   color: #515151 ;  /* ; #EF5150*/
+}
+
+slide:not(.segue) h1, slide:not(.segue) h2, slide:not(.segue) h3 {
+  color: #515151;
+}

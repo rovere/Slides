@@ -1,0 +1,32 @@
+---
+layout: slide
+---
+<hr/>
+{{{ slide.content }}}
+<!-- LEFT IMAGE -->
+<div style='float:left;width:{{{slide.w1}}}%;' class='centered'>
+  <!-- do we have a left image? -->
+  {{#slide.imageleft}}
+   <article class="flexbox vcenter">
+    <img src="{{slide.imageleft}}" title="{{{slide.image_title_left.html}}}" width="100%">
+   </article>
+  {{/slide.imageleft}}
+  <!-- do we have an associated left caption? -->
+  {{#slide.caption_left}}
+   {{{slide.caption_left.html}}}
+  {{/slide.caption_left}}
+</div>
+
+<!-- RIGHT IMAGE -->
+<div style='float:right;width:{{{ slide.w2 }}}%;'>
+  <!-- do we have a left image? -->
+  {{#slide.imageright}}
+    <article class="flexbox vcenter">
+      <img src="{{slide.imageright}}" title="{{{slide.image_title_right.html}}}" width="100%">
+    </article>
+  {{/slide.imageright}}
+  <!-- do we have an associated left caption? -->
+  {{#slide.caption_right}}
+     {{{slide.caption_right.html}}}
+  {{/slide.caption_right}}
+</div>

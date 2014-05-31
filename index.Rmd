@@ -1,0 +1,125 @@
+---
+title       : First slidify test
+subtitle    : A first attempt
+author      : Marco Rovere
+job         : CERN
+framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+highlighter : prettify.js      # {highlight.js, prettify, highlight}
+hitheme     : twitter-bootstrap # sunburst      #
+widgets     : []            # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone,draft}
+---
+
+---
+
+## A few important remarks
+
+---
+
+## Read-And-Delete
+
+1. Edit YAML front matter
+2. Write using R Markdown
+3. Use an empty line followed by three dashes to separate slides!
+
+
+--- &twoimages w1:45 w2:45 imageleft:images/CERN-logo.png imageright:images/CERN-logo.jpg
+## An example of 2 pic slides.
+
+This can be a little, short, introduction to the images...
+
+*** {name: image_title_left}
+
+A very beautiful image
+
+*** {name: caption_left}
+
+A typical CERN Logo
+
+*** {name: image_title_right}
+
+Logo-2
+
+*** {name: caption_right}
+
+A typical CERN logo-2
+
+
+--- &threecolstext wl:34 wc:32 wr:34
+
+## This is a slide with three(3) columns of text
+
+*** {name: left}
+
+Lorem Ipsum is simply dummy text of the printing and typesetting
+industry. Lorem Ipsum has been the industry's standard dummy text ever
+since the 1500s, when an unknown printer took a galley of type and
+scrambled it to make a type specimen book. It has survived not only
+five centuries, but also the leap into electronic typesetting,
+remaining essentially unchanged. 
+
+*** {name: center}
+
+Lorem Ipsum is simply dummy text of the printing and typesetting
+industry. Lorem Ipsum has been the industry's standard dummy text ever
+since the 1500s, when an unknown printer took a galley of type and
+scrambled it to make a type specimen book. It has survived not only
+five centuries, but also the leap into electronic typesetting,
+remaining essentially unchanged. It was popularised in the 1960s with
+the release of Letraset 
+
+*** {name: right}
+
+Lorem Ipsum is simply dummy text of the printing and typesetting
+industry. Lorem Ipsum has been the industry's standard dummy text ever
+since the 1500s, when an unknown printer took a galley of type and
+scrambled it to make a type specimen book. It has survived not only
+five centuries, but also the leap into electronic typesetting,
+
+---
+
+## A table
+
+| First Header  | Second Header   |
+| ------------- | :-------------: |
+| Content Cell  | Content Cell  |
+| Content Cell  | Content Cell  |
+| Content Cell  | Content Cell  |
+| Content Cell  | Content Cell  |
+| Content Cell  | Content Cell  |
+| Content Cell  | Content Cell  |
+
+
+--- &topic
+
+## A single Topic
+
+---
+
+## DQM GUI Backend
+
+- The <font class="blue2">master catalogue</font> identifies data samples by a (dataset; runnr or cmssw version) tuple.
+- The master catalogue contains the following information.
+    - Key <font class="blue2">MASTER_SAMPLE_RECORD</font>
+    - Key <font class="blue2">MASTER_SOURCE_PATHNAME</font>
+    - Key <font class="blue2">MASTER_DATASET_NAME</font>
+    - Key <font class="blue2">MASTER_CMSSW_VERSION</font>
+    - Key <font class="blue2">MASTER_OBJECT_NAME</font>
+    - Key <font class="blue2">MASTER_TSTREAMERINFO</font>
+- <font class="red2">All this info is in-memory on the server for ultra-fast access.</font>
+
+
+ <pre class="prettyprint" data-lang="c++">
+ static const uint64_t MASTER_SAMPLE_RECORD       = ((uint64_t) 0) << 32;
+ static const uint64_t MASTER_SOURCE_PATHNAME     = ((uint64_t) 1) << 32;
+ static const uint64_t MASTER_DATASET_NAME        = ((uint64_t) 2) << 32;
+ static const uint64_t MASTER_CMSSW_VERSION       = ((uint64_t) 3) << 32;
+ static const uint64_t MASTER_OBJECT_NAME         = ((uint64_t) 4) << 32;
+ static const uint64_t MASTER_TSTREAMERINFO       = ((uint64_t) 5) << 32;
+</pre>
+
+
+
+--- &thankyou
+
+## Thank You!
