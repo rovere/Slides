@@ -4,7 +4,7 @@ subtitle    : A first attempt
 author      : Marco Rovere
 job         : CERN
 framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
-highlighter : prettify.js      # {highlight.js, prettify, highlight}
+highlighter : prettify      # {highlight.js, prettify, highlight}
 hitheme     : twitter-bootstrap # sunburst      #
 widgets     : []            # {mathjax, quiz, bootstrap}
 mode        : selfcontained # {standalone,draft}
