@@ -1,0 +1,144 @@
+/* COLORS FROM SOLARIZED PALETTE */
+$base03:    #002b36;
+$base02:    #073642;
+$base01:    #586e75;
+$base00:    #657b83;
+$base0:     #839496;
+$base1:     #93a1a1;
+$base2:     #eee8d5;
+$base3:     #fdf6e3;
+$yellow:    #b58900;
+$orange:    #cb4b16;
+$red:       #dc322f;
+$magenta:   #d33682;
+$violet:    #6c71c4;
+$blue:      #268bd2;
+$cyan:      #2aa198;
+$green:     #859900;
+$background: #222222;
+
+@mixin rebase($rebase03,$rebase02,$rebase01,$rebase00,$rebase0,$rebase1,$rebase2,$rebase3) 
+{
+    * { color:$rebase0; }
+    body { background-color:$rebase03; }
+    h1,h2,h3,h4,h5,h6 { color:$rebase1; border-color: $rebase0; }
+    h1#pagetitle, h1:first-of-type { color: $rebase1; }
+    h2#pagesubtitle, h2:first-of-type { color: $rebase01; }
+    a, a:active, a:visited { color: $rebase1; }
+    a:hover { background-color: $rebase02 }
+    header {
+        background-color: $rebase01;
+        color: $rebase1;
+        a.navlink, a:active.navlink, a:visited.navlink { color: $rebase1; }
+        a:hover.navlink { background: transparent; color: $rebase02; }
+        #sitelink { color: $rebase02; background-color: $rebase1 }
+        a:hover#sitelink { font-weight: bold; }
+    }
+    footer {
+        background-color: $rebase02;
+        color: $rebase01;
+    }
+    pre {
+        color: $rebase1;
+        background-color: $rebase02;
+    }
+    tr:nth-child(odd) { background-color:$rebase02 }
+    th { color:$rebase1; background-color:$rebase03; }
+    h1 a:hover {
+        -webkit-text-stroke: 3px $rebase02;
+    }
+    h2#download + h3 {
+        background-image: url("/img/download-base00.png");
+        color:$rebase0;
+    }
+}
+
+@mixin io2012ize($bg,$rebase03,$rebase02,$rebase01,$rebase00,$rebase0,$rebase1,$rebase2,$rebase3) 
+{
+  * { color:$rebase0; }
+  body { background-color:$bg; }
+  h1,h2,h3,h4,h5,h6 { color:$rebase1; border-color: $rebase0; }
+  a {
+    color: $blue;
+  }
+/*
+  slide:not(.segue) {
+    h2 {
+      color:$rebase1; border-color: $rebase0;
+    }
+  }
+*/  
+  slide {
+    hgroup {
+      h2 {
+        color: $rebase03;
+      }
+    }
+    article {
+      color: $rebase1;
+    }
+    table {
+      th {
+        color: #fff;
+        background: $blue;
+      }
+      tbody {
+        tr {
+          background: #fff;  
+        }
+        tr:nth-child(2n+1) {
+          background: #f0f0f0;
+        }
+ 	td {
+          padding: 0.5em 0.5em;
+	}
+        td:first-child {
+          font-weight: 700;
+          padding: 0.5em 0.5em;
+        }
+      }
+    }
+  }
+  .title-slide {
+    background-color: #fff;
+    hgroup {
+      h1 {
+        color: $rebase03;
+      }
+      h2 {
+        color: $rebase01;
+      }
+      p {
+        color: $rebase00;
+      }
+    }
+  }
+}
+
+@mixin singlecolor2class($color) {
+  color: $color;
+}
+
+@mixin accentize($accent) {
+    a#sitelink{ background-color:$accent; }
+    a, a:active, a:visited, code.url { color: $accent; }
+    h1 {color:$accent}
+    h2,h3,h4,h5,h6 {color:$accent}
+    h1#pagetitle, h1:first-of-type { color: $accent; }
+}
+
+/* html.light { @include rebase($base3,$base2,$base1,$base0,$base00,$base01,$base02,$base03)} */
+/* html.dark  { @include rebase($base03,$base02,$base01,$base00,$base0,$base1,$base2,$base3)} */
+
+html, html.io2012 { @include io2012ize($background,$base03,$base02,$base01,$base00,$base0,$base1,$base2,$base3)}
+
+.yellow { @include singlecolor2class($yellow) }
+.orange { @include singlecolor2class($orange) }
+.red { @include singlecolor2class($red) }
+.magenta { @include singlecolor2class($magenta) }
+.violet { @include singlecolor2class($violet) }
+.blue { @include singlecolor2class($blue) }
+.cyan { @include singlecolor2class($cyan) }
+.green { @include singlecolor2class($green) }
+
+

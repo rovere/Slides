@@ -1,3 +1,6 @@
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic);
+@import 'colors.css'
+
 slides > slide:not(.nobackground):before {
   font-size: 12pt;
   content: attr(data-hashtag);
@@ -15,30 +18,67 @@ slides > slide:not(.nobackground):before {
 }
 
 article p, article li, article li.build, section p, section li{
- line-height: 1em;
-}
-
-.title-slide {
-  background-color: #fff;
-}
-
-
-
-.title-slide {
-  background-color: #fff;
-}
-
-.title-slide hgroup > h1,
-.title-slide hgroup > h2 {
-   color: #515151 ;  /* ; #EF5150*/
-}
-
-slide:not(.segue) h1, slide:not(.segue) h2, slide:not(.segue) h3 {
-  color: #515151;
+ font-size: 25px;
+ line-height: 1.1em;
 }
 
 .prettyprint {
   padding: 10px 0 10px 60px;
   background-color: #f7f7f9;
   border: 1px solid #e1e1e8;
+}
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Source Sans Pro'), local('OpenSans'), url(../fonts/OpenSans.woff) format('woff'); 
+}
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Source Sans Pro Bold'), local('OpenSans-Bold'), url(../fonts/OpenSans-Bold.woff) format('woff');
+}
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: italic;
+  font-weight: 700;
+  src: local('Source Sans Pro Bold Italic'), local('OpenSans-BoldItalic'), url(../fonts/OpenSans-BoldItalic.woff) format('woff');
+}
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: italic;
+  font-weight: 400;
+  src: local('Source Sans Pro Italic'), local('OpenSans-Italic'), url(../fonts/OpenSans-Italic.woff) format('woff');
+}
+
+/* Styles for Title Slide */
+.title-slide hgroup > h1{
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+.title-slide hgroup > h2{
+  font-family: 'Source Sans Pro', 'Oswald', 'Calibri', sans-serif;
+}
+
+/* Fonts and Spacing */
+article p, article li, article li.build, section p, section li{
+  font-family: 'Source Sans Pro', 'Open Sans','Helvetica', 'Crimson Text', 'Garamond',  'Palatino', sans-serif;
+  text-align: justify;
+  font-size:22px;
+  line-height: 1.5em;
+}
+
+slide:not(.segue) h2{
+  font-family: 'Source Sans Pro', 'Calibri', Arial, sans-serif;
+  font-size: 52px;
+  font-style: normal;
+  font-weight: bold;
+  text-transform: normal;
+  letter-spacing: -2px;
+  line-height: 1.2em;
+/*  color: #193441;*/
+/*  color: #02574D;*/
+/*  color: #CC2904;*/
 }

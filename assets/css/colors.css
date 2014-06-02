@@ -1,0 +1,68 @@
+/* COLORS FROM SOLARIZED PALETTE */
+/* html.light { @include rebase($base3,$base2,$base1,$base0,$base00,$base01,$base02,$base03)} */
+/* html.dark  { @include rebase($base03,$base02,$base01,$base00,$base0,$base1,$base2,$base3)} */
+html, html.io2012 {
+  /*
+    slide:not(.segue) {
+      h2 {
+        color:$rebase1; border-color: $rebase0;
+      }
+    }
+  */ }
+  html *, html.io2012 * {
+    color: #839496; }
+  html body, html.io2012 body {
+    background-color: #222222; }
+  html h1, html h2, html h3, html h4, html h5, html h6, html.io2012 h1, html.io2012 h2, html.io2012 h3, html.io2012 h4, html.io2012 h5, html.io2012 h6 {
+    color: #93a1a1;
+    border-color: #839496; }
+  html a, html.io2012 a {
+    color: #268bd2; }
+  html slide hgroup h2, html.io2012 slide hgroup h2 {
+    color: #002b36; }
+  html slide article, html.io2012 slide article {
+    color: #93a1a1; }
+  html slide table th, html.io2012 slide table th {
+    color: #fff;
+    background: #268bd2; }
+  html slide table tbody tr, html.io2012 slide table tbody tr {
+    background: #fff; }
+  html slide table tbody tr:nth-child(2n+1), html.io2012 slide table tbody tr:nth-child(2n+1) {
+    background: #f0f0f0; }
+  html slide table tbody td, html.io2012 slide table tbody td {
+    padding: 0.5em 0.5em; }
+  html slide table tbody td:first-child, html.io2012 slide table tbody td:first-child {
+    font-weight: 700;
+    padding: 0.5em 0.5em; }
+  html .title-slide, html.io2012 .title-slide {
+    background-color: #fff; }
+    html .title-slide hgroup h1, html.io2012 .title-slide hgroup h1 {
+      color: #002b36; }
+    html .title-slide hgroup h2, html.io2012 .title-slide hgroup h2 {
+      color: #586e75; }
+    html .title-slide hgroup p, html.io2012 .title-slide hgroup p {
+      color: #657b83; }
+
+.yellow {
+  color: #b58900; }
+
+.orange {
+  color: #cb4b16; }
+
+.red {
+  color: #dc322f; }
+
+.magenta {
+  color: #d33682; }
+
+.violet {
+  color: #6c71c4; }
+
+.blue {
+  color: #268bd2; }
+
+.cyan {
+  color: #2aa198; }
+
+.green {
+  color: #859900; }

@@ -1,7 +1,7 @@
 ---
-title       : First slidify test
-subtitle    : A first attempt
-author      : Marco Rovere
+title       : DQM GUI (almost) Explained
+subtitle    : A quick introduction to the DQM GUI
+author      : Marco Rovere - PH-CMG-CO
 job         : CERN
 framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
 highlighter : prettify      # {highlight.js, prettify, highlight}
@@ -10,114 +10,403 @@ widgets     : []            # {mathjax, quiz, bootstrap}
 mode        : selfcontained # {standalone,draft}
 ---
 
----
-
 ## A few important remarks
 
----
+* <font class="blue">Good software does not happen by magic ...</font>
+* The DQM GUI is the work mainly of <font class="red">Lassi Tuura</font> and <font class="red">Giulio Eulisse</font>
+    * all glory should go to them.
+* Since 2010 I have been taking care of it.
+* There are many topics involved in the DQM GUI:
+    * its backend design (<font class="blue">index</font>)
+    * its web server (<font class="blue">CherryPy</font>)
+    * its Javascript Frontend (<font class="blue">YUI+ExtJS</font>)
+* It is not possible to focus on all of them w/in few hours, a selection is made here.
+* <font class="red">This is not a tutorial on GUI's capabilities</font>
+* be patient w/ slides: it's my first attempt at using HTML5 + GoogleIO + MarkDown.
 
-## Read-And-Delete
-
-1. Edit YAML front matter
-2. Write using R Markdown
-3. Use an empty line followed by three dashes to separate slides!
-
-
---- &twoimages w1:45 w2:45 imageleft:images/CERN-logo.png imageright:images/CERN-logo.jpg
-## An example of 2 pic slides.
-
-This can be a little, short, introduction to the images...
-
-*** {name: image_title_left}
-
-A very beautiful image
-
-*** {name: caption_left}
-
-A typical CERN Logo
-
-*** {name: image_title_right}
-
-Logo-2
-
-*** {name: caption_right}
-
-A typical CERN logo-2
-
-
---- &threecolstext wl:34 wc:32 wr:34
-
-## This is a slide with three(3) columns of text
-
-*** {name: left}
-
-Lorem Ipsum is simply dummy text of the printing and typesetting
-industry. Lorem Ipsum has been the industry's standard dummy text ever
-since the 1500s, when an unknown printer took a galley of type and
-scrambled it to make a type specimen book. It has survived not only
-five centuries, but also the leap into electronic typesetting,
-remaining essentially unchanged. 
-
-*** {name: center}
-
-Lorem Ipsum is simply dummy text of the printing and typesetting
-industry. Lorem Ipsum has been the industry's standard dummy text ever
-since the 1500s, when an unknown printer took a galley of type and
-scrambled it to make a type specimen book. It has survived not only
-five centuries, but also the leap into electronic typesetting,
-remaining essentially unchanged. It was popularised in the 1960s with
-the release of Letraset 
-
-*** {name: right}
-
-Lorem Ipsum is simply dummy text of the printing and typesetting
-industry. Lorem Ipsum has been the industry's standard dummy text ever
-since the 1500s, when an unknown printer took a galley of type and
-scrambled it to make a type specimen book. It has survived not only
-five centuries, but also the leap into electronic typesetting,
 
 ---
 
-## A table
+## Agenda
 
-| First Header  | Second Header   |
-| ------------- | :-------------: |
-| Content Cell  | Content Cell  |
-| Content Cell  | Content Cell  |
-| Content Cell  | Content Cell  |
-| Content Cell  | Content Cell  |
-| Content Cell  | Content Cell  |
-| Content Cell  | Content Cell  |
+Things we'll cover today:
 
+* General DQM GUI design principles
+* Overview of the current backend
 
 --- &topic
 
-## A single Topic
+## DQM GUI General Overview
+### Main design aspects
+<!--TO BE FIXED -->
+
+---
+
+## DQM GUI in few words
+
+* Web based interface to browse histograms stored in a ROOT file.
+* Focus on robustness and speed.
+* Based on CherryPy, Javascript (YUI, ExtJS) and C++ code on [github](http://github.com/rovere/dqmgui)
+* Understands <font class="blue">TH{1,2,3}{S,I,F,D}, TProfile{,2D}, strings, ints, floats.</font>
+* Histograms extracted directly from <font class="blue">plain ROOT files.</font>
+* ROOT files/histograms ofter/always available for download.
+* Scales up to O(10TB) objects indexed, O(+Million) unique Monitor Element names.
+
+--- .image
+
+## DQM GUI Architecture
+
+<article class="flexbox vcenter">
+<img src="images/DQM_GUI_servers.png" alt="General Overview" title="General Overview" height="90%">
+</article>
+
+---
+
+## DQM GUI in numbers
+
+* O(15K) lines of C++ code (web server accelerator, render engine, index manipulation)
+* O(5K) python lines
+* O(4K) javascript lines.
+
+
+|    Quantity   |   Offline Server | RelVal Server | Online Server |
+|---------------|------------------|---------------|---------------|
+| SAMPLES       |          264.383 |        31.587 |        16.042 |
+| SOURCE FILES  |          303.580 |        31.744 |       387.298 |
+| DATASETS      |            2.068 |        18.379 |             1 |
+| UNIQUE OBJS   |          913.174 |     1.649.086 |       346.448 |
+| STREAMERS     |                1 |             1 |             2 |
+| DISK SIZE(TB) |              2.5 |          0.38 |          0.06 |
+
+
+---
+
+## DQM GUI basic concepts
+### How a page is created
+
+* All pages are dynamically created starting from
+    * templated html
+    * information retrieved from the server
+    * Javascript plugins
+    * stateful HTML via unique URL redirection and server side python dictionary: [cmsweb/dqm/offline](https://cmsweb.cern.ch/dqm/offline)
+    * all interaction w/ GUI are:
+        * send AJAX request
+        * update server-side <font class="blue">state</font>
+        * receive <font class="blue">state</font> object and render it
+
+---
+
+## DQM GUI basic concepts
+### /state object
+
+<article class="smaller">
+<pre class="prettyprint" data-lang="json">
+([
+  {<b>'kind':'AutoUpdate'</b>,
+   'interval':300,
+   'stamp':1398331290.056085,
+   'serverTime':97.564000
+  },
+  {<b>'kind':'DQMHeaderRow'</b>, 'run':"221'242", 'lumi':"2'458",
+   'event':"97'324'253", 'runstart':"Sun Apr 13, 06:11",
+   'service':'Offline', ...
+  },
+  {<b>'kind':'DQMQuality'</b>,
+   'items':[{'label':"CSC",
+             'version':1397610899608040000,
+             'name':"CSC/EventInfo/reportSummaryMap",
+             'location':"archive/221242/MinimumBias/Commissioning201-PromptReco-v1/DQM",
+             'reportSummary':"1",
+             'eventTimeStamp':""
+            }, ...
+          ]
+  }])
+</pre>
+</article>
+
+---
+
+## DQM GUI basic concepts
+### DQMQuality plugin example
+
+<article class="smaller">
+<pre class="prettyprint" data-lang="javascript">
+GUI.Plugin.DQMQuality = new function()
+{
+  ...
+  this.attach = function(gui) { _gui = gui; };
+  this.detach = function() { ... };
+  /** Update this plug-in display.  Fills the canvas area with a floating image panel for each DQM source
+      for which we have the required summary information and 2D map.  Updates the page incrementally to
+      avoid flashing. */
+  this.update = function(data) {
+    _items = data.items;
+    var status = data.items;
+    ...
+    // If there is no contents to show, display a simple message.
+    if (! status.length) {
+      var content = " < div ...>< p >
+      No data are presently available or the DQM producers have not generated the standard EventInfo summary information.< /p >< /div >";
+      if (_canvas.innerHTML != content) _canvas.innerHTML = content;
+    } ... }
+  ...
+}();
+</pre>
+</article>
+
+<footnote class="source">[source](https://github.com/rovere/dqmgui/blob/index128/src/javascript/DQM/Quality.js)</footnote>
+
+--- &topic
+
+## DQM GUI Backend
+### Main design aspects
+
+
+---
+
+## DQM GUI Backend
+### Main concepts
+
+- The backend does not use any open source nor commercial database.
+- it is not exactly a database, even if it uses <font class="blue">keys</font> to index and retrieve data
+- entirely written in C++
+    - multiple-readers, single-writer
+    - extremely optimised for our use case
+    - not a general purpose backend
+- The index is a directory containing one well-known generation ID identifying current <font class="blue">master catalogue</font> which in turn references the <font class="blue">data files with the actual data content</font>.
+
+--- image
+
+## DQM GUI Backend
+### Typical file's layout
+
+<article class="flexbox vcenter">
+<img src="images/index_file_layout.png" alt="Layout of a typical VisDQMFile" title="Layout of a typical VisDQMFile" width="100%">
+</article>
+
+--- .image
+
+## DQM GUI Backend
+### Keys, keys and more keys...
+
+<article class="flexbox vcenter">
+<img src="images/index_keys.png" alt="Keys" title="Keys" width="100%">
+</article>
+
+--- .image
+
+## DQM GUI Backend
+### p-trie
+
+<article class="flexbox vcenter">
+<img src="images/Lassi.png" alt="First Node" title="First Node" height="60%">
+</article>
+
+--- .image
+
+## DQM GUI Backend
+### p-trie, p-tries
+
+<article class="flexbox vcenter">
+<img src="images/Tuura.png" alt="Second Node" title="Second Node" height="70%">
+</article>
+
+--- .image
+
+## DQM GUI Backend
+### p-trie, p-tries and more p-tries
+
+<article class="flexbox vcenter">
+<img src="images/thought.png" alt="Third Node" title="Third Node" height="75%">
+</article>
+
+--- .image
+
+## DQM GUI Backend
+### p-trie, p-tries and more p-tries
+
+
+<article class="flexbox vcenter">
+<img src="images/and.png" alt="Fourth Node" title="Fourth Node" height="80%">
+</article>
+
+--- .image
+
+## DQM GUI Backend
+### p-trie, p-tries and more p-tries
+
+<article class="flexbox vcenter">
+<img src="images/developed.png" alt="Fifth Node" title="Fifth Node" height="80%">
+</article>
+
+--- .image
+
+## DQM GUI Backend
+### p-trie, p-tries and more p-tries
+
+
+<article class="flexbox vcenter">
+<img src="images/it.png" alt="Sixth Node" title="Sixth Node" height="80%">
+</article>
+
+--- .image
+
+## DQM GUI Backend
+### Pages, pages and more pages
+
+
+A typical (un)-compressed, generic datapage in memory is laid out as in the following figure:
+<article class="flexbox vcenter">
+<img src="images/datapage.png" alt="In-memory datapage" title="In-memory datapage" width="100%">
+</article>
+
+When persisted on disk, the layout is optimised and compressed even more, as follows:
+<article class="flexbox vcenter">
+<img src="images/datapage_ondisk.png" alt="On-disk datapage" title="On-disk datapage" width="100%">
+</article>
 
 ---
 
 ## DQM GUI Backend
 
-- The <font class="blue2">master catalogue</font> identifies data samples by a (dataset; runnr or cmssw version) tuple.
+- The <font class="blue">master catalogue</font> identifies data samples by a (dataset; runnr or cmssw version) tuple.
 - The master catalogue contains the following information.
-    - Key <font class="blue2">MASTER_SAMPLE_RECORD</font>
-    - Key <font class="blue2">MASTER_SOURCE_PATHNAME</font>
-    - Key <font class="blue2">MASTER_DATASET_NAME</font>
-    - Key <font class="blue2">MASTER_CMSSW_VERSION</font>
-    - Key <font class="blue2">MASTER_OBJECT_NAME</font>
-    - Key <font class="blue2">MASTER_TSTREAMERINFO</font>
+    - Key <font class="blue">MASTER_SAMPLE_RECORD</font>
+    - Key <font class="blue">MASTER_SOURCE_PATHNAME</font>
+    - Key <font class="blue">MASTER_DATASET_NAME</font>
+    - Key <font class="blue">MASTER_CMSSW_VERSION</font>
+    - Key <font class="blue">MASTER_OBJECT_NAME</font>
+    - Key <font class="blue">MASTER_TSTREAMERINFO</font>
 - <font class="red2">All this info is in-memory on the server for ultra-fast access.</font>
 
-
- <pre class="prettyprint" data-lang="c++">
- static const uint64_t MASTER_SAMPLE_RECORD       = ((uint64_t) 0) << 32;
- static const uint64_t MASTER_SOURCE_PATHNAME     = ((uint64_t) 1) << 32;
- static const uint64_t MASTER_DATASET_NAME        = ((uint64_t) 2) << 32;
- static const uint64_t MASTER_CMSSW_VERSION       = ((uint64_t) 3) << 32;
- static const uint64_t MASTER_OBJECT_NAME         = ((uint64_t) 4) << 32;
- static const uint64_t MASTER_TSTREAMERINFO       = ((uint64_t) 5) << 32;
+<article class="smaller">
+<pre class="prettyprint" data-lang="c++">
+static const uint64_t MASTER_SAMPLE_RECORD       = ((uint64_t) 0) << 32;
+static const uint64_t MASTER_SOURCE_PATHNAME     = ((uint64_t) 1) << 32;
+static const uint64_t MASTER_DATASET_NAME        = ((uint64_t) 2) << 32;
+static const uint64_t MASTER_CMSSW_VERSION       = ((uint64_t) 3) << 32;
+static const uint64_t MASTER_OBJECT_NAME         = ((uint64_t) 4) << 32;
+static const uint64_t MASTER_TSTREAMERINFO       = ((uint64_t) 5) << 32;
 </pre>
+</article>
 
+---
+
+## DQM GUI Backend
+### Sample
+
+<article class="smaller">
+<pre class="prettyprint" data-lang="c++">
+struct Sample
+{
+ uint64_t firstImportTime;
+ uint64_t lastImportTime;
+ uint32_t importVersion;<b>
+ uint32_t files[2];
+ uint32_t sourceFileIdx;
+ uint32_t datasetNameIdx;
+ uint32_t streamerInfoIdx;
+ uint32_t cmsswVersion;</b>
+ int32_t  runNumber;
+ uint32_t numObjects;
+ uint64_t numLumiSections;
+ uint64_t runStartTime;
+ uint64_t processedTime;
+};
+</pre>
+</article>
+
+---
+
+## DQM GUI Backend
+### Main concepts
+
+- In addition to the master catalogue, the index contains <font class="blue">two other types of files</font>:
+    - summary and statistics
+    - object data.
+- Each type is in separate files, built up to about 500MB per file
+- Inside the data files objects are ordered by 64-bit keys
+    - top 20 bits are the sample index
+    - 4-bit type identifier
+    - 20-bit lumi section index
+    - 20-bit object name index.
+
+---
+
+## DQM GUI Backend
+### Main concepts
+
+- The <font class="blue">sample index</font> is the index of this sample in the master catalogue.
+- The <font class="blue">object name index</font> is the monitor element name in the master catalogue table of names.
+- The <font class="blue">object data file</font> contains two serialised ROOT objects per key: the object itself and the reference
+- To extract the objects first read in and activate the [streamer info](https://github.com/rovere/dqmgui/blob/index128/src/cpp/DQM/VisDQMTools.h#L149) for the sample in the master catalogue, then simply extract objects from the byte buffer as long as it has data left in it.
+- No ROOT object is stored for the scalar monitor elements.
+
+---
+
+## DQM GUI Backend
+### image URL explained
+
+
+- How to locate a single histogram that fast?
+
+http://.../dqm/offline/<font class="blue">plotfairy/</font><font class="red">archive</font>/196531/<font class="green">JetHT/Run2012B-PromptReco-v1/DQM</font>/<font class="yellow">Tracking/TrackParameters/GeneralProperties/NumberOfTracks_GenTk</font>...
+
+- <font class="blue">API specification</font>
+- <font class="red">Source specification</font>
+- <font class="green">Dataset specification</font>
+- <font class="yellow">Object Specification</font>
+
+---
+
+## DQM GUI Backend
+### image URL explained
+
+- Overall search logic
+
+1. Locate p-trie index for the specified <font class="green">Dataset</font> (ultra-fast in-memory + p-trie)
+1. Locate sample that corresponds to tuple (dataset, run)
+1. create full <font class="blue">64-bits key</font> for objects requested
+1. Open <font class="blue">data-file</font> linked to the proper sample
+1. <font class="blue">Read its index and immediately jump to the correct page</font>
+1. Un-compress the page and <font class="blue">look for the exact key, grab proper serialized ROOT object</font>
+1. <font class="blue">Deserialise it using proper Streamer (index grabbed from the sample)</font>
+1. pass decoded ROOT object to rendering engine
+1. Typical time ~ 100ms. (<< if in cache...)
+
+--- &topic
+
+## DQM GUI Performances
+
+
+---
+
+## DQM GUI Performances
+
+<article class="flexbox vcenter">
+<img src="images/OfflineAccesses2011_2012.png" alt="Offline Accesses" title="Offline Accesses" width="100%">
+
+<img src="images/OfflineResponseTime2011_2012.png" alt="Offline Response Time" title="Offline Response Time" width="100%">
+</article>
+
+--- &topic
+
+## Further Readings
+
+
+--- .big
+
+## Links
+
+
+- [Code in github](http://github.com/rovere/dqmgui)
+- [M.Rovere@ROOT Users Workshop 2013 - Saas Fee](https://indico.cern.ch/event/217511/contribution/42/material/slides/0.pdf)
+- [M.Rovere@LHCb Computing Workshop CERN, 23 May 2013](https://indico.cern.ch/event/236650/session/5/contribution/51/material/slides/0.pdf)
+- [L Tuura et al 2010 J. Phys.: Conf. Ser. 219 072055](http://iopscience.iop.org/1742-6596/219/7/072055/pdf/1742-6596_219_7_072055.pdf)
+- [P-Trie](http://en.wikipedia.org/wiki/Radix_tree)
+- [CherryPy](http://www.cherrypy.org/)
+- [Sencha - ExtJS](http://www.sencha.com/products/extjs/)
+- [YUI](http://yuilibrary.com/)
 
 
 --- &thankyou
