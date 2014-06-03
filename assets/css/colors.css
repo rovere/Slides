@@ -18,6 +18,8 @@ html, html.io2012 {
     border-color: #839496; }
   html a, html.io2012 a {
     color: #268bd2; }
+  html slide:not(.nobackground):after, html slide:not(.nobackground):before, html.io2012 slide:not(.nobackground):after, html.io2012 slide:not(.nobackground):before {
+    color: #002b36; }
   html slide hgroup h2, html.io2012 slide hgroup h2 {
     color: #002b36; }
   html slide article, html.io2012 slide article {

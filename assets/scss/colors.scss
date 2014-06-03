@@ -68,6 +68,9 @@ $background: #222222;
     }
   }
 */  
+  slide:not(.nobackground):after,slide:not(.nobackground):before {
+    color: $rebase03;
+  }
   slide {
     hgroup {
       h2 {
