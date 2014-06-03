@@ -37,16 +37,76 @@ article p, article li, article li.build, section p, section li{
   src: local('Source Sans Pro Italic'), local('OpenSans-Italic'), url(../fonts/OpenSans-Italic.woff) format('woff');
 }
 
+/* Logo and page numbers on every slide */
+
+slides > slide:not(.nobackground):before {
+  font-size: 10pt;
+  content: attr(data-hashtag);
+  content: "M.Rovere, G.Cerati, Tracking POG Meeting - 2014-06-02";
+  position: absolute;
+  bottom: 1px;
+  left: 15px;
+  /*background: url("../../images/CERN-logo_outline_128.png") no-repeat 0 50%;*/
+  -webkit-background-size: 30px 30px;
+  -moz-background-size: 30px 30px;
+  -o-background-size: 30px 30px;
+  background-size: 30px 30px;
+  padding-left: 0px;
+  height: 30px;
+  line-height: 1.9;
+}
+slides > slide:not(.nobackground):after {
+  font-size: 10pt;
+  content: attr(data-slide-num) "/" attr(data-total-slides);
+  position: absolute;
+  bottom: 1px;
+  right: 15px;
+  line-height: 1.9;
+}
+slides > slide.backdrop {
+  z-index: -10;
+  display: block !important;
+  background: url("../../images/CERN-logo_outline_128.png") 99% 4% no-repeat,
+              url("../../images/CMS_Logo_Color.png") 93% 4% no-repeat;
+  background-size: 60px 60px;
+/*  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(85%, #ffffff), color-stop(100%, #e6e6e6));
+  background: -webkit-linear-gradient(#ffffff, #ffffff 85%, #e6e6e6);
+  background: -moz-linear-gradient(#ffffff, #ffffff 85%, #e6e6e6);
+  background: -o-linear-gradient(#ffffff, #ffffff 85%, #e6e6e6);
+  background: -ms-linear-gradient(#ffffff, #ffffff 85%, #e6e6e6);
+  background: linear-gradient(#ffffff, #ffffff 85%, #e6e6e6); */
+  background-color: white;
+}
+
+/* Logo on topic and front page */
+aside.gdbar > img {
+  margin: 6px 6px;
+}
+
 /* Styles for Title Slide */
 .title-slide hgroup > h1{
   font-family: 'Source Sans Pro', sans-serif;
+  text-shadow: #fff 0px 4px 0px,rgba(0,0,0,0.3) 0 5px 5px;
 }
 
 .title-slide hgroup > h2{
   font-family: 'Source Sans Pro', 'Oswald', 'Calibri', sans-serif;
 }
 
+/* hr style */
+
+hr {
+  border:none;
+  background:-webkit-gradient(linear, 0% 50%, 100% 50%, color-stop(0%, rgba(255,255,255,0)), color-stop(10%, #a9a9a9), color-stop(90%, #a9a9a9), color-stop(100%, rgba(255,255,255,0))) no-repeat;
+  background:-webkit-linear-gradient(left, rgba(255,255,255,0),#a9a9a9 10%,#a9a9a9 90%,rgba(255,255,255,0)) no-repeat;
+  background:-moz-linear-gradient(left, rgba(255,255,255,0),#a9a9a9 10%,#a9a9a9 90%,rgba(255,255,255,0)) no-repeat;
+  background:-o-linear-gradient(left, rgba(255,255,255,0),#a9a9a9 10%,#a9a9a9 90%,rgba(255,255,255,0)) no-repeat;
+  background:linear-gradient(left, rgba(255,255,255,0),#a9a9a9 10%,#a9a9a9 90%,rgba(255,255,255,0)) no-repeat;
+  height:1px
+} 
+
 /* Fonts and Spacing */
+
 article p, article li, article li.build, section p, section li{
   font-family: 'Source Sans Pro', 'Open Sans','Helvetica', 'Crimson Text', 'Garamond',  'Palatino', sans-serif;
   text-align: justify;
@@ -54,14 +114,17 @@ article p, article li, article li.build, section p, section li{
   line-height: 1.5em;
 }
 
-slide:not(.segue) h2{
+/* Title for all slides */
+
+slide:not(.segue) h2 {
   font-family: 'Source Sans Pro', 'Calibri', Arial, sans-serif;
-  font-size: 52px;
+  font-size: 45px;
   font-style: normal;
   font-weight: bold;
   text-transform: normal;
   letter-spacing: -2px;
   line-height: 1.2em;
+  text-shadow: #fff 0px 4px 0px,rgba(0,0,0,0.3) 0 5px 5px;
 /*  color: #193441;*/
 /*  color: #02574D;*/
 /*  color: #CC2904;*/
