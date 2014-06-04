@@ -1,6 +1,7 @@
 /* COLORS FROM SOLARIZED PALETTE */
 /* html.light { @include rebase($base3,$base2,$base1,$base0,$base00,$base01,$base02,$base03)} */
 /* html.dark  { @include rebase($base03,$base02,$base01,$base00,$base0,$base1,$base2,$base3)} */
+/* line 136, ../scss/colors.scss */
 html, html.io2012 {
   /*
     slide:not(.segue) {
@@ -8,63 +9,112 @@ html, html.io2012 {
         color:$rebase1; border-color: $rebase0;
       }
     }
-  */ }
-  html *, html.io2012 * {
-    color: #839496; }
-  html body, html.io2012 body {
-    background-color: #222222; }
-  html h1, html h2, html h3, html h4, html h5, html h6, html.io2012 h1, html.io2012 h2, html.io2012 h3, html.io2012 h4, html.io2012 h5, html.io2012 h6 {
-    color: #93a1a1;
-    border-color: #839496; }
-  html a, html.io2012 a {
-    color: #268bd2; }
-  html slide:not(.nobackground):after, html slide:not(.nobackground):before, html.io2012 slide:not(.nobackground):after, html.io2012 slide:not(.nobackground):before {
-    color: #002b36; }
-  html slide hgroup h2, html.io2012 slide hgroup h2 {
-    color: #002b36; }
-  html slide article, html.io2012 slide article {
-    color: #93a1a1; }
-  html slide table th, html.io2012 slide table th {
-    color: #fff;
-    background: #268bd2; }
-  html slide table tbody tr, html.io2012 slide table tbody tr {
-    background: #fff; }
-  html slide table tbody tr:nth-child(2n+1), html.io2012 slide table tbody tr:nth-child(2n+1) {
-    background: #f0f0f0; }
-  html slide table tbody td, html.io2012 slide table tbody td {
-    padding: 0.5em 0.5em; }
-  html slide table tbody td:first-child, html.io2012 slide table tbody td:first-child {
-    font-weight: 700;
-    padding: 0.5em 0.5em; }
-  html .title-slide, html.io2012 .title-slide {
-    background-color: #fff; }
-    html .title-slide hgroup h1, html.io2012 .title-slide hgroup h1 {
-      color: #002b36; }
-    html .title-slide hgroup h2, html.io2012 .title-slide hgroup h2 {
-      color: #586e75; }
-    html .title-slide hgroup p, html.io2012 .title-slide hgroup p {
-      color: #657b83; }
+  */
+}
+/* line 58, ../scss/colors.scss */
+html *, html.io2012 * {
+  color: #839496;
+}
+/* line 59, ../scss/colors.scss */
+html body, html.io2012 body {
+  background-color: #222222;
+}
+/* line 60, ../scss/colors.scss */
+html h1, html h2, html h3, html h4, html h5, html h6, html.io2012 h1, html.io2012 h2, html.io2012 h3, html.io2012 h4, html.io2012 h5, html.io2012 h6 {
+  color: #93a1a1;
+  border-color: #839496;
+}
+/* line 61, ../scss/colors.scss */
+html a, html.io2012 a {
+  color: #268bd2;
+}
+/* line 71, ../scss/colors.scss */
+html slide:not(.nobackground):after, html slide:not(.nobackground):before, html.io2012 slide:not(.nobackground):after, html.io2012 slide:not(.nobackground):before {
+  color: #002b36;
+}
+/* line 76, ../scss/colors.scss */
+html slide hgroup h2, html.io2012 slide hgroup h2 {
+  color: #002b36;
+}
+/* line 80, ../scss/colors.scss */
+html slide article, html.io2012 slide article {
+  color: #93a1a1;
+}
+/* line 84, ../scss/colors.scss */
+html slide table th, html.io2012 slide table th {
+  color: #fff;
+  background: #268bd2;
+}
+/* line 89, ../scss/colors.scss */
+html slide table tbody tr, html.io2012 slide table tbody tr {
+  background: #fff;
+}
+/* line 92, ../scss/colors.scss */
+html slide table tbody tr:nth-child(2n+1), html.io2012 slide table tbody tr:nth-child(2n+1) {
+  background: #f0f0f0;
+}
+/* line 95, ../scss/colors.scss */
+html slide table tbody td, html.io2012 slide table tbody td {
+  padding: 0.5em 0.5em;
+}
+/* line 98, ../scss/colors.scss */
+html slide table tbody td:first-child, html.io2012 slide table tbody td:first-child {
+  font-weight: 700;
+  padding: 0.5em 0.5em;
+}
+/* line 105, ../scss/colors.scss */
+html .title-slide, html.io2012 .title-slide {
+  background-color: #fff;
+}
+/* line 108, ../scss/colors.scss */
+html .title-slide hgroup h1, html.io2012 .title-slide hgroup h1 {
+  color: #002b36;
+}
+/* line 111, ../scss/colors.scss */
+html .title-slide hgroup h2, html.io2012 .title-slide hgroup h2 {
+  color: #586e75;
+}
+/* line 114, ../scss/colors.scss */
+html .title-slide hgroup p, html.io2012 .title-slide hgroup p {
+  color: #657b83;
+}
 
+/* line 138, ../scss/colors.scss */
 .yellow {
-  color: #b58900; }
+  color: #b58900;
+}
 
+/* line 139, ../scss/colors.scss */
 .orange {
-  color: #cb4b16; }
+  color: #cb4b16;
+}
 
+/* line 140, ../scss/colors.scss */
 .red {
-  color: #dc322f; }
+  color: #dc322f;
+}
 
+/* line 141, ../scss/colors.scss */
 .magenta {
-  color: #d33682; }
+  color: #d33682;
+}
 
+/* line 142, ../scss/colors.scss */
 .violet {
-  color: #6c71c4; }
+  color: #6c71c4;
+}
 
+/* line 143, ../scss/colors.scss */
 .blue {
-  color: #268bd2; }
+  color: #268bd2;
+}
 
+/* line 144, ../scss/colors.scss */
 .cyan {
-  color: #2aa198; }
+  color: #2aa198;
+}
 
+/* line 145, ../scss/colors.scss */
 .green {
-  color: #859900; }
+  color: #859900;
+}
