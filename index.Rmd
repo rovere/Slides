@@ -1,49 +1,130 @@
 ---
-title       : News
-subtitle    : Tracking POG Meeting, 2014-06-02
-author      : Marco Rovere, Giuseppe Cerati
+title       : Latest developments in phase2 geometry description and navigation
+subtitle    : Upgrade TP Performance Studies group Meeting, 2014-06-05
+author      : M. Rovere, K. Stenson, G. Cerati for Andrea Vanturi
 job         : CERN
 framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
 highlighter : prettify      # {highlight.js, prettify, highlight}
 hitheme     : twitter-bootstrap # sunburst      #
-widgets     : []            # {mathjax, quiz, bootstrap}
+widgets     : [mathjax]            # {mathjax, quiz, bootstrap}
 mode        : selfcontained # {standalone,draft}
 ---
 
-## Releases
+## Summary of changes
 
-* **CMSSW_7_1_0_pre8** has been released 2+ weeks ago
-    * Full details available [here](https://indico.cern.ch/event/320094/contribution/0/material/slides/0.pdf)
-	* The new simulation of Pixel Dynamic Inefficiency entered
-          [**pre6**](https://github.com/cms-sw/cmssw/pull/3140) and
-          was _fixed_ in
-          [**pre8**](https://github.com/cms-sw/cmssw/pull/3689)
-	    * See its effect in today's talk from Giuseppe.
-* **CMSSW_7_2_X** branch has been opened
-    * please submit your PR to this branch
-	* requests to 71X are automatically forwarded to 72X
-* Important developments almost ready missed 71X and should come early in 72X:
-    1. Jet Core iteration [github-link](https://github.com/cms-sw/cmssw/pull/3859)
-	1. **Hit Pattern** redesign
+* Details available in [Andrea's
+  talk](https://indico.cern.ch/event/305423/session/3/contribution/4/material/slides/1.pdf)
+* Main improvements in
+    * Geometry/TrackerNumberingBuilder
+    * RecoTracker/TkDetLayers
+* All contained in pending PR
+  [4108](https://github.com/cms-sw/cmssw/pull/4108), few of them
+  already included in SLHC13.
+
+--- .smaller
+
+## Changes in Geometry/TrackerNumberingBuilder
+
+* Mostly transparent and to improve the modularity of the package
+    * Many "if" moved away from the algorithmic part of the code and classes split to cope with different geometry elements
+    * The "navigation" into the geometry is based upon:
+        * GeometricDet name
+            * If this is an accepted solution we have to ensure, in future, that elements with different geometries have different names
+        * Number of blades
+            * As it has been so far
+
+--- .smaller
+
+## Changes in Geometry/TrackerNumberingBuilder
+
+* Fixes of the FPIX geometry
+    * inner and outer ring assignment
+        * Mean radius is now hardcoded in the software ...
+    * $\phi$ offset
+    * These fixes are already in SLHC13
+* CmsTrackerDiskBuilder split into:
+    * CmsTrackerDiskBuilder (present detector)
+    * CmsTrackerPhase1DiskBuilder (phase 1 detector)
+    * CmsTrackerOTDiscBuilder (phase 2 OT endcaps)
+* CmsTrackerPanelBuilder split into:
+    * CmsTrackerPanelBuilder
+    * CmsTrackerOTRingBuilder
 
 ---
 
-## Approvals
+## Changes in RecoTracker/TkDetLayers
 
-* We recently <font class="red">approved many plots</font> that could be useful in preparing slides/posters for future conferences.
-* The TWiki page collecting all of them is available [here](https://twiki.cern.ch/twiki/bin/viewauth/CMS/TrackingPOGPlots2014)
-* Among many, the new approved plots include:
-    1. Effect of iteration 9&10 on muon reconstruction efficieny
-    1. Reconstruction efficiency vs pt for all iterations
-    1. Many timing plots, especially useful to better understand the effect of PU on tracking-time.
-    1. Number of masked/unmasked clusters for different iterations
-* Each plot has a corresponding explanation on the TWiki page.
+* Similar approach as for the Geometry: split the code to have different algorithms in different classes
+    * Same GeometricDet names used to navigate in the geometry
+* PixelBarrelLayer(Builder) split into
+    * PixelBarrelLayer(Builder) (pixel detector)
+    * Phase2OTBarrelLayer(Builder) (phase 2 OT barrel)
+* Phase2OTBarrelRod(Builder) newly created
+    * Phase 2 outer tracker barrel navigation inspired by TOB navigation: recovered overlap in z
+    * Second pt module compatibility inherited from the first one: we can do better!
 
---- .image
+---
 
-## Today's Agenda
+## Changes in RecoTracker/TkDetLayers
 
-<article class="flexbox vcenter">
-<img src="images/TrackingPOGAgenda_20140602.png" alt="Agenda" title="Agenda" width="90%">
-</article>
+* PixelForwardLayer(Builder) split into
+    * PixelForwardLayer(Builder)
+    * Phase2OTECRingedLayer(Builder)
+* Phase2OTECRing(Builder) newly created
+    * Phase 2 outer tracker disk navigation inspired by TID navigation: ring geometry properly taken into account, including overlaps
+    * Second pt module compatibility inherited from the first one: it seems to work fine
+* PixelBlade cleaned up
+* Inner/outer FPIX ring definition already fixed in SLHC13
 
+
+---
+
+## Results: on track hit fraction
+
+--- &twoimages
+
+## Occupancy maps: 10 muons
+
+---
+
+## Number of hits: 10 muons
+
+--- &twoimages
+
+## Comparison between different Release&fixes
+
+--- &twoimages
+
+## Comparison between different Release&fixes 2
+
+--- &twoimages
+
+## Comparison between different Release&fixes 3
+
+--- &twoimages
+
+## Comparison between different Release&fixes 4
+
+---
+
+## Conclusions
+
+* Many pending problems that were fixed/hacked in the past got finally
+  fixed in a more appropriate way.
+
+* We would like to have these changes used for the Technical Proposal
+  performance plots since no problems have been found in independent
+  tests
+
+    * Full production chain with these changes
+    * Tracking efficiency, fake rate and momentum resolution
+    * Fraction of hits which are used more than once: there should be none
+
+* The code seems to be more compatible to be integrated in 71x
+    * If the geometry element names are chosen properly upgrade and present detector classes are completely independent
+
+* Pushed for SLHC 14
+
+--- &thankyou
+
+## Thank you
