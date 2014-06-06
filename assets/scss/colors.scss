@@ -116,6 +116,30 @@ $background: #222222;
       }
     }
   }
+  ul {
+    li:before {
+      color: $rebase03;
+    }
+    li {
+      ul {
+        li:before {
+          color: $rebase03;
+        }
+        li {
+          ul {
+            li:before {
+              color: $rebase03;
+            }
+	  }
+	}
+      }
+    }
+  }
+  .thank-you-slide {
+    h2 {
+      color: #fff;
+    }
+  }
 }
 
 @mixin singlecolor2class($color) {

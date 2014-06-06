@@ -1,7 +1,7 @@
 /* COLORS FROM SOLARIZED PALETTE */
 /* html.light { @include rebase($base3,$base2,$base1,$base0,$base00,$base01,$base02,$base03)} */
 /* html.dark  { @include rebase($base03,$base02,$base01,$base00,$base0,$base1,$base2,$base3)} */
-/* line 136, ../scss/colors.scss */
+/* line 160, ../scss/colors.scss */
 html, html.io2012 {
   /*
     slide:not(.segue) {
@@ -78,43 +78,59 @@ html .title-slide hgroup h2, html.io2012 .title-slide hgroup h2 {
 html .title-slide hgroup p, html.io2012 .title-slide hgroup p {
   color: #657b83;
 }
+/* line 120, ../scss/colors.scss */
+html ul li:before, html.io2012 ul li:before {
+  color: #002b36;
+}
+/* line 125, ../scss/colors.scss */
+html ul li ul li:before, html.io2012 ul li ul li:before {
+  color: #002b36;
+}
+/* line 130, ../scss/colors.scss */
+html ul li ul li ul li:before, html.io2012 ul li ul li ul li:before {
+  color: #002b36;
+}
+/* line 139, ../scss/colors.scss */
+html .thank-you-slide h2, html.io2012 .thank-you-slide h2 {
+  color: #fff;
+}
 
-/* line 138, ../scss/colors.scss */
+/* line 162, ../scss/colors.scss */
 .yellow {
   color: #b58900;
 }
 
-/* line 139, ../scss/colors.scss */
+/* line 163, ../scss/colors.scss */
 .orange {
   color: #cb4b16;
 }
 
-/* line 140, ../scss/colors.scss */
+/* line 164, ../scss/colors.scss */
 .red {
   color: #dc322f;
 }
 
-/* line 141, ../scss/colors.scss */
+/* line 165, ../scss/colors.scss */
 .magenta {
   color: #d33682;
 }
 
-/* line 142, ../scss/colors.scss */
+/* line 166, ../scss/colors.scss */
 .violet {
   color: #6c71c4;
 }
 
-/* line 143, ../scss/colors.scss */
+/* line 167, ../scss/colors.scss */
 .blue {
   color: #268bd2;
 }
 
-/* line 144, ../scss/colors.scss */
+/* line 168, ../scss/colors.scss */
 .cyan {
   color: #2aa198;
 }
 
-/* line 145, ../scss/colors.scss */
+/* line 169, ../scss/colors.scss */
 .green {
   color: #859900;
 }

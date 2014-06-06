@@ -65,7 +65,7 @@ body {
 slides > slide {
   display: none;
   font-family: 'Source Sans Pro', 'Open Sans', Arial, sans-serif;
-  font-size: 25px;
+  font-size: $font_size_slide;
   color: $gray-3;
   //@include background(linear-gradient(white, white 85%, $gray-1));
   //background-color: white;
@@ -144,7 +144,7 @@ slides > slide {
       /* background: url(../../images/google_developers_icon_128.png) no-repeat 0 50%; */
       @include background-size($brand-small-icon-size $brand-small-icon-size);
       padding-left: 0px;
-      height: $brand-small-icon-size;
+      height: initial;
       line-height: 1.9;
     }
     &:after {
@@ -153,6 +153,7 @@ slides > slide {
       position: absolute;
       bottom: $slide-top-bottom-padding / 2;
       right: $slide-left-right-padding;
+      height: initial;
       line-height: 1.9;
     }
   }
@@ -190,7 +191,7 @@ slides > slide {
     }
 
     p {
-      margin-bottom: 1em;
+      margin-bottom: 0.3em;
     }
   }
 
@@ -199,6 +200,15 @@ slides > slide {
 
     > iframe {
       height: 98%;
+    }
+  }
+  article {
+    figcaption {
+      p {
+        font-size: $font_size_image_caption;
+	font-style: $font_style_image_caption;
+	line-height: $font_size_image_caption+1px;
+      }
     }
   }
 }
@@ -281,14 +291,14 @@ h1, h2, h3 {
 }
 
 h2 {
-  font-size: 45px;
-  line-height: 45px;
+  font-size: $font_size_title;
+  line-height: $font_size_title;
   letter-spacing: -2px;
   color: $gray-4;
 }
 
 h3 {
-  font-size: 30px;
+  font-size: $font_size_subtitle;
   letter-spacing: -1px;
   line-height: 2;
   font-weight: inherit;
@@ -300,25 +310,50 @@ ul {
   margin-bottom: 1em;
   position: relative;
 
+  > li:before {
+    content: $bullet_level1;
+    margin-left: $bullet_offset;
+    position: absolute;
+    font-weight: 600;
+    font-size: $font_size_bullet;
+  }
+
   li {
     margin-bottom: 0.5em;
 
     ul {
       margin-left: 2em;
       margin-bottom: 0;
+      font-size: $font_size_list_level2;
 
       li:before {
-        content: '-';
+        content: $bullet_level2;
+    	margin-left: $bullet_offset;
         font-weight: 600;
+    	font-size: $font_size_bullet;
+      }
+
+      li {
+        margin-bommot: 0.5em;
+
+	ul {
+	  margin-left: 2em;
+     	  margin-bottom: 0;
+      	  font-size: $font_size_list_level3;
+
+          li:before {
+    	    content: $bullet_level3;
+    	    margin-left: $bullet_offset;
+    	    position: absolute;
+    	    font-weight: 600;
+    	    font-size: $font_size_bullet;
+	  }
+	  li {
+	    margin-bottom: 0.5em;
+	  }
+        }
       }
     }
-  }
-
-  > li:before {
-    content: '\00B7';
-    margin-left: -1em;
-    position: absolute;
-    font-weight: 600;
   }
 
   ul {
@@ -511,7 +546,7 @@ table {
 }
 
 q {
-  font-size: 45px;
+  font-size: $font_size_title;
   line-height: 72px;
 
   &:before {
@@ -534,9 +569,35 @@ slide.fill {
 
 /* Size variants */
 
+article {
+  p, ul, li {
+    font-size: $font_size_slide;
+    line-height: $font_size_slide;
+    letter-spacing: 0;
+  }
+  table {
+    td, th {
+      font-size: $font_size_table_td_th;
+    }
+  }
+  pre {
+    font-size: $font_size_pre;
+    line-height: 20px;
+    letter-spacing: 0;
+  }
+  q {
+    font-size: $font_size_title;
+    line-height: 48px;
+
+    &:before, &:after {
+      font-size: 60px;
+    }
+  }
+}
+
 article.smaller {
   p, ul {
-    font-size: 20px;
+    font-size: $font_size_list_level2;
     line-height: 24px;
     letter-spacing: 0;
   }
@@ -832,7 +893,6 @@ article.smaller {
 
   h2 {
     font-size: 60px;
-    color: inherit;
   }
 
   article > p {
@@ -943,7 +1003,7 @@ aside.gdbar {
       display: none !important;
     }
   }
-  
+
   slides {
     slide {
       &.backdrop {
@@ -1047,5 +1107,20 @@ aside.gdbar {
 
   pre, code {
     font-family: monospace !important;
+  }
+}
+
+/** For debugging of positions */
+.debug {
+  slides,  h1, h2, h3, ul, li, li::before, hr, article, p, hgroup, img {
+    border: 1px solid red;
+  }
+}
+
+slide.debug {
+  border: 1px solid red;
+
+  &:before, &:after {
+    border: 1px solid red;
   }
 }
