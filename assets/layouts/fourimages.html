@@ -1,0 +1,66 @@
+---
+layout: slide
+---
+{{{ slide.content }}}
+<!-- LEFT-most IMAGE -->
+<div style='float:left;width:{{{slide.w1}}}%;' class='centered'>
+  <!-- do we have a left image? -->
+  {{#slide.imageleft_most}}
+   <article class="flexbox vcenter">
+    <img src="{{slide.imageleft_most}}" title="{{{slide.image_title_left_most.html}}}" width="100%">
+    <!-- do we have an associated left caption? -->
+    {{#slide.caption_left_most}}
+     <figcaption>{{{slide.caption_left_most.html}}}</figcaption>
+    {{/slide.caption_left_most}}
+    </article>
+  {{/slide.imageleft_most}}
+</div>
+
+<!-- LEFT-most IMAGE -->
+<div style='float:left;width:{{{slide.w2}}}%;' class='centered'>
+  <!-- do we have a left image? -->
+  {{#slide.imageleft}}
+   <article class="flexbox vcenter">
+    <img src="{{slide.imageleft}}" title="{{{slide.image_title_left.html}}}" width="100%">
+    <!-- do we have an associated left caption? -->
+    {{#slide.caption_left}}
+     <figcaption>{{{slide.caption_left.html}}}</figcaption>
+    {{/slide.caption_left}}
+    </article>
+  {{/slide.imageleft}}
+</div>
+
+<!-- RIGHT IMAGE -->
+<div style='float:left;width:{{{ slide.w3 }}}%;'>
+  <!-- do we have a left image? -->
+  {{#slide.imageright}}
+    <article class="flexbox vcenter">
+      <img src="{{slide.imageright}}" title="{{{slide.image_title_right.html}}}" width="100%">
+      <!-- do we have an associated left caption? -->
+      {{#slide.caption_right}}
+       <figcaption>{{{slide.caption_right.html}}}</figcaption>
+      {{/slide.caption_right}}
+      </article>
+  {{/slide.imageright}}
+</div>
+
+<!-- RIGHT_MOST-most IMAGE -->
+<div style='float:right;width:{{{ slide.w4 }}}%;'>
+  <!-- do we have a left image? -->
+  {{#slide.imageright_most}}
+    <article class="flexbox vcenter">
+      <img src="{{slide.imageright_most}}" title="{{{slide.image_title_right_most.html}}}" width="100%">
+      <!-- do we have an associated left caption? -->
+      {{#slide.caption_right_most}}
+       <figcaption>{{{slide.caption_right_most.html}}}</figcaption>
+      {{/slide.caption_right_most}}
+      </article>
+  {{/slide.imageright_most}}
+</div>
+
+<div style="clear:both;">
+<!-- do we a final text? -->
+{{#slide.bottom_text}}
+  {{{slide.bottom_text.html}}}
+{{/slide.bottom_text}}
+</div>
