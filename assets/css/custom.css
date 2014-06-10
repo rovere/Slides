@@ -532,7 +532,7 @@ ul {
 }
 /* line 323, ../scss/custom.scss */
 ul > li:before {
-  content: "\273d";
+  content: "\25cf";
   margin-left: -16pt;
   position: absolute;
   font-weight: 600;
@@ -550,7 +550,7 @@ ul li ul {
 }
 /* line 339, ../scss/custom.scss */
 ul li ul li:before {
-  content: "\270f";
+  content: "\25c6";
   margin-left: -16pt;
   font-weight: 600;
   font-size: 16px;
@@ -567,7 +567,7 @@ ul li ul li ul {
 }
 /* line 354, ../scss/custom.scss */
 ul li ul li ul li:before {
-  content: "\2605";
+  content: "\25a0";
   margin-left: -16pt;
   position: absolute;
   font-weight: 600;

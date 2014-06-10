@@ -123,13 +123,20 @@ $background: #222222;
     li {
       ul {
         li:before {
-          color: $rebase03;
+          color: $magenta; // $rebase03;
         }
         li {
           ul {
             li:before {
-              color: $rebase03;
+              color: $blue; // $rebase03;
             }
+            li {
+              ul {
+                li:before {
+                  color: $orange;
+                }
+	      }
+	    }
 	  }
 	}
       }
