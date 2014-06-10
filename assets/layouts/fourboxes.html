@@ -1,0 +1,75 @@
+---
+layout: slide
+---
+{{{ slide.content }}}
+<!-- LEFT-UP Container -->
+<div style='float:left;width:{{{slide.w1}}}%;' class='centered'>
+  <!-- do we have a left image? -->
+  {{#slide.imageleft_up}}
+   <article class="flexbox vcenter">
+    <img src="{{slide.imageleft_up}}" title="{{{slide.image_title_left_up.html}}}" height="37%">
+    <!-- do we have an associated left caption? -->
+    {{#slide.caption_left_up}}
+     <figcaption>{{{slide.caption_left_up.html}}}</figcaption>
+    {{/slide.caption_left_up}}
+    </article>
+  {{/slide.imageleft_up}}
+  <!-- do we have a left text? -->
+  {{#slide.textleft_up}}
+    {{{slide.textleft_up.html}}}
+  {{/slide.textleft_up}}
+</div>
+
+<!-- RIGHT-UP Container -->
+<div style='float:left;width:{{{slide.w2}}}%;' class='centered'>
+  <!-- do we have a right image? -->
+  {{#slide.imageright_up}}
+   <article class="flexbox vcenter">
+    <img src="{{slide.imageright_up}}" title="{{{slide.image_title_right_up.html}}}" height="37%">
+    <!-- do we have an associated right caption? -->
+    {{#slide.caption_right_up}}
+     <figcaption>{{{slide.caption_right_up.html}}}</figcaption>
+    {{/slide.caption_right_up}}
+    </article>
+  {{/slide.imageright_up}}
+  <!-- do we have a right text? -->
+  {{#slide.textright_up}}
+    {{{slide.textright_up.html}}}
+  {{/slide.textright_up}}
+</div>
+
+<!-- LEFT-DOWN Container -->
+<div style='float:left;width:{{{ slide.w3 }}}%; clear="both;"'>
+  <!-- do we have a left-down image? -->
+  {{#slide.imageleft_down}}
+   <article class="flexbox vcenter">
+    <img src="{{slide.imageleft_down}}" title="{{{slide.image_title_left_down.html}}}" height="37%">
+    <!-- do we have an associated left caption? -->
+    {{#slide.caption_left_down}}
+     <figcaption>{{{slide.caption_left_down.html}}}</figcaption>
+    {{/slide.caption_left_down}}
+    </article>
+  {{/slide.imageleft_down}}
+  <!-- do we have a left-down text? -->
+  {{#slide.textleft_down}}
+    {{{slide.textleft_down.html}}}
+  {{/slide.textleft_down}}
+</div>
+
+<!-- RIGHT-DOWN Container -->
+<div style='float:left;width:{{{slide.w2}}}%;' class='centered'>
+  <!-- do we have a right-down image? -->
+  {{#slide.imageright_down}}
+   <article class="flexbox vcenter">
+    <img src="{{slide.imageright_down}}" title="{{{slide.image_title_right_down.html}}}" height="37%">
+    <!-- do we have an associated right caption? -->
+    {{#slide.caption_right_down}}
+     <figcaption>{{{slide.caption_right_down.html}}}</figcaption>
+    {{/slide.caption_right_down}}
+    </article>
+  {{/slide.imageright_down}}
+  <!-- do we have a right-down text? -->
+  {{#slide.textright_down}}
+    {{{slide.textright_down.html}}}
+  {{/slide.textright_down}}
+</div>
