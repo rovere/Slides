@@ -8,7 +8,8 @@ highlighter : prettify      # {highlight.js, prettify, highlight}
 hitheme     : twitter-bootstrap # sunburst      #
 widgets     : [mathjax]            # {mathjax, quiz, bootstrap}
 mode        : selfcontained # {standalone,draft}
----
+
+--- .bigger
 
 ## Summary of changes
 
@@ -32,11 +33,6 @@ mode        : selfcontained # {standalone,draft}
             * If this is an accepted solution we have to ensure, in future, that elements with different geometries have different names
         * Number of blades
             * As it has been so far
-
---- .smaller
-
-## Changes in Geometry/TrackerNumberingBuilder
-
 * Fixes of the FPIX geometry
     * inner and outer ring assignment
         * Mean radius is now hardcoded in the software ...
@@ -50,7 +46,7 @@ mode        : selfcontained # {standalone,draft}
     * CmsTrackerPanelBuilder
     * CmsTrackerOTRingBuilder
 
----
+--- .smaller
 
 ## Changes in RecoTracker/TkDetLayers
 
@@ -62,11 +58,6 @@ mode        : selfcontained # {standalone,draft}
 * Phase2OTBarrelRod(Builder) newly created
     * Phase 2 outer tracker barrel navigation inspired by TOB navigation: recovered overlap in z
     * Second pt module compatibility inherited from the first one: we can do better!
-
----
-
-## Changes in RecoTracker/TkDetLayers
-
 * PixelForwardLayer(Builder) split into
     * PixelForwardLayer(Builder)
     * Phase2OTECRingedLayer(Builder)
@@ -77,33 +68,126 @@ mode        : selfcontained # {standalone,draft}
 * Inner/outer FPIX ring definition already fixed in SLHC13
 
 
----
+--- .smaller &fourboxes w1:50 w2:50 w3:50 w4:50 imageleft_up:images/FractionOfHitsOnTrackFPIX.png imageright_up:images/FractionOfHitsOnTrackTEC.png imageright_down:images/FractionOfHitsOnTrackTOB.png
 
 ## Results: on track hit fraction
 
---- &twoimages
+*** =caption_left_up
+
+Fraction of hits On-Track in the Pixel Forward Detector.
+
+*** =caption_right_up
+
+Fraction of hits On-Track in the TEC: here the recovery of the hits on track is dramatic.
+
+*** =caption_right_down
+
+Fraction of hits On-Track in TOB.
+
+*** =textleft_down
+
+* <font class="red">SLHC12</font>, <font class="blue">SLHC13</font> and SLHC13+this PR in 10-$\mu$ events.
+* In 10-muon events:
+    * FPIX recovered in SLHC13
+    * TEC: big improvement
+    * Barrel: it is better but still problem with shallow angle tracks
+        * The compatibility for the two modules has to be tested independently
+
+--- &fourimages w1:25 w2:25 w3:25 w4:25 imageleft_most:images/TEC_PS_SLHC13.png imageleft:images/TEC_PS_New.png imageright:images/TEC_2S_SLHC13.png imageright_most:images/TEC_2S_New.png
 
 ## Occupancy maps: 10 muons
 
----
+*** =caption_left_most
+TEC PS Module - SLHC13
 
-## Number of hits: 10 muons
+*** =caption_left
+TEC PS Module - New
 
---- &twoimages
+*** =caption_right
+TEC 2S - SLHC13
 
-## Comparison between different Release&fixes
+*** =caption_right_most
+TEC 2S - New
 
---- &twoimages
+--- &fourboxes w1:50 w2:50 w3:50 w4:50 imageleft_up:images/EtaPhiOccupancyNew.png imageright_up:images/EtaPhiOccupancySLHC13.png imageright_down:images/EtaPhiOccupancySLHC12.png
 
-## Comparison between different Release&fixes 2
+## Number of Hits in 10 $\mu$ sample
 
---- &twoimages
+*** =caption_left_up
 
-## Comparison between different Release&fixes 3
+New Occupancy map
 
---- &twoimages
+*** =caption_right_up
 
-## Comparison between different Release&fixes 4
+SLHC13 occupancy map
+
+*** =caption_right_down
+
+SLHC12 occupancy map
+
+*** =textleft_down
+
+* The improvements in the occupancy map in the $\eta-\phi$ plane is
+  cleary visible in going from SLHC12 to SLHC13 to the New proposed
+  changes.
+
+--- &twoimages w1:50 w2:50 imageleft:images/hits_mupt100_afix_eta.png imageright:images/trkeff_mupt100pu0_afix_eta_hp.png
+
+## Comparison between releases&bug fixes
+
+*** =bottom_text
+
+* SLHC12: plain SLHC12 with GEN-SIM and DIGI also done in SLHC12
+
+* <font class="blue">SLHC12 + Andrea fix = SLHC12 +
+  venturia:navigation_cleanup and reusing the DIGI from the previous
+  step.</font>
+
+* <font class="red">SLHC13 + Andrea fix = SLHC13_patch1 +
+  venturia:navigation_cleanup-SLHC13 with GEN-SIM and DIGI done in the
+  same release.</font>
+
+--- &twoimages w1:50 w2:50 imageleft:images/trkfake_ttbar_afix_eta_hp.png imageright:images/trkeff_ttbar_afix_eta_hp.png
+
+## Comparison between releases&bug fixes
+
+*** =bottom_text
+
+* SLHC12: plain SLHC12 with GEN-SIM and DIGI also done in SLHC12
+
+* <font class="blue">SLHC12 + Andrea fix = SLHC12 +
+  venturia:navigation_cleanup and reusing the DIGI from the previous
+  step.</font>
+
+* <font class="red">SLHC13 + Andrea fix = SLHC13_patch1 +
+  venturia:navigation_cleanup-SLHC13 with GEN-SIM and DIGI done in the
+  same release.</font>
+
+--- &twoimages w1:50 w2:50 imageleft:images/ptresvseta_mupt100_afix.png imageright:images/trkdup_ttbar_afix_eta_hp.png
+
+## Comparison between releases&bug fixes
+
+*** =bottom_text
+
+* SLHC12: plain SLHC12 with GEN-SIM and DIGI also done in SLHC12
+
+* <font class="blue">SLHC12 + Andrea fix = SLHC12 +
+  venturia:navigation_cleanup and reusing the DIGI from the previous
+  step.</font>
+
+* <font class="red">SLHC13 + Andrea fix = SLHC13_patch1 +
+  venturia:navigation_cleanup-SLHC13 with GEN-SIM and DIGI done in the
+  same release.</font>
+
+--- &twoimages w1:50 w2:50 imageleft:images/TrackerOccupancySameClusterOntrackMap_SLHC12.png imageright:images/TrackerOccupancySameClusterOntrackMap_SLHC12Fixes.png
+
+## Comparison between releases&bug fixes
+
+*** =caption_left
+Plain SLHC12 Release
+
+*** =caption_right
+Plain SLHC12 Release+proposed fixes
 
 ---
 
@@ -127,4 +211,6 @@ mode        : selfcontained # {standalone,draft}
 
 --- &thankyou
 
-## Thank you
+## Thank you!
+
+Questions & Answers
