@@ -1,0 +1,10 @@
+.RData
+.Rhistory
+.nojekyll
+index.html
+index.md
+libraries.hacked/
+images/
+*.sass-cache
+*~
+.DS_Store
