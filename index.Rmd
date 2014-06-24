@@ -182,15 +182,15 @@ In reverse cronological order:
 
 ## Additional Plots
 
---- &twoimages w1:47 w2:47 imageleft:images/ptresvseta_ttbar_phs1phs2.png imageright:/images/dzresvseta_ttbar_phs1phs2.png
+--- &twoimages w1:47 w2:47 imageleft:images/ptresvseta_ttbar_phs1phs2.png imageright:images/dzresvseta_ttbar_phs1phs2.png
 
 ## Resolutions for different samples
 
---- &fourboxes w1:45 w2:45 w3:45 w4:45 imageleft_up:images/trkfake_ttbar_phs1age_eta_hp_pt09.png imageright_up:/images/trkfake_ttbar_phs1phs2_eta_hp_pt09.png imageleft_down:/images/trkdup_ttbar_phs1age_eta_hp_pt09.png imageright_down:/images/trkdup_ttbar_phs1phs2_eta_hp_pt09.png
+--- &fourboxes w1:45 w2:45 w3:45 w4:45 imageleft_up:images/trkfake_ttbar_phs1age_eta_hp_pt09.png imageright_up:images/trkfake_ttbar_phs1phs2_eta_hp_pt09.png imageleft_down:images/trkdup_ttbar_phs1age_eta_hp_pt09.png imageright_down:images/trkdup_ttbar_phs1phs2_eta_hp_pt09.png
 
 ## Individual Fake and Duplicate rates
 
---- &fourboxes w1:45 w2:45 w3:45 w4:45 imageleft_up:images/trkfake_ttbar_phs1age_eta_hp.png imageright_up:/images/trkfake_ttbar_phs1phs2_eta_hp.png imageleft_down:/images/trkdup_ttbar_phs1age_eta_hp.png imageright_down:/images/trkdup_ttbar_phs1phs2_eta_hp.png
+--- &fourboxes w1:45 w2:45 w3:45 w4:45 imageleft_up:images/trkfake_ttbar_phs1age_eta_hp.png imageright_up:images/trkfake_ttbar_phs1phs2_eta_hp.png imageleft_down:images/trkdup_ttbar_phs1age_eta_hp.png imageright_down:images/trkdup_ttbar_phs1phs2_eta_hp.png
 
 ## Individual Fake and Duplicate rates - Looser cuts
 
