@@ -12,8 +12,8 @@
 
 @mixin backdrop {
 /*  @include background(linear-gradient(white, white 85%, $gray-1)); */
-  background: url("../../images/CERN-logo_outline_128.png") 97% 4% no-repeat,
-              url("../../images/CMS_Logo_Color.png") 91% 4% no-repeat;
+  background: url("../../images/CERN-logo_outline_128.png") 97% 1.5% no-repeat,
+              url("../../images/CMS_Logo_Color.png") 91% 1.5% no-repeat;
   background-color: white;
   background-size: 60px 60px;
 }
@@ -218,6 +218,7 @@ slides > slide {
         font-size: $font_size_image_caption;
         font-style: $font_style_image_caption;
         line-height: $font_size_image_caption+1px;
+	padding: 0px $padding_figcaption 0px $padding_figcaption;
       }
     }
   }
@@ -313,6 +314,11 @@ h3 {
   line-height: 2;
   font-weight: inherit;
   color: $gray-3;
+}
+
+ol {
+ list-style-type: decimal;
+ margin-left: 1.2em;
 }
 
 ul {
@@ -724,6 +730,13 @@ slide.bigger {
 
     &:before, &:after {
       font-size: 60px;
+    }
+  }
+  figcaption {
+    p {
+      font-size: $font_size_list_level4;
+      font-style: $font_style_image_caption;
+      line-height: $font_size_image_caption+1px;
     }
   }
 }
@@ -1215,6 +1228,14 @@ aside.gdbar {
   pre, code {
     font-family: monospace !important;
   }
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.bolder {
+  font-weight: bolder;
 }
 
 /** For debugging of positions */
