@@ -1,0 +1,23 @@
+---
+layout: slide
+---
+{{{ slide.content }}}
+<!-- IMAGE -->
+<div style='width:{{{slide.w1}}}%; margin: 0 auto;'>
+  <!-- do we have a left image? -->
+  {{#slide.image}}
+   <article class="flexbox vcenter">
+    <img src="{{slide.image}}" title="{{{slide.image_title.html}}}" width="100%">
+    <!-- do we have an associated caption? -->
+    {{#slide.caption}}
+     <figcaption>{{{slide.caption.html}}}</figcaption>
+    {{/slide.caption}}
+    </article>
+  {{/slide.image}}
+</div>
+<div style="clear:both;">
+<!-- do we a final text? -->
+{{#slide.bottom_text}}
+  {{{slide.bottom_text.html}}}
+{{/slide.bottom_text}}
+</div>
