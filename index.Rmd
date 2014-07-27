@@ -26,13 +26,21 @@ mode        : selfcontained # {standalone,draft}
         * [4437](https://github.com/cms-sw/cmssw/pull/4437) - VinInn - <font class="red bold">Speed up conversions</font>
         * [4438](https://github.com/cms-sw/cmssw/pull/4438) - VinInn - <font class="red bold">Speed up GSF</font>
 
---- .image
+---
+
+## Announcements
+
+* We are planning to replicate the successfull Tracking Training Day that was help last year
+* The <font class="red bold">tentative</font> date is October 20th:
+    * sign this date on your agenda!!
+* For Conference Reports and Proceeding, please keep in mind that:
+    * if you submit to Subeditor of project<font class="red bold">Physics</font> with a subdetector of <font class="red bold">Tracker</font>, the proceeding will arrive to Tracking POGs for review
+    * if you submit to Subeditor of project<font class="red bold">Tracker</font> with <font class="red bold">any</font> subdetector, the proceeding will arrive to the Tracker editors
+    * <font class="red bold">Please, select the proper option to avoid that your proceeding will remain un-handled</font> 
+
+--- &singleimage w1:90 image:images/TrackingPOGAgenda_20140728.png
 
 ## Today's Agenda
-
-<article class="flexbox vcenter">
-<img src="images/TrackingPOGAgenda_20140728.png" alt="Agenda" title="Agenda" width="90%">
-</article>
 
 ---
 
