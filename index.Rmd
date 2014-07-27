@@ -26,6 +26,14 @@ mode        : selfcontained # {standalone,draft}
         * [4437](https://github.com/cms-sw/cmssw/pull/4437) - VinInn - <font class="red bold">Speed up conversions</font>
         * [4438](https://github.com/cms-sw/cmssw/pull/4438) - VinInn - <font class="red bold">Speed up GSF</font>
 
+--- .image
+
+## Today's Agenda
+
+<article class="flexbox vcenter">
+<img src="images/TrackingPOGAgenda_20140728.png" alt="Agenda" title="Agenda" width="90%">
+</article>
+
 ---
 
 ## Introduction
