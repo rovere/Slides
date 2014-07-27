@@ -1,7 +1,7 @@
 ---
-title       : Pre-approval of Tracking performance
-subtitle    : CMS Week, Upgrade TP Performance Studies group, 2014-06-25
-author      : K. Stenson, A. Venturi, G. Cerati and M. Rovere
+title       : News
+subtitle    : Tracking POG Meeting, 2014-07-28
+author      : M. Rovere, G. Cerati, V. Innocente
 job         : CERN
 framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
 highlighter : prettify      # {highlight.js, prettify, highlight}
