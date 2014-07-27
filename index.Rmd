@@ -9,7 +9,24 @@ hitheme     : twitter-bootstrap # sunburst      #
 widgets     : [mathjax]            # {mathjax, quiz, bootstrap}
 mode        : selfcontained # {standalone,draft}
 
---- .segue .dark .nobackground .smaller
+---
+
+## Releases
+
+* **CMSSW_7_2_0_pre2** has been release 1 week ago
+    * Pull Requests in github:
+        * [4530](https://github.com/cms-sw/cmssw/pull/4530) - rovere - <font class="red bold">Initial version of a slimmed and simple vertex validator.</font>
+        * [4455](https://github.com/cms-sw/cmssw/pull/4455) - Juan - <font class="red bold">TrackBase & HitPattern redesign discussed on the RECO meeting of 08/05/2014</font>
+            * Additional material [here](https://indico.cern.ch/event/327055/contribution/6/material/slides/0.pdf)
+        * [4614](https://github.com/cms-sw/cmssw/pull/4614) - VinInn - <font class="red bold">added persistent position to GS hits</font>
+        * [4563](https://github.com/cms-sw/cmssw/pull/4563) - VinInn - <font class="red bold">Fix det-pointer in tracker-rechit used in GlobalTrajectoryBuilderBase</font>
+        * [4447](https://github.com/cms-sw/cmssw/pull/4447) - VinInn - <font class="red bold">KfComponentsHolder cleanup</font>
+        * [4435](https://github.com/cms-sw/cmssw/pull/4435) - VinInn - <font class="red bold">speed up DA clusterizer allowing more vectorization</font>
+        * [4205](https://github.com/cms-sw/cmssw/pull/4205) - ebrondol - <font class="red bold">Deterministic Annealing Filter for track reconstruction</font>
+        * [4437](https://github.com/cms-sw/cmssw/pull/4437) - VinInn - <font class="red bold">Speed up conversions</font>
+        * [4438](https://github.com/cms-sw/cmssw/pull/4438) - VinInn - <font class="red bold">Speed up GSF</font>
+
+---
 
 ## Introduction
 
