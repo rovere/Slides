@@ -341,7 +341,7 @@ slides > slide.dark {
 /* line 148, ../scss/custom.scss */
 slides > slide:not(.nobackground):before {
   font-size: 10pt;
-  content: "K.S., G.C., A.V., M.Rovere - Upgrade TP Performance Studies - CMS-Week 2014-06-25";
+  content: "M.Rovere - Tracking POG Meeting - 2014-07-28";
   position: absolute;
   bottom: 0.5pt;
   left: 30px;

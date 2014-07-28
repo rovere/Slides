@@ -1,7 +1,7 @@
 ---
-title       : Pre-approval of Tracking performance
-subtitle    : CMS Week, Upgrade TP Performance Studies group, 2014-06-25
-author      : K. Stenson, A. Venturi, G. Cerati and M. Rovere
+title       : New Validation Vertex Package
+subtitle    : Tracking POG Meeting, 2014-07-28
+author      : M. Rovere, CERN
 job         : CERN
 framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
 highlighter : prettify      # {highlight.js, prettify, highlight}
@@ -9,149 +9,176 @@ hitheme     : twitter-bootstrap # sunburst      #
 widgets     : [mathjax]            # {mathjax, quiz, bootstrap}
 mode        : selfcontained # {standalone,draft}
 
---- .segue .dark .nobackground .smaller
+---
 
 ## Introduction
 
---- &singleimage w1:90 image:images/Phase2Tracker.png
+### Purpose
 
-## The Phase 2 Detector for the TP
+This slides will explain
+* the plots produced centrally by the PV Vertex validation package
+* how they are organised
+* how they are produced and filled
+* how to run only this part of the full validation sequence in an effortless way, almost in standalone mode.
 
-* The Phase 2 detector is composed of the <font class="violet bold">
-Phase 1 pixel detector</font> plus a new outer tracker and <font
-class="violet bold"> extended forward disks</font>.
-    * The Outer tracker consists of <font
-	class="blue bold">pixel-strip</font> or <font
-	class="red bold">strip-strip</font> modules, allowing for an L1 track trigger.
+### Current situation
 
-    * The extended forward disks (4-10) are replications of standard forward
-disks (1-3). Disks 8-10 only have an outer disk.
-
---- .smaller &singleimage w1:60 image:images/BadModulesPhase1_1000fb-1.png
-
-## Scenarios investigated
-
-* Three main samples are used to evaluate results:
-    * ttbar + 140PU for general results
-	* single particle gun with 10 muons per event + 140PU for muon efficiency with high pileup
-    * single particle gun with 10 muons per event + 0PU for studies of number of hits and resolution
-* Three scenarios are shown:
-    * Phase 1: current outer tracker, phase 1 pixel detector, no aging of any detector.
-    * Phase 1 with strip aging: as Phase 1 with strip aged to $1000~\textrm{fb}^{-1}$ (main effect is to kill TIB1, TIB2, TOB1, TOB2). Pixel detector is unaged.
-    * Phase 2: Phase 1 pixel detector, phase 2 outer tracker,
- forward disk extension.
+* The package lives under ```Validation/RecoVertex```
+* The code entered ```720pre2``` and is run be default using the standard ```VALIDATION``` step in ```cmsDriver.py```
+* A porting of this code into ```SLHC``` release is ready and currently under validation.
 
 ---
 
-## Details of Reconstruction Software
+## Histograms Organization
 
-* The phase 1 results come from 6_2_0_SLHC12.  
-* The phase 2 results come from 6_2_0_SLHC14 plus Kevin's hack
-to emulate binary readout of the outer tracker (which generally has a
-small effect).
-* The Phase 1(in high PU conditions) and Phase 2 track reconstruction is very
-similar.
-* The same track iterations are used (except that one of the
-muon recovery iterations is not included in phase 2). 
-    * high pT quad step (pT>0.8 GeV), 
-	* high pT triplet step (pT>0.9 GeV), 
-	* low pT quad step (pT>0.35 GeV), 
-	* low pT triplet step (pT>0.45 GeV), 
-	* detached quad step (pT>0.5 GeV, d0<0.5 cm), 
-	* pixel pair step (pT>1.5 GeV), muon recovery. 
-* The main differences are:
-    * addition of seeds for the extended forward
-disks;
-    * some tuning of the final selection cuts to account for some 
-features of the phase 2 tracker.
-    * a reconstruction more tailored to lower PU scenario (<100PU) for
-      the Phase1, using OuterSiStripTracker seeding.
-* Results are obtained using the reconstruction scenarios that give the most
-  meaningful comparisons.
+Histograms are divided into folders. The root folder for the most
+generic plots is <font class="red bold">Validation/Vertices</font>.
+The plots that are contained here belong to two categories
 
---- .segue .dark .nobackground
+### Plots related to all Simulated Primary Vertices
 
-## Plots for Approval & inclusion in the TP
+Here we mean the real PV of the interaction plus all the PVs coming
+from the in-time PU events. The simulated PV coming from the
+out-of-time events are not included into these plots. The prefix for
+these kind of plots is ```GenAllV_```.
 
+### Plots related only to the real Simulated Primary Vertex
 
---- .bigger &fourimages w1:33 imageleft_most:images/trkeff_mupt10_phs1age_eta_hp.png w2:33 imageleft:images/trkeff_ttbar_phs1age_eta_hp.png w3:0 w4:33 imageright_most:images/trkfakedup_ttbar_phs1age_eta_hp_pt09.png
+Here we only use the first vertex coming from bunch-crossing 0 and
+event 0 in that bunch crossing. The prefix for these kind of plots is ```GenPV_```.
 
-## Motivation for the Upgraded Tracker
+---
 
-After $1000~\textrm{fb}^{-1}$ of collected data, the current Outer
-Tracker performaces degrade considerably, spoiling physics reach of
-searches using tracks and degrading quantities like jet resolution and
-isolation criteria.
+## Histograms Naming - Gen Level -
 
-*** =caption_left_most
-Efficiency for 10 GeV pt muons as a function of pseudorapidity for Phase-1
-detector before and <font class="blue bold">after</font> aging of the Outer Tracker.
+* Under the root folder, there are <font class="bold">as many folders as
+PrimaryVertex selectors have been defined in the input configuration
+to the module via the parameter (```cms.VInputTag```)
+```vertexRecoCollections```</font>.
 
-*** =caption_left
-Efficiency for charge particles from ttbar events with pt > 0.9 GeV
-produced within 3.5 cm of the interaction region, in the transverse plane.
+* Each folder will have exactly the same number
+of histograms filled using the selected input collection.
 
-*** =caption_right_most
-Fake and duplicate rate of charged particles from ttbar events.
+* The histograms contained in each subfolder can be categorised
+looking at the prefix in their name, as explained here and in the following pages.
 
-*** =bottom_text
+    * <font class="bold red">GenAllAssoc2Reco_</font>: these plots are
+      used as <font class="bold blue">denominators for efficiency
+      plots</font>. We kind of duplicate plots here with respect to
+      the ones contained in the main folder labelled with prefix
+      ```GenAllV_``` in case we want to perform more detailed studies
+      on a selection of generated vertices, not on all of them.
 
-<font class="bold red">All plots for approval</font>.
+    * <font class="bold red">GenAllAssoc2RecoMatched_</font>: these
+      plots are filled with information coming from all simulated
+      vertices that are matched to a reconstructed vertex. These plots
+      are used as <font class="bold blue">numerators for efficiency
+      plots</font>. The matching is currently done based on the
+      significance of z-separation between the reconstructed and the
+      simulated vertex. In future we plan to add also a matching based
+      on the number of matched tracks belonging the the reconstructed
+      vertex and the simulated one.
 
---- .smaller &fourboxes w1:42 w2:42 w3:42 w4:42 imageright_up:images/trkeff_ttbar_phs1phs2_eta_hp.png imageleft_up:images/trkeff_mupt10_phs1phs2_eta_hp.png imageleft_down:images/trkfakedup_ttbar_phs1phs2_eta_hp_pt09.png imageright_down:images/ptresvseta_mupt1_10_phs1phs2.png
+    * <font class="bold red">GenAllAssoc2RecoMultiMatched_</font>:
+      these plots are used as <font class="bold blue">numerators to
+      compute the duplicate rate</font> for reconstructed
+      vertices. They are filled with information coming from simulated
+      vertices that have been associated to more than one
+      reconstructed track.
 
-## Phase-2 Tracker reconstruction performances
+---
 
-Comparison of <font class="red bold">Phase-2 tracker at 140 PU</font> with
-<font class="bold">Phase-1 tracker w/o aging at 50PU</font>.
+## Histograms Naming - Reco Level -
 
-*** =caption_left_up 
-Track reconstruction efficiency for pt=10GeV $\mu$ as a function of
-$\eta$.
+* Histograms derived from reconstructed vertices.
 
-*** =caption_right_up
-Track reconstruction efficiency for charged particles from $t\bar{t}$
-events.
+    * <font class="bold red">RecoAllAssoc2Gen_</font>: these are used
+      as <font class="bold blue">denominator to compute the
+      fake, merge and duplicate rate</font>. These plots are filled
+      with information coming from all reconstructed vertices
+      belonging to the specific vertex collection used in input in the
+      specific subfolder.
 
-*** =caption_left_down
-Fake+duplicate rate in ttbar events.
+    * <font class="bold red">RecoAllAssoc2GenMatched_</font>: these
+      plots are used as <font class="bold blue">numerators to compute
+      the fake rate</font> (in fact it's 1-this_entries that is the
+      true value used as the numerator for the fake rate, which
+      basically represents the reco vertices that have not been
+      associated to any simulated vertex, hence they are fake) and are
+      filled with information coming from the reconstructed vertices
+      that have been associated to a simulated vertex.
 
-*** =caption_right_down
-pt resolution of pt=1, 10GeV $\mu$ at 0PU.
+    * <font class="bold red">RecoAllAssoc2GenMultiMatched_</font>:
+      these plots are used as <font class="bold blue">numerators to
+      compute the merge rate</font> and are filled with information
+      coming from the reconstructed vertices that have been associated
+      to more than one simulated vertex.
 
+---
 
---- .segue .dark .nobackgorund
+## Histograms Explanation
 
-## Additional plots, not for inclusion in the TP
+* The typical plots that are produced are:
 
---- &twoimages w1:50 imageleft:images/hits_mupt10_phs1phs2_eta.png w2:50 imageright:images/hits_ttbar_phs1phs2_eta.png
+    * <font class="bold red">Efficiency plots</font>: these plots are
+     the ratio between the reconstructed vertices that have been
+     associated to at least one generated vertex, divided by the
+     corresponding plot filled with info coming from all the generated
+     vertices plot.
 
-## On-track hits vs $\eta$
+    * <font class="bold red">Fake rate plots</font>: these plots
+      represent the number of fake vertices, i.e. the number of
+      reconstructed vertices that have not been associated to any
+      simulated vertex.
 
-Distribution of valid hits associated to a reconstructed track as a
-function of $\eta$ for <font class="bold">Phase-1</font> and <font
-class="red bold">Phase-2</font> detectors, using pt=10GeV $\mu$
-samples at 0PU(left) and ttbar events(right).
+    * <font class="bold red">Duplicate rate plots</font>: these plots
+      represent the amount of vertices that have been reconstructed
+      more than once. They are obtained using as numerator a histogram
+      filled with information coming from simulated vertices that have
+      been associated to more than one reconstructed vertex (hence the
+      meaning of duplicate rate), and as denominator the whole set of
+      reconstructed vertices.
 
---- &twoimages w1:47 w2:47 imageleft:images/trkeff_ttbar_phs1hpuage_eta_hp.png imageright:images/trkfakedup_ttbar_phs1hpuage_eta_hp_pt09.png
+    * <font class="bold red">Merge rate plots</font>: these plots
+      represent the probability of having 2 different simulated
+      vertices reconstructed as a single vertex. It is obtained by
+      dividing a histogram filled with info coming from reconstructed
+      vertices that have been associated to more than one simulated
+      vertex, divided by the total number of reconstructed vertices.
 
-## Phase-1 aging versus PU
+* At the moment the association between reconstructed vertices to
+  simulated ones is done using a cut on the significance of the
+  absolute z-distance between the 2. The current value is lower than 3
+  sigma.
 
-Tracking efficiency and Fake+Duplicate rate for $\mu$ and ttbar
-samples for different scenarios:
+---
 
-1. Phase-1, no-aging, 50PU
-1. <font class="green">Phase-1, no-aging, 140PU</font>
-1. <font class="blue">Phase-1, 1000 fb-1, 140PU</font>
+## Monitored Variables
 
---- &fourboxes w1:45 w2:45 w3:45 w4:45 imageleft_up:images/dxyresvseta_mupt1_10_phs1phs2.png imageright_up:images/dzresvseta_mupt1_10_phs1phs2.png imageright_down:images/dzresvseta_ttbar_phs1phs2.png
+* Each of the previous plot is plotted as a function of a parameter. The ones currently used are:
 
-## Impact parameter resolutions
+    * Pt_2 of the vertex
+    * Z position of the vertex
+    * R position of the vertex
+    * Number of vertices in the event
+    * Number of tracks associated to the vertex
+    * distance to the closest in z vertex
 
-*** =textleft_down
+## Eff., Fake, Duplicate and MergeRate
 
-Transversal and longitudinal impact parameter resolution for pt=1,10
-GeV $\mu$ and ttbar samples.
+* All efficiency, fake, duplicate and merge plots are produced in the
+<font class="bold blue">harvesting step using the DQMGenericClient module</font>.
+
+* Instead of pasting few command and python snippets here, I included a
+README file under the test directory with rather detailed information
+on how to run this validation module and its harvesting twin in
+standalone-like mode. [Here](https://github.com/cms-sw/cmssw/blob/CMSSW_7_2_X/Validation/RecoVertex/test/README_VertexValidationSlimmed.txt) you can find the link.
+
+* There is also a TWiki page
+  [here](https://twiki.cern.ch/twiki/bin/view/CMS/TrackingVertexValidatorSlimmed)
+  that contains all the information that I tried to include in this
+  talk.
+
 
 --- &thankyou
 
@@ -175,7 +202,7 @@ In reverse cronological order:
 * [Kevins' Talk at the Workshop at Fermilab](https://indico.cern.ch/event/305314/contribution/1/material/slides/0.pdf)
 * [Marco's Talk at the Upgrade TP Performance Studies](https://indico.cern.ch/event/314557/contribution/6/material/slides/0.pdf)
 * [Giuseppe's slides for ECFA2013](https://indico.cern.ch/event/309894/contribution/6/material/0/0.pdf)
-  
+
 
 
 --- .segue .dark .nobackground
@@ -201,21 +228,21 @@ In reverse cronological order:
 * InitialStep (High pT quad step)
     * [main cfg](https://roverepublic.web.cern.ch/roverepublic/Sequences/CMSSW_6_2_0_SLHC14/html/initialStepSeeds.html)
 	* [used layers](https://roverepublic.web.cern.ch/roverepublic/Sequences/CMSSW_6_2_0_SLHC14/html/pixellayertriplets.html)
-	* [quad-seed](https://roverepublic.web.cern.ch/roverepublic/Sequences/CMSSW_6_2_0_SLHC14/html/pixelseedmergerlayers.html)  
+	* [quad-seed](https://roverepublic.web.cern.ch/roverepublic/Sequences/CMSSW_6_2_0_SLHC14/html/pixelseedmergerlayers.html)
 * HighPtTripletStep
     * [main cfg](https://roverepublic.web.cern.ch/roverepublic/Sequences/CMSSW_6_2_0_SLHC14/html/highPtTripletStepClusters.html)
     * [used layers](https://roverepublic.web.cern.ch/roverepublic/Sequences/CMSSW_6_2_0_SLHC14/html/highPtTripletStepSeedLayers.html)
 * LowPtQuadStep
     * [main cfg](https://roverepublic.web.cern.ch/roverepublic/Sequences/CMSSW_6_2_0_SLHC14/html/lowPtQuadStepSeeds.html)
 	* [used layers](https://roverepublic.web.cern.ch/roverepublic/Sequences/CMSSW_6_2_0_SLHC14/html/lowPtQuadStepSeedLayers.html)
-	* [quad-seed](https://roverepublic.web.cern.ch/roverepublic/Sequences/CMSSW_6_2_0_SLHC14/html/pixelseedmergerlayers.html)  
+	* [quad-seed](https://roverepublic.web.cern.ch/roverepublic/Sequences/CMSSW_6_2_0_SLHC14/html/pixelseedmergerlayers.html)
 * LowPtTripletStep
     * [main cfg](https://roverepublic.web.cern.ch/roverepublic/Sequences/CMSSW_6_2_0_SLHC14/html/lowPtTripletStepSeeds.html)
 	* [used layers](https://roverepublic.web.cern.ch/roverepublic/Sequences/CMSSW_6_2_0_SLHC14/html/lowPtTripletStepSeedLayers.html)
 * DetachedQuadStep
     * [main cfg](https://roverepublic.web.cern.ch/roverepublic/Sequences/CMSSW_6_2_0_SLHC14/html/detachedQuadStepSeeds.html)
 	* [used layers](https://roverepublic.web.cern.ch/roverepublic/Sequences/CMSSW_6_2_0_SLHC14/html/detachedQuadStepSeedLayers.html)
-	* [quad-seed](https://roverepublic.web.cern.ch/roverepublic/Sequences/CMSSW_6_2_0_SLHC14/html/pixelseedmergerlayers.html)  
+	* [quad-seed](https://roverepublic.web.cern.ch/roverepublic/Sequences/CMSSW_6_2_0_SLHC14/html/pixelseedmergerlayers.html)
 * PixelPairStep
     * [main cfg](https://roverepublic.web.cern.ch/roverepublic/Sequences/CMSSW_6_2_0_SLHC14/html/pixelPairStepSeeds.html)
 	* [used layers](https://roverepublic.web.cern.ch/roverepublic/Sequences/CMSSW_6_2_0_SLHC14/html/pixelPairStepSeedLayers.html)
