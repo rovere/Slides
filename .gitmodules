@@ -1,0 +1,3 @@
+[submodule "images"]
+	path = images
+	url = sshd@178.250.212.35:/mnt/HD/HD_a2/Public/GitRepo/ImagesForSlides.git
