@@ -14,7 +14,7 @@ mode        : selfcontained # {standalone,draft}
 ## Releases
 
 * **CMSSW_7_2_0_pre2** has been release 1 week ago
-    * Pull Requests in github:
+    * Included Pull Requests in github:
         * [4530](https://github.com/cms-sw/cmssw/pull/4530) - rovere - <font class="red bold">Initial version of a slimmed and simple vertex validator.</font>
         * [4455](https://github.com/cms-sw/cmssw/pull/4455) - Juan - <font class="red bold">TrackBase & HitPattern redesign discussed on the RECO meeting of 08/05/2014</font>
             * Additional material [here](https://indico.cern.ch/event/327055/contribution/6/material/slides/0.pdf)
@@ -33,7 +33,7 @@ mode        : selfcontained # {standalone,draft}
 
 * We are planning to replicate the successfull Tracking Training Day that was help last year
 * The <font class="red bold">tentative</font> date is October 20th:
-    * sign this date on your agenda!!
+    * let us know as soon as possible if this time slot is tentatively ok w/ you.
 * For Conference Reports and Proceeding, please keep in mind that:
     * if you submit to Subeditor of project<font class="red bold">Physics</font> with a subdetector of <font class="red bold">Tracker</font>, the proceeding will arrive to Tracking POGs for review
     * if you submit to Subeditor of project<font class="red bold">Tracker</font> with <font class="red bold">any</font> subdetector, the proceeding will arrive to the Tracker editors
