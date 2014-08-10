@@ -1,6 +1,6 @@
 ---
-title       : New Validation Vertex Package
-subtitle    : Tracking POG Meeting, 2014-07-28
+title       : New Vertex Validation Package
+subtitle    : Tracking POG Meeting, 2014-08-11
 author      : M. Rovere, CERN
 job         : CERN
 framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
@@ -15,7 +15,7 @@ mode        : selfcontained # {standalone,draft}
 
 ### Purpose
 
-This slides will explain
+These slides will explain
 * the plots produced centrally by the PV Vertex validation package
 * how they are organised
 * how they are produced and filled
@@ -31,9 +31,12 @@ This slides will explain
 
 ## Histograms Organization
 
-Histograms are divided into folders. The root folder for the most
-generic plots is <font class="red bold">Validation/Vertices</font>.
-The plots that are contained here belong to two categories
+* Histograms are divided into folders.
+
+* The root folder for the most generic plots is configurable via the
+parameter ```root_folder```, with a default value of <font class="red
+bold">Validation/Vertices</font>.  The plots that are contained here
+belong to two categories:
 
 ### Plots related to all Simulated Primary Vertices
 
@@ -45,74 +48,80 @@ these kind of plots is ```GenAllV_```.
 ### Plots related only to the real Simulated Primary Vertex
 
 Here we only use the first vertex coming from bunch-crossing 0 and
-event 0 in that bunch crossing. The prefix for these kind of plots is ```GenPV_```.
+event 0 in that bunch crossing. The prefix for these kind of plots is
+```GenPV_```.
 
 ---
 
 ## Histograms Naming - Gen Level -
 
-* Under the root folder, there are <font class="bold">as many folders as
-PrimaryVertex selectors have been defined in the input configuration
-to the module via the parameter (```cms.VInputTag```)
-```vertexRecoCollections```</font>.
+* Under the root folder, there are <font class="bold">as many folders
+as ReconstructedParimaryVertex selectors have been defined in the
+input configuration to the module via the parameter
+(```cms.VInputTag```) ```vertexRecoCollections```</font>.
 
 * Each folder will have exactly the same number
 of histograms filled using the selected input collection.
 
 * The histograms contained in each subfolder can be categorised
-looking at the prefix in their name, as explained here and in the following pages.
+looking at the prefix in their name, as explained here and in the
+following pages.
 
     * <font class="bold red">GenAllAssoc2Reco_</font>: these plots are
-      used as <font class="bold blue">denominators for efficiency
-      plots</font>. We kind of duplicate plots here with respect to
-      the ones contained in the main folder labelled with prefix
-      ```GenAllV_``` in case we want to perform more detailed studies
-      on a selection of generated vertices, not on all of them.
+      used as <font class="bold blue">denominators for efficiency and
+      duplicate plots</font>. We kind of duplicate plots here with
+      respect to the ones contained in the main folder labelled with
+      prefix ```GenAllV_``` in case we want to perform more detailed
+      studies on a selection of generated vertices, not on all of
+      them.
 
     * <font class="bold red">GenAllAssoc2RecoMatched_</font>: these
-      plots are filled with information coming from all simulated
-      vertices that are matched to a reconstructed vertex. These plots
-      are used as <font class="bold blue">numerators for efficiency
-      plots</font>. The matching is currently done based on the
-      significance of z-separation between the reconstructed and the
-      simulated vertex. In future we plan to add also a matching based
-      on the number of matched tracks belonging the the reconstructed
-      vertex and the simulated one.
+      plots are filled with information coming from all <font
+      class="blue">simulated vertices</font> that are matched to a
+      reconstructed vertex. These plots are used as <font class="bold
+      blue">numerators for efficiency plots</font>. The matching is
+      currently done based on both a cut on the absolute distance
+      between the two vertices and the significance of
+      z-separation. In future we plan to add also a matching based on
+      the number of matched tracks belonging the the reconstructed
+      vertex and the simulated one. All parameters are configurable.
 
     * <font class="bold red">GenAllAssoc2RecoMultiMatched_</font>:
       these plots are used as <font class="bold blue">numerators to
       compute the duplicate rate</font> for reconstructed
-      vertices. They are filled with information coming from simulated
-      vertices that have been associated to more than one
-      reconstructed track.
+      vertices. They are filled with information coming from <font
+      class="blue">simulated vertices</font> that have been associated
+      to more than one reconstructed track.
 
 ---
 
 ## Histograms Naming - Reco Level -
 
-* Histograms derived from reconstructed vertices.
+* Histograms derived from <font class="blue">reconstructed
+  vertices</font>.
 
     * <font class="bold red">RecoAllAssoc2Gen_</font>: these are used
-      as <font class="bold blue">denominator to compute the
-      fake, merge and duplicate rate</font>. These plots are filled
-      with information coming from all reconstructed vertices
-      belonging to the specific vertex collection used in input in the
-      specific subfolder.
+      as <font class="bold blue">denominator to compute the fake,
+      merge and duplicate rate</font>. These plots are filled with
+      information coming from all <font class="blue">reconstructed
+      vertices</font> belonging to the specific vertex collection used
+      in input in the specific subfolder.
 
     * <font class="bold red">RecoAllAssoc2GenMatched_</font>: these
       plots are used as <font class="bold blue">numerators to compute
-      the fake rate</font> (in fact it's 1-this_entries that is the
+      the fake rate</font> (in fact it's 1 - this_entries that is the
       true value used as the numerator for the fake rate, which
       basically represents the reco vertices that have not been
       associated to any simulated vertex, hence they are fake) and are
-      filled with information coming from the reconstructed vertices
-      that have been associated to a simulated vertex.
+      filled with information coming from the <font
+      class="blue">reconstructed vertices</font> that have been
+      associated to a simulated vertex.
 
     * <font class="bold red">RecoAllAssoc2GenMultiMatched_</font>:
       these plots are used as <font class="bold blue">numerators to
       compute the merge rate</font> and are filled with information
-      coming from the reconstructed vertices that have been associated
-      to more than one simulated vertex.
+      coming from the <font class="blue">reconstructed vertices</font>
+      that have been associated to more than one simulated vertex.
 
 ---
 
@@ -145,11 +154,6 @@ looking at the prefix in their name, as explained here and in the following page
       dividing a histogram filled with info coming from reconstructed
       vertices that have been associated to more than one simulated
       vertex, divided by the total number of reconstructed vertices.
-
-* At the moment the association between reconstructed vertices to
-  simulated ones is done using a cut on the significance of the
-  absolute z-distance between the 2. The current value is lower than 3
-  sigma.
 
 ---
 
