@@ -16,16 +16,37 @@ mode        : selfcontained # {standalone,draft}
 ### Purpose
 
 These slides will explain
+
 * the plots produced centrally by the PV Vertex validation package
-* how they are organised
-* how they are produced and filled
-* how to run only this part of the full validation sequence in an effortless way, almost in standalone mode.
+
+* how they are organised, produced and filled
+
+* how to run only this part of the full validation sequence in an
+  effortless way, almost in standalone mode.
+
+* Few, <font class="bold red">very preliminary</font> results obtained
+  on a privatly produced TTbar sample, PU70@25ns.
+
+* More detailed studies will follow on different PU conditions, with
+  more statistics.
 
 ### Current situation
 
 * The package lives under ```Validation/RecoVertex```
-* The code entered ```720pre2``` and is run be default using the standard ```VALIDATION``` step in ```cmsDriver.py```
-* A porting of this code into ```SLHC``` release is ready and currently under validation.
+
+* The code entered ```720pre2``` and is run be default using the
+  standard ```VALIDATION``` step in ```cmsDriver.py```
+
+* A porting of this code into ```SLHC``` release is ready and
+  currently under validation.
+
+* Few bug fixes and improvements have already been submitted w.r.t
+  pre2 and more will arrive in due time.
+
+
+--- .segue .dark .nobackground
+
+## Package Description
 
 ---
 
@@ -48,8 +69,7 @@ these kind of plots is ```GenAllV_```.
 ### Plots related only to the real Simulated Primary Vertex
 
 Here we only use the first vertex coming from bunch-crossing 0 and
-event 0 in that bunch crossing. The prefix for these kind of plots is
-```GenPV_```.
+event 0 in that bunch crossing. The prefix for these kind of plots is ```GenPV_```.
 
 ---
 
@@ -184,6 +204,72 @@ standalone-like mode. [Here](https://github.com/cms-sw/cmssw/blob/CMSSW_7_2_X/Va
   talk.
 
 
+--- .segue .dark .nobackground
+
+## Preliminary Results
+
+--- &twoimages w1:45 w2:45 imageleft:images/selectedOfflinePrimaryVertices_RecoVtx_vs_GenVtx.png imageright:images/selectedOfflinePrimaryVertices_MatchedRecoVtx_vs_GenVtx.png
+
+## Reconstructed vs Generated vertices
+
+* The plot on the left shows the number of reconstructed (good)
+  vertices as a function of the number of generated ones.
+
+* The plot on the right shows the same, but requiring that the
+  reconstructed vertex is also associated to a generated one.
+
+* Both plots should be linear and the relative difference is
+  proportional to the number of bad reco vertices that have been
+  reconstructed.
+
+--- &fourimages w1:33 w2:33 w3:0 w4:33 imageleft_most:images/selectedOfflinePrimaryVertices_effic_vs_NumVertices.png imageleft:images/selectedOfflinePrimaryVertices_effic_vs_NumTracks.png imageright_most:images/selectedOfflinePrimaryVertices_effic_vs_Pt2.png
+
+## Efficiencies
+ 
+* The leftmost plot shows the vertex-reconstruction efficiency as a
+  function of the generated PU conditions
+
+* The central plot shows the vertex-reconstruction efficiency as
+  a function of the number of tracks associated to the simulated
+  vertex.
+
+* The rightmost plot shows the vertex-reconstruction efficiency as a
+  function $\sum {p_t}^2$ of the tracks belonging to the generated
+  vertex.
+
+* The overall efficiency is around 70% and seems quite stable vs
+  PU(<font class="bold red"> but the range is rather limited</font>),
+  while it is considerably higher for "bigger" and "harder" vertices.
+
+--- &twoimages w1:45 w2:45 imageleft:images/selectedOfflinePrimaryVertices_fakerate_vs_PU.png  imageright:images/selectedOfflinePrimaryVertices_merged_vs_ClosestVertexInZ.png
+
+## Fake and Merge Rates
+
+* The plot on the left shows the fake rate as a function of the PU of
+  the events
+
+* The plot on the right shows the merge rate as a function of the
+  closest distance between the simulated vertices associated to the
+  reconstructed one.
+
+* The overall(integrated) fake rate is around 15%, while the merge
+  rate is around 10%. For vertex distance above the 1mm, the merge
+  rate is though negligible.
+
+--- &twoimages w1:45 w2:45 imageleft:images/selectedOfflinePrimaryVertices_MisTagRate.png  imageright:images/selectedOfflinePrimaryVertices_TruePVLocationIndex.png
+
+## Signal Identification
+
+* The plot on the left shows probability that the first reconstructed
+  vertex is the signal one. Entries at 0 means either that the signal
+  vertex has not been reconstructed, or that is was not the one with
+  the highest $\sum pt^2$
+
+* The plot on the right shows the position (in the recovertex
+  collection) at which the true signal vertex has been
+  reconstructed. Entries at -1 refer to the case in which the signal
+  vertex has not been reconstructed.
+
 --- &thankyou
 
 ## Thank you!
@@ -193,66 +279,6 @@ Questions & Answers
 --- .segue .dark .nobackground
 
 ## Backup
-
---- .bigger
-
-## Links to supporing material/talks/slides
-
-In reverse cronological order:
-
-* [Kevin's Talk at the Upgrade Week in Karlsruhe](https://indico.cern.ch/event/294765/session/25/contribution/23/material/slides/0.pdf)
-* [Andrea's Talk at Phase1/2 Upgrade Simulation Meeting](https://indico.cern.ch/event/305423/session/3/contribution/4/material/slides/1.pdf)
-* [Marco's Talk at the Upgrade TP Performance Studies](https://indico.cern.ch/event/322595/contribution/14/material/slides/0.pdf)
-* [Kevins' Talk at the Workshop at Fermilab](https://indico.cern.ch/event/305314/contribution/1/material/slides/0.pdf)
-* [Marco's Talk at the Upgrade TP Performance Studies](https://indico.cern.ch/event/314557/contribution/6/material/slides/0.pdf)
-* [Giuseppe's slides for ECFA2013](https://indico.cern.ch/event/309894/contribution/6/material/0/0.pdf)
-
-
-
---- .segue .dark .nobackground
-
-## Additional Plots
-
---- &twoimages w1:47 w2:47 imageleft:images/ptresvseta_ttbar_phs1phs2.png imageright:images/dzresvseta_ttbar_phs1phs2.png
-
-## Resolutions for different samples
-
---- &fourboxes w1:45 w2:45 w3:45 w4:45 imageleft_up:images/trkfake_ttbar_phs1age_eta_hp_pt09.png imageright_up:images/trkfake_ttbar_phs1phs2_eta_hp_pt09.png imageleft_down:images/trkdup_ttbar_phs1age_eta_hp_pt09.png imageright_down:images/trkdup_ttbar_phs1phs2_eta_hp_pt09.png
-
-## Individual Fake and Duplicate rates
-
---- &fourboxes w1:45 w2:45 w3:45 w4:45 imageleft_up:images/trkfake_ttbar_phs1age_eta_hp.png imageright_up:images/trkfake_ttbar_phs1phs2_eta_hp.png imageleft_down:images/trkdup_ttbar_phs1age_eta_hp.png imageright_down:images/trkdup_ttbar_phs1phs2_eta_hp.png
-
-## Individual Fake and Duplicate rates - Looser cuts
-
---- .smaller
-
-## Details of reco configuration - Seeding
-
-* InitialStep (High pT quad step)
-    * [main cfg](https://roverepublic.web.cern.ch/roverepublic/Sequences/CMSSW_6_2_0_SLHC14/html/initialStepSeeds.html)
-	* [used layers](https://roverepublic.web.cern.ch/roverepublic/Sequences/CMSSW_6_2_0_SLHC14/html/pixellayertriplets.html)
-	* [quad-seed](https://roverepublic.web.cern.ch/roverepublic/Sequences/CMSSW_6_2_0_SLHC14/html/pixelseedmergerlayers.html)
-* HighPtTripletStep
-    * [main cfg](https://roverepublic.web.cern.ch/roverepublic/Sequences/CMSSW_6_2_0_SLHC14/html/highPtTripletStepClusters.html)
-    * [used layers](https://roverepublic.web.cern.ch/roverepublic/Sequences/CMSSW_6_2_0_SLHC14/html/highPtTripletStepSeedLayers.html)
-* LowPtQuadStep
-    * [main cfg](https://roverepublic.web.cern.ch/roverepublic/Sequences/CMSSW_6_2_0_SLHC14/html/lowPtQuadStepSeeds.html)
-	* [used layers](https://roverepublic.web.cern.ch/roverepublic/Sequences/CMSSW_6_2_0_SLHC14/html/lowPtQuadStepSeedLayers.html)
-	* [quad-seed](https://roverepublic.web.cern.ch/roverepublic/Sequences/CMSSW_6_2_0_SLHC14/html/pixelseedmergerlayers.html)
-* LowPtTripletStep
-    * [main cfg](https://roverepublic.web.cern.ch/roverepublic/Sequences/CMSSW_6_2_0_SLHC14/html/lowPtTripletStepSeeds.html)
-	* [used layers](https://roverepublic.web.cern.ch/roverepublic/Sequences/CMSSW_6_2_0_SLHC14/html/lowPtTripletStepSeedLayers.html)
-* DetachedQuadStep
-    * [main cfg](https://roverepublic.web.cern.ch/roverepublic/Sequences/CMSSW_6_2_0_SLHC14/html/detachedQuadStepSeeds.html)
-	* [used layers](https://roverepublic.web.cern.ch/roverepublic/Sequences/CMSSW_6_2_0_SLHC14/html/detachedQuadStepSeedLayers.html)
-	* [quad-seed](https://roverepublic.web.cern.ch/roverepublic/Sequences/CMSSW_6_2_0_SLHC14/html/pixelseedmergerlayers.html)
-* PixelPairStep
-    * [main cfg](https://roverepublic.web.cern.ch/roverepublic/Sequences/CMSSW_6_2_0_SLHC14/html/pixelPairStepSeeds.html)
-	* [used layers](https://roverepublic.web.cern.ch/roverepublic/Sequences/CMSSW_6_2_0_SLHC14/html/pixelPairStepSeedLayers.html)
-
-
-
 
 
 
