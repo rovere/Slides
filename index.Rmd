@@ -262,13 +262,35 @@ standalone-like mode. [Here](https://github.com/cms-sw/cmssw/blob/CMSSW_7_2_X/Va
 
 * The plot on the left shows probability that the first reconstructed
   vertex is the signal one. Entries at 0 means either that the signal
-  vertex has not been reconstructed, or that is was not the one with
+  vertex has not been reconstructed, or that it was not the one with
   the highest $\sum pt^2$
 
 * The plot on the right shows the position (in the recovertex
   collection) at which the true signal vertex has been
   reconstructed. Entries at -1 refer to the case in which the signal
   vertex has not been reconstructed.
+
+---
+
+## Conclusions
+
+* The Vertex Validation package has been revived and included into
+  72X as of pre2
+
+* Most of the plots are already there, but few others will soon come
+  (pulls, residuals, others .. ?)
+
+* Preliminary studies on a small sample in 72pre3 70PU@25ns show that
+  the vertex reconstruction is behaving as expected.
+
+* More refined studies, tailored to the Upgrade and to higher PU
+  scenarios, have been recently shown by Kevin
+  [link](https://indico.cern.ch/event/334164/contribution/10/material/slides/0.pdf). Maybe
+  in this case some further tuning of "good vertex selection" will be
+  needed.
+
+* More advanced studies on vertex reconstruction in 72 will be done in
+  the coming future.
 
 --- &thankyou
 
