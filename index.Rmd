@@ -17,17 +17,14 @@ HH:MM | Monday | Tuesday | Wednesday | Thursday | Friday
 ------|--------|---------|-----------|----------|-------
 11:00(+1)| [CMG Meeting](https://indico.cern.ch/category/1236/) | | | |
 11:00(+2.2) | | | | [TPO](https://indico.cern.ch/category/1065/) | 
-14:00(+2) | [TSG Coordination](https://indico.cern.ch/category/1576/) | [DQM{,Core,PdmV}](https://indico.cern.ch/category/3904/) | [PPD General Meeting](https://indico.cern.ch/category/3905/) | [Weekly Joint PPD/Off/Trig/Comp Ops Meeting](https://indico.cern.ch/category/4448/) |
+14:00(+2) | [TSG Coordination](https://indico.cern.ch/category/1576/) | [DQM{,Core,PdmV}](https://indico.cern.ch/category/3904/) <br/> [X-POG](https://indico.cern.ch/category/5517/) | [PPD General Meeting](https://indico.cern.ch/category/3905/) | [Weekly Joint PPD/Off/Trig/Comp Ops Meeting](https://indico.cern.ch/category/4448/) |
 1{4,6}:00(+2) | [TrackingPOG](https://indico.cern.ch/category/2029/) | | | |
 15:00(+2/+3) | [AlCaDB](https://indico.cern.ch/category/3903/) | | | | [Tracker DPG - Tracking POG general meeting] (https://indico.cern.ch/category/1358/)
 15:30(+2.5/+1.5)|        | [RunMeeting](https://indico.cern.ch/category/1354/)     |           |          | [Simulation] (https://indico.cern.ch/category/1370/)
-16:00(+2) | [CompOpMeeting](https://indico.cern.ch/category/1374/) | | | |
-16:00(+3) | | | [WGM](https://indico.cern.ch/category/677/) | | 
-16:00(+2.2) | | | | [Upgrade TP](https://indico.cern.ch/category/5353/) | 
-17:00(+1) | | [D'Orp](https://indico.cern.ch/category/1370/) | | | 
-17:00(+2) | | | | [Reco&AT](https://indico.cern.ch/category/1370/) | 
-17:00(+2)|        |[Phase1/Phase2 Upgrade Simulation](https://indico.cern.ch/category/1358/) | | |
+16:00(+2) |  | | | |
+16:00(+2,+3,+2.2) | [CompOpMeeting](https://indico.cern.ch/category/1374/) | | [WGM](https://indico.cern.ch/category/677/) | [Upgrade TP](https://indico.cern.ch/category/5353/) | 
+17:00(+1,+2) | | [D'Orp](https://indico.cern.ch/category/1370/)<br/> [Phase1/Phase2 Upgrade Simulation](https://indico.cern.ch/category/1358/)| | [Reco&AT](https://indico.cern.ch/category/1370/) | 
 17:30(+1.5) | [CMSSW R&D](https://indico.cern.ch/category/1370/) | | | |
 17:45(+1.5) | | [Core Sft](https://indico.cern.ch/category/1370/) | | | 
-18:00(+2) | [PhysCoord](https://indico.cern.ch/category/1376/) | | | |
+18:00(+2) | [PhysCoord](https://indico.cern.ch/category/1376/) or [PPDCoord](https://indico.cern.ch/category/3894/)| | | |
 
