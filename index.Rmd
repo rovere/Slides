@@ -1,7 +1,7 @@
 ---
 title       : New Vertex Validation Package
-subtitle    : Tracking POG Meeting, 2014-08-11
-author      : M. Rovere, CERN
+subtitle    : Joint DQM/PdmV Meeting, 2014-09-02
+author      : M. Rovere, G. Cerati
 job         : CERN
 framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
 highlighter : prettify      # {highlight.js, prettify, highlight}
@@ -25,10 +25,7 @@ These slides will explain
   effortless way, almost in standalone mode.
 
 * Few, <font class="bold red">very preliminary</font> results obtained
-  on a privatly produced TTbar sample, PU70@25ns.
-
-* More detailed studies will follow on different PU conditions, with
-  more statistics.
+  on a privatly produced TTbar sample, PU{25,40,70,140}@25ns.
 
 ### Current situation
 
@@ -37,12 +34,9 @@ These slides will explain
 * The code entered ```720pre2``` and is run be default using the
   standard ```VALIDATION``` step in ```cmsDriver.py```
 
-* A porting of this code into ```SLHC``` release is ready and
-  currently under validation.
-
-* Few bug fixes and improvements have already been submitted w.r.t
-  pre2 and more will arrive in due time.
-
+* A porting of this code into ```SLHC``` release has been done but is
+  not constantly kept up-to-date due to DQM Framework changes related
+  to MT.
 
 --- .segue .dark .nobackground
 
@@ -66,7 +60,7 @@ from the in-time PU events. The simulated PV coming from the
 out-of-time events are not included into these plots. The prefix for
 these kind of plots is ```GenAllV_```.
 
-### Plots related only to the real Simulated Primary Vertex
+### Plots related only to the Signal Primary Vertex
 
 Here we only use the first vertex coming from bunch-crossing 0 and
 event 0 in that bunch crossing. The prefix for these kind of plots is ```GenPV_```.
@@ -150,10 +144,10 @@ following pages.
 * The typical plots that are produced are:
 
     * <font class="bold red">Efficiency plots</font>: these plots are
-     the ratio between the reconstructed vertices that have been
-     associated to at least one generated vertex, divided by the
-     corresponding plot filled with info coming from all the generated
-     vertices plot.
+      the ratio between the reconstructed vertices that have been
+      associated to at least one generated vertex, divided by the
+      corresponding plot filled with info coming from all the
+      generated vertices plot.
 
     * <font class="bold red">Fake rate plots</font>: these plots
       represent the number of fake vertices, i.e. the number of
@@ -213,7 +207,8 @@ standalone-like mode. [Here](https://github.com/cms-sw/cmssw/blob/CMSSW_7_2_X/Va
 ## Reconstructed vs Generated vertices
 
 * The plot on the left shows the number of reconstructed (good)
-  vertices as a function of the number of generated ones.
+  vertices as a function of the number of generated ones for <font style="color: #0f0;">25</font>, <font style="color: #ff0087;">40</font>,
+  <font style="color: #0012ff">70</font>, <font style="color: #00c3ff">140</font> PU TTbar samples.
 
 * The plot on the right shows the same, but requiring that the
   reconstructed vertex is also associated to a generated one.
@@ -237,9 +232,9 @@ standalone-like mode. [Here](https://github.com/cms-sw/cmssw/blob/CMSSW_7_2_X/Va
   function $\sum {p_t}^2$ of the tracks belonging to the generated
   vertex.
 
-* The overall efficiency is around 70% and seems quite stable vs
-  PU(<font class="bold red"> but the range is rather limited</font>),
-  while it is considerably higher for "bigger" and "harder" vertices.
+* The overall efficiency is around 70% (<font class="bold red"> with a
+  steady decrease as PU increases</font>), while it is considerably
+  higher for "bigger" and "harder" vertices.
 
 --- &twoimages w1:45 w2:45 imageleft:images/selectedOfflinePrimaryVertices_fakerate_vs_PU.png  imageright:images/selectedOfflinePrimaryVertices_merged_vs_ClosestVertexInZ.png
 
@@ -252,23 +247,48 @@ standalone-like mode. [Here](https://github.com/cms-sw/cmssw/blob/CMSSW_7_2_X/Va
   closest distance between the simulated vertices associated to the
   reconstructed one.
 
-* The overall(integrated) fake rate is around 15%, while the merge
-  rate is around 10%. For vertex distance above the 1mm, the merge
-  rate is though negligible.
+* The overall (integrated) fake rate shows a steep growth as a
+  function of the true PU, yet keeping below 10% up to PU 70.  For
+  vertex distances above 1 mm the merge rate is practically
+  negligible.
 
---- &twoimages w1:45 w2:45 imageleft:images/selectedOfflinePrimaryVertices_MisTagRate.png  imageright:images/selectedOfflinePrimaryVertices_TruePVLocationIndex.png
+--- &singleimage w1:45 image:images/selectedOfflinePrimaryVertices_TruePVLocationIndexCumulative.png
 
 ## Signal Identification
 
-* The plot on the left shows probability that the first reconstructed
-  vertex is the signal one. Entries at 0 means either that the signal
-  vertex has not been reconstructed, or that it was not the one with
-  the highest $\sum pt^2$
+* The plot shows the position (in the recovertex collection) at which
+  the true signal vertex has been reconstructed. Entries at -1 refer
+  to the case in which the signal vertex has not been reconstructed,
+  while all entries above 1 have been collapsed at 1.
 
-* The plot on the right shows the position (in the recovertex
-  collection) at which the true signal vertex has been
-  reconstructed. Entries at -1 refer to the case in which the signal
-  vertex has not been reconstructed.
+* The ratio between the entries in bin 0 and the sum of the entries in
+  bin at -1 and 1, should give an idea of the misidentification rate.
+
+* As we can see, for PU 25, 40 and 70 the misidentification rate is
+  almost negligible, while it becomes an issue at PU 140.
+
+---
+
+## Small suggestion
+
+* We usually had to monitor quantities over many order of
+  magnitudes. Instead of booking a huge number of bins, we decided to
+  create an ad-hoc, custom, logaritmic scale.
+
+<pre class="prettyprint" data-lang="c++">
+  double log_pt2_bins_double[<b>16</b>] = {
+    0.0, 0.1, 0.5, 
+    1.0, 2.0, 5.0,
+    10.0, 20.0, 50.0,
+    100.0, 200.0, 500.0, 
+    1000.0, 2000.0, 5000.0,10000.0
+   };
+   ...
+   ...
+   mes_["root_folder"]["GenPV_Pt2"] =
+       i.book1D("GenPV_Pt2", "GeneratedPV_Sum-pt2", <b>15</b>, &log_pt2_bins[0]);
+</pre>
+
 
 ---
 
@@ -280,17 +300,15 @@ standalone-like mode. [Here](https://github.com/cms-sw/cmssw/blob/CMSSW_7_2_X/Va
 * Most of the plots are already there, but few others will soon come
   (pulls, residuals, others .. ?)
 
-* Preliminary studies on a small sample in 72pre3 70PU@25ns show that
-  the vertex reconstruction is behaving as expected.
+* Preliminary studies on a private samples in 72pre4
+  {25,40,70,140}PU@25ns show that the vertex reconstruction is
+  behaving as expected up to 70, while some tuning is needed at higher PU.
 
 * More refined studies, tailored to the Upgrade and to higher PU
   scenarios, have been recently shown by Kevin
   [link](https://indico.cern.ch/event/334164/contribution/10/material/slides/0.pdf). Maybe
   in this case some further tuning of "good vertex selection" will be
   needed.
-
-* More advanced studies on vertex reconstruction in 72 will be done in
-  the coming future.
 
 --- &thankyou
 
