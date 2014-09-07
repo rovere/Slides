@@ -1,6 +1,6 @@
 ---
-title       : DQM GUI (almost) Explained
-subtitle    : A quick introduction to DQM GUI
+title       : DQM GUI Ideas
+subtitle    : Possible extension to make DQM GUI a  distributed service
 author      : M. Rovere, PH-CMG-CO, CERN
 job         : CERN
 framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
@@ -8,6 +8,98 @@ highlighter : prettify      # {highlight.js, prettify, highlight}
 hitheme     : twitter-bootstrap # sunburst      #
 widgets     : [mathjax]            # {mathjax, quiz, bootstrap}
 mode        : selfcontained # {standalone,draft}
+
+--- .segue .dark .nobackground
+
+## Motivation
+
+---
+
+## Many Requirements, One application
+
+### <font class='red bold'>Offline</font> Requirements
+
+1. Quickly digest all data coming in from Tier-0
+1. Handle a huge volume of data (~2.5TB)
+1. Handle a huge number of samples
+1. Quickly digest all data coming from reprocessing
+
+### <font class='red bold'>RelVal</font> Requirements
+
+1. Handle a huge number of histograms
+1. Quickly digest Relval samples injected by WMAgent
+1. Moderate data volume (~1TB)
+
+### <font class='red bold'>Online</font> Requirements
+
+1. Live feedback from Online DQM Apps
+1. Small number of samples
+a. Small disk size
+
+---
+
+## How to satisfy requirements
+
+### <font class='red bold'>Offline</font>
+
+1. Buy performant/expensive dedicated hardware
+1. Design a fast application
+
+### <font class='red bold'>RelVal</font>
+
+1. Buy performant/expensive dedicated hardware
+1. Design a fast application
+
+### <font class='red bold'>Online</font>
+
+1. Design a fast application
+1. Use dedicated/fast network protocol to transmit histograms in live mode.
+
+---
+
+## Scaling ...
+
+- While buy new hardware is a legittimate step, it is clear that it
+is not going to scale in the longish term
+   - computing is going in the opposite direction:
+       - multi-threading and parallelisation
+       - <font class='red bold'>horizontal scaling</font>
+
+- DQM GUI is no exception in this respect
+
+- CERN IT is less and less willing to buy, configure and handle dedicated hardware
+
+- vocms138 and vocms139 are already <font class='red bold'>out of
+  warranty</font> and will soon be retired
+
+- <font class='blue bold'>Need to find adeguate replacements, trying
+  to satisfy all needs, keeping the highest possible performances,
+  possibly improving the system</font>
+
+- In this process, I started to think what DQM GUI could be in the
+  (maybe not so near) future.
+
+---
+
+## Switch to Virtual Machines
+
+Moving the current produciton servers to Virtual Machines is not an immediate step.
+
+- Current production servers have hardware RAID 6 to cope with
+single(multiple) disk failures.
+
+- The current read/write on disk capabilities are ~700/~350 MB/s, not
+reproducible using a VM with an ordinary disk attached.
+
+- Few solutions have been explored during a dedicated meeting with IT guys.
+   - I will put together an ad-hoc test suite to measure reasonable performances of the current servers
+   - Compare these numbers with the proposed solutions
+   - Try to come up with some reasonable requirements from CMS
+       - As fast as possible is not a <font class='red bold'>good</font> metric. 
+
+- Good occasion to re-think a bit the DQM GUI applications and give a
+  thought about what could be done to cope with less performant
+  operating hardware
 
 ---
 

@@ -324,11 +324,11 @@ body {
   font-size: 1em;
 }
 slide.segue h2{
- font-family: "Open Sans Condensed";
+ font-family: "Open Sans";
  font-weight: 700;
 }
 slide:not(.segue)  h2{
- font-family: "Open Sans Condensed";
+ font-family: "Open Sans";
  font-weight: 700;
  color: darkslategray;
 }
