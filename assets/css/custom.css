@@ -342,7 +342,7 @@ slides > slide.dark {
 /* line 148, ../scss/custom.scss */
 slides > slide:not(.nobackground):before {
   font-size: 10pt;
-  content: "M.Rovere - Tracking POG Meeting - 2014-08-11";
+  content: "M.Rovere - CMG-CO Tech Meeting - 2014-09-10";
   position: absolute;
   bottom: 0.5pt;
   left: 30px;
