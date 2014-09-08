@@ -204,6 +204,12 @@ slides > slide {
       margin-bottom: 0.3em;
     }
   }
+ 
+  > hgroup {
+      h2 {
+       color: $gray-4;
+      }
+   }
 
   > article:only-child {
     height: 100%;

@@ -60,7 +60,7 @@ slide:not(.segue) h2{
   line-height: 1.2em;
 /*  color: #193441;*/
 /*  color: #02574D;*/
-  color: #CC2904;
+  color: #797979;
 }
 
 /* Reduce Space between Title and Body */
@@ -330,7 +330,7 @@ slide.segue h2{
 slide:not(.segue)  h2{
  font-family: "Open Sans";
  font-weight: 700;
- color: darkslategray;
+ color: #515151;
 }
 article p {
   font-family: "Open Sans"

@@ -36,6 +36,9 @@ mode        : selfcontained # {standalone,draft}
 1. Small number of samples
 a. Small disk size
 
+<font class='red bold'>These requirements will be extended to even
+higher values in Run2 and Phase1&2 upgrades</font>
+
 ---
 
 ## How to satisfy requirements
@@ -57,9 +60,11 @@ a. Small disk size
 
 ---
 
-## Scaling ...
+## Scaling
 
-- While buy new hardware is a legittimate step, it is clear that it
+### General considerations
+
+- While buying new hardware is a legittimate step, it is clear that it
 is not going to scale in the longish term
    - computing is going in the opposite direction:
        - multi-threading and parallelisation
@@ -81,14 +86,58 @@ is not going to scale in the longish term
 
 ---
 
+## Scaling
+
+### Viable Approaches
+
+- Invest in hardware (vertical scaling)
+- Invest in software (horizontal scaling)
+   - Swap the current backend with a viable ditributed backend
+   - Modify the current backend to be a distributed backend
+
+### Hardware
+
+- <font class='red'>Expensive</font>
+- <font class='red'>Not the preferred solution from IT</font>
+- <font class='red'>Additional load on us, since they would outsource the
+  configuration/handling/alarming of commodity hardware</font>
+
+### Software - Open Source distributed backend
+- <font class='blue bold'>Solid rock/tested/community supported software</font>
+- <font class='red bold'>Big evaluation time, development integration,
+  steep learning curve</font> (see, e.g., ongoing effort for
+  Conditions in CMSSW)
+- <font class='yellow3 bold'>PREFERRED CHOICE FOR LONG TERM</font> (technical student?)
+
+---
+
+## Scaling
+
+### Viable Approaches
+
+- Invest in hardware (vertical scaling)
+- Invest in software (horizontal scaling)
+   - Swap the current backend with a viable ditributed backend
+   - Modify the current backend to be a distributed backend
+
+### Software - Make current backend "distributed"
+- <font class='red bold'>Non-negligible development effort</font>
+- <font class='blue bold'>Start from a solid-rock code</font>
+- <font class='blue bold'>Affordable learning curve</font>
+- <font class='green bold'>PREFERRED CHOICE FOR SHORT TERM</font>
+
+---
+
 ## Switch to Virtual Machines
+
+### Current situation/proposal
 
 Moving the current produciton servers to Virtual Machines is not an immediate step.
 
 - Current production servers have hardware RAID 6 to cope with
 single(multiple) disk failures.
 
-- The current read/write on disk capabilities are ~700/~350 MB/s, not
+- The current read/write on disk capabilities are ~700/~350 MB/s(read/write), not
 reproducible using a VM with an ordinary disk attached.
 
 - Few solutions have been explored during a dedicated meeting with IT guys.
@@ -97,9 +146,38 @@ reproducible using a VM with an ordinary disk attached.
    - Try to come up with some reasonable requirements from CMS
        - As fast as possible is not a <font class='red bold'>good</font> metric. 
 
-- Good occasion to re-think a bit the DQM GUI applications and give a
+- <font class='yellow bold'>Good occasion to re-think a bit the DQM GUI applications and give a
   thought about what could be done to cope with less performant
-  operating hardware
+  operating hardware</font>
+
+--- &singleimage w1:100 image:images/OfflineAgentsChainLocal.png
+
+## Possible scaling
+
+### How to scale
+1. if single hardware is not enough to cope, spread load on multiple servers
+
+1. even better if you spread the <font class='red bold'>most intensive
+operations (read indexing)</font>
+
+1. DQM GUI is a perfect example, since indexing is a simple serial queue
+
+1. We have been file-based since RunI.
+
+--- &singleimage w1:50 image:images/DQM_GUI_servers.png
+
+## Current Architecture
+
+--- &twoimages w1:45 w2:50 imageleft:images/DQM_GUI_servers_distributed.png imageright:images/OfflineAgentsChainDistributed.png
+
+## Possible Distributed Architecture
 
 ---
+
+## Challanges
+
+### Main challanges
+1. Internal coherence of DQM GUI (relatively easy)
+1. External coherence versus exposed "dynamic" URL (RelMon example)
+1. External coherence versus the already exposed API
 
