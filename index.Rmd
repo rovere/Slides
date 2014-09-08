@@ -131,12 +131,18 @@ reproducible using a VM with an ordinary disk attached.
   thought about what could be done to cope with less performant
   operating hardware</font>
 
+--- .segue .dark .nobackground
+
+## Few ideas 
+
 --- &singleimage w1:100 image:images/OfflineAgentsChainLocal.png
 
 ## Possible scaling
 
-### How to scale
-1. if single hardware is not enough to cope, spread load on multiple servers
+### How to scale 
+
+1. if single hardware is not enough to cope, spread load on multiple
+servers (<font class='red'>divide et impera</font>)
 
 1. even better if you spread the <font class='red bold'>most intensive
 operations (read indexing)</font>
@@ -153,6 +159,10 @@ operations (read indexing)</font>
 
 ## Possible Distributed Architecture
 
+--- .segue .dark .nobackground
+
+## Challanges
+
 ---
 
 ## Challanges
@@ -161,4 +171,97 @@ operations (read indexing)</font>
 1. Internal coherence of DQM GUI (relatively easy)
 1. External coherence versus exposed "dynamic" URL (RelMon example)
 1. External coherence versus the already exposed API
+
+
+### Internal coherence
+
+* This could be done allowing the web server to concurrently handle
+  multiple sources (<font class='yellow bold'>archive</font>) that
+  point to separate folders with uniques <font class='yellow
+  bold'>aliases</font>.
+
+* The real challenge here is to be sure to <font class='red
+  bold'>avoid duplicates</font>, i.e. be sure that <font class='red
+  bold'>the same sample is always handled by the same
+  backend</font>. Could be handled by a persistent catalogue on the
+  webserver and an ad-hoc agent.
+
+* <font class='yellow bold'>during migration I did exactly the same
+  exercise</font>.
+
+---
+
+## Challanges
+
+### Main challanges
+1. Internal coherence of DQM GUI (relatively easy)
+1. External coherence versus exposed "dynamic" URL (RelMon example)
+1. External coherence versus the already exposed API
+
+### External coherence versus exposed "dynamic" URL
+
+* The most relevant example here is the URL of any image served by the
+  DQM GUI.
+
+* How to locate a single histogram that fast?
+
+http://.../dqm/offline/<font class="blue2">plotfairy/</font><font class="red2">archive</font>/<font class='bold gray4'>196531</font>/<font class="green2">JetHT/Run2012B-PromptReco-v1/DQM</font>/<font class="yellow">Tracking/TrackParameters/GeneralProperties/NumberOfTracks_GenTk</font>...
+
+* <font class="blue2">API specification</font>
+* <font class="red2">Source specification(alias)</font>
+* <font class="gray4 bold">Run Number</font>
+* <font class="green2">Dataset specification</font>
+* <font class="yellow2">Object Specification</font>
+
+---
+
+## Challanges
+
+### Main challanges
+1. Internal coherence of DQM GUI (relatively easy)
+1. External coherence versus exposed "dynamic" URL (RelMon example)
+1. External coherence versus the already exposed API
+
+### External coherence versus exposed "dynamic" URL
+
+* <font class='red bold'>BUT</font> we do not want to expose all
+  different aliases through the API, since this will invalidate most
+  of the apps developed on top of this (RelMon in primis).
+
+* Moreover, users should know nothing about aliases and where the
+  sample is located: all that matters is to specify a source on disk
+  w.r.t to live
+
+* Hide this complexity via a <font class='blue bold'>generic proxy
+  API</font>
+
+* <font class='bold yellow'>I already have a working prototype</font>.
+
+---
+
+## Challanges
+
+### Main challanges
+1. Internal coherence of DQM GUI (relatively easy)
+1. External coherence versus exposed "dynamic" URL (RelMon example)
+1. External coherence versus the already exposed API
+
+### External coherence versus the already exposed API
+
+http://.../dqm/offline/<font class="blue2">data/json</font>/<font class="red2">archive</font>/<font class='bold gray4'>196531</font>/<font class="green2">JetHT/Run2012B-PromptReco-v1/DQM</font>/<font class="yellow">Tracking/TrackParameters/GeneralProperties/NumberOfTracks_GenTk</font>...
+
+* <font class="blue2">API specification</font>
+* <font class="red2">Source specification(alias)</font>
+* <font class="gray4 bold">Run Number</font>
+* <font class="green2">Dataset specification</font>
+* <font class="yellow2">Object Specification</font>
+
+* I could apply the same solution used for the image URL API.
+
+
+--- &thankyou
+
+## Thank you!
+
+Questions & Answers
 
