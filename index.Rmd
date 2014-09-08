@@ -92,39 +92,20 @@ is not going to scale in the longish term
 
 - Invest in hardware (vertical scaling)
 - Invest in software (horizontal scaling)
-   - Swap the current backend with a viable ditributed backend
+   - Swap the current backend with a viable distributed backend
    - Modify the current backend to be a distributed backend
 
-### Hardware
 
-- <font class='red'>Expensive</font>
-- <font class='red'>Not the preferred solution from IT</font>
-- <font class='red'>Additional load on us, since they would outsource the
-  configuration/handling/alarming of commodity hardware</font>
 
-### Software - Open Source distributed backend
-- <font class='blue bold'>Solid rock/tested/community supported software</font>
-- <font class='red bold'>Big evaluation time, development integration,
-  steep learning curve</font> (see, e.g., ongoing effort for
-  Conditions in CMSSW)
-- <font class='yellow3 bold'>PREFERRED CHOICE FOR LONG TERM</font> (technical student?)
 
----
-
-## Scaling
-
-### Viable Approaches
-
-- Invest in hardware (vertical scaling)
-- Invest in software (horizontal scaling)
-   - Swap the current backend with a viable ditributed backend
-   - Modify the current backend to be a distributed backend
-
-### Software - Make current backend "distributed"
-- <font class='red bold'>Non-negligible development effort</font>
-- <font class='blue bold'>Start from a solid-rock code</font>
-- <font class='blue bold'>Affordable learning curve</font>
-- <font class='green bold'>PREFERRED CHOICE FOR SHORT TERM</font>
+|                                        | Hardware                                                                                                     | Software/Open Source distributed backend                                                                                | Software/Make current backend distributed                       |
+|----------------------------------------|--------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------- |
+| <font class='red bold'>CONS</font>     | Expensive                                                                                                    | Big evaluation time                                                     					          | Non-negligible development effort                               |
+|                                        | Not the preferred solution from IT                                                                           | Development integration time                                                                                            |                                                                 |
+|                                        | Additional load on us, since they would outsource the  configuration/handling/alarming of commodity hardware | steep learning curve (see, e.g., ongoing effort for Conditions in CMSSW)                                                |                                                                 |
+| <font class='green bold'>PROS</font>   | No software development                                                                                      | Solid rock/tested/community supported software                                                                          | Start from a solid-rock code                                    |
+|                                        |                                                                                                              |                                                                                                                         | Affordable learning curve                                       |
+| <font class='blue bold'>REMARKS</font> |                                                                                                              | <font class='yellow3 bold'>PREFERRED CHOICE FOR LONG TERM</font> (technical student?)                                   | <font class='green bold'>PREFERRED CHOICE FOR SHORT TERM</font> |
 
 ---
 
@@ -160,7 +141,7 @@ reproducible using a VM with an ordinary disk attached.
 1. even better if you spread the <font class='red bold'>most intensive
 operations (read indexing)</font>
 
-1. DQM GUI is a perfect example, since indexing is a simple serial queue
+1. DQM GUI is a perfect example, since `indexing` is a simple serial queue
 
 1. We have been file-based since RunI.
 
