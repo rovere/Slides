@@ -1,7 +1,7 @@
 ---
 title       : News
-subtitle    : Tracking POG Meeting, 2014-06-02
-author      : Marco Rovere, Giuseppe Cerati
+subtitle    : Tracking POG Meeting, 2014-09-08
+author      : Marco Rovere, Giuseppe Cerati, Vincenzo Innocente
 job         : CERN
 framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
 highlighter : prettify      # {highlight.js, prettify, highlight}
@@ -12,38 +12,37 @@ mode        : selfcontained # {standalone,draft}
 
 ## Releases
 
-* **CMSSW_7_1_0_pre8** has been released 2+ weeks ago
-    * Full details available [here](https://indico.cern.ch/event/320094/contribution/0/material/slides/0.pdf)
-	* The new simulation of Pixel Dynamic Inefficiency entered
-          [**pre6**](https://github.com/cms-sw/cmssw/pull/3140) and
-          was _fixed_ in
-          [**pre8**](https://github.com/cms-sw/cmssw/pull/3689)
-	    * See its effect in today's talk from Giuseppe.
-* **CMSSW_7_2_X** branch has been opened
-    * please submit your PR to this branch
-	* requests to 71X are automatically forwarded to 72X
-* Important developments almost ready missed 71X and should come early in 72X:
-    1. Jet Core iteration [github-link](https://github.com/cms-sw/cmssw/pull/3859)
-	1. **Hit Pattern** redesign
+### CMSSW_7_2_0_pre5 is out
+
+### Changes since CMSSW_7_2_0_pre4:
+https://github.com/cms-sw/cmssw/compare/CMSSW_7_2_0_pre4...CMSSW_7_2_0_pre5
+
+
+1. [5030](http://github.com/cms-sw/cmssw/pull/5030)  from @avartak: Tk Validation dedx plot bugfix and adding eff/fake vs dR plots `dqm`
+
+1. [4973](http://github.com/cms-sw/cmssw/pull/4973)  from @quertenmont: Update RecoTracker/dEdx package `alca`  `analysis`  `dqm`  `operations`  `reconstruction`
+
+1. [4937](http://github.com/cms-sw/cmssw/pull/4937)  from @mtosi: tracking and PV validation@HLT `dqm`  `simulation`
+
+1. [4872](http://github.com/cms-sw/cmssw/pull/4872)  from @rovere: Move Vertex Validation histograms in a more appropriate folder. `dqm`
+
+1. [4947](http://github.com/cms-sw/cmssw/pull/4947)  from @VinInn: Tracker geom det `alca`  `fastsim`  `geometry`  `reconstruction`  `visualization`
+
+* Keep an eye on PR  [5151](http://github.com/cms-sw/cmssw/pull/5151), still pending but relevant to tracking.
 
 ---
 
-## Approvals
+## Announcements
 
-* We recently <font class="red">approved many plots</font> that could be useful in preparing slides/posters for future conferences.
-* The TWiki page collecting all of them is available [here](https://twiki.cern.ch/twiki/bin/viewauth/CMS/TrackingPOGPlots2014)
-* Among many, the new approved plots include:
-    1. Effect of iteration 9&10 on muon reconstruction efficieny
-    1. Reconstruction efficiency vs pt for all iterations
-    1. Many timing plots, especially useful to better understand the effect of PU on tracking-time.
-    1. Number of masked/unmasked clusters for different iterations
-* Each plot has a corresponding explanation on the TWiki page.
+* <font class='red bold'>Tracking Training Day 2</font> has been finally announced and booked for October 20th, full day.
+    * Please sign this date and register
+    * Many changes have been introduced in the racking code and this will be a wonderful occasion to study/review them all
 
 --- .image
 
 ## Today's Agenda
 
 <article class="flexbox vcenter">
-<img src="images/TrackingPOGAgenda_20140602.png" alt="Agenda" title="Agenda" width="90%">
+<img src="images/20140908_TrackingPOGAgenda.png" alt="Agenda" title="Agenda" width="90%">
 </article>
 
