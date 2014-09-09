@@ -40,11 +40,11 @@ mode        : selfcontained # {standalone,draft}
 
 ### Selections
    * consider only HighPurity tracks
-   * use track associator by hits (threshold > 75%)
+   * use track association by hits (threshold > 75%)
    * fake rate: all tracks
    * efficiency:
-      * vs : pT>0.9 GeV, VZ<30 cm, VR<3.5 cm
-      * vs R: pT>0.5 GeV, VZ<150 cm, |$\eta$|<2.5 cm
+      * vs : pT>0.9 GeV, $V_Z$<30 cm, $V_R$<3.5 cm
+      * vs R: pT>0.5 GeV, $V_Z$<150 cm, |$\eta$|<2.5 cm
    * vertices, association by position ( $\Delta$ z < 3 $\sigma_z$, $\Delta$ z < 1 mm): 
       * ndof > 4, |z| < 24 cm, R < 2 cm
 
@@ -60,7 +60,7 @@ mode        : selfcontained # {standalone,draft}
 
 ## New development for Run 2
 
---- &twoimages w1:40 w2:40 imageleft:images/stripTripletsSeedsEta.png imageright:images/stripTripletsTracksHpPt.png
+--- &twoimages w1:45 w2:45 imageleft:images/stripTripletsSeedsEta.png imageright:images/stripTripletsTracksHpPt.png
 
 ## Strip Triplet Seeding
 
@@ -78,27 +78,354 @@ stacked. The new algorithm reduces the number of seeds by a factor 2x.
 
 *** =caption_right
 
-Number of recosntructed high purity tracks vs pT for the strip-seeded
+Number of reconstructed high purity tracks vs pT for the strip-seeded
 iterations, comparing the pair-based algorithm with the new
 triplet-based one. Plots are stacked. The new algorithm reconstructed
 approximately the same number of tracks.
 
----
+--- &twoimages w1:45 w2:45 imageleft:images/SiStripClusterCharge.png imageright:images/fakerate_ccc.png
 
 ## Cluster Charge Cut
 
+Another development targeting physics and timing performances is a
+cut on the strip cluster charge, rejecting clusters produced by
+out-of-time particles. It can be applied upfront tracking, during
+seeding or during pattern recognition and accounts for sensor
+thickness and trajectory crossing angle.
+
+*** =caption_left
+
+<font class='red bold'>Already approved</font>.  With 25 ns bx, 45%
+increase in occupancy for the strip detector. Clusters from out of
+time pile-up are characterized by low collected charge.
+
+*** =caption_right
+
+Tracking fake+duplicate rate vs eta with and without the strip cluster
+charge cut. Fake rate is defined as number of non-associated
+reconstructed tracks divided by the number of reconstructed tracks. The
+cluster charge cut effectively reduces the fake rate by about 2x.
 
 --- .segue .nobackground .dark
 
 ## Tracking Performances
 
+---
+
+## Tracking Performance
+
+### General description
+
+* The plots that follow come always in three:
+   * Track reconstruction efficiency vs eta
+   * Fake and Duplicate rate vs eta
+   * Track reconstruction efficiency vs track production radius
+
+* The definition of efficiency, fake rate and duplicate rate are:
+
+   * <font class='bold'>efficiency</font>: it is defined as the number
+     of matched reconstructed tracks divided by number of simulated
+     tracks. The association between reconstructed and simulated
+     tracks has been introduced and explained in the previous
+     paragraph
+
+   * <font class='bold'>fake rate</font>: it is defined as the number
+     of non-matched reconstructed tracks divided by number of
+     reconstructed tracks.
+
+   * <font class='bold'>duplicate rate</font>: it is defined as the
+     number of reconstructed tracks associated to the very same
+     simulated track divided by number of reconstructed tracks.
+
+* We performed several comparisons
+   * Run1 PU conditions with Run 1 Tracking vs Run 2 PU conditions with Run 2 tracking
+   * Run1 PU conditions with Run 1 and Run 2 tracking
+   * Run 2 low PU conditions with Run 1 and Run 2 tracking
+   * Run 2 high PU conditions with Run 1 and Run 2 tracking
+
+--- &fourimages w1:33 w2:33 w3:0 w4:33 imageleft_most:images/effic_eta_PU4025_BX2550.png imageleft:images/fake_eta_PU4025_BX2550.png imageright_most:images/effic_r_PU4025_BX2550.png
+
+## Run1 PU&Trk vs Run2 PU&Trk
+
+*** =bottom_text
+* For analysis, the relevant comparison is with nominal PU conditions
+   * <font class='bold yellow3'>PU25 BX50ns for Run1 release</font>
+   * <font class='bold blue'>PU40 BX25ns for Run2 release</font>  
+* With much worse conditions, in Run2 we have same efficiency for prompt tracks, 
+  slightly higher fake rate, slightly lower efficiency for displaced tracks.
+* Expect CMS physics performance to be the same, at least for tracking
+
+
+
+*** =caption_left_most
+
+Comparison of tracking efficiency for Run 1 and Run 2 typical PU
+conditions. Despite the harsher conditions for Run2 we were able to
+keep the same performance. We do expect the same physics performance
+from the tracking point of view in Run2 as we had in Run1.
+
+*** =caption_left
+
+Comparison of the fake+duplicate rate for typical Run 1 and Run2 PU
+conditions. The fake+duplicate rate is at an acceptable level over the
+full eta range, with a slight increase in the central region for the
+Run2 release-conditions.
+
+*** =caption_right_most
+
+Comparison of the tracking efficiency for Run 1 and Run 2 typical PU
+conditions as a function of the production radius. A slightly lower
+efficiency for displaced tracks in the Run 2 scenario is visible.
+
+--- &fourimages w1:33 w2:33 w3:0 w4:33 imageleft_most:images/effic_eta_PU25_BX50.png imageleft:images/fake_eta_PU25_BX50.png imageright_most:images/effic_r_PU25_BX50.png
+
+## Run1 PU with Run-1&Run-2 Trk
+
+*** =bottom_text
+In this specific comparison, which is mimicking the harsher conditions
+met during Run 1, we can appreciate:
+
+   * Using <font class='bold yellow3'>Run2 tracking</font> the same or
+     higher efficiency for prompt tracks is observed.
+
+   * <font class='yellow3 bold'>Run 2 tracking</font> reached up to a
+     <font class='bold'>factor of 2 reduction in fake rate</font>.
+
+   * The only downside is a slight efficiency loss for displaced tracks
+
+*** =caption_left_most
+
+*** =caption_left
+
+*** =caption_right_most
+
+
+--- &fourimages w1:33 w2:33 w3:0 w4:33 imageleft_most:images/effic_eta_PU25_BX25.png imageleft:images/fake_eta_PU25_BX25.png imageright_most:images/effic_r_PU25_BX25.png
+
+## Run2 Low PU with Run-1&Run-2 Trk
+
+*** =bottom_text
+
+In this specific comparison we can appreciate:
+
+   * Using <font class='bold yellow3'>Run2 tracking</font> the same or
+     higher efficiency for prompt tracks is observed.
+
+   * <font class='bold yellow3'>Run 2 tracking</font> reached up to a
+     <font class='bold'>factor of 4 reduction in fake rate</font>.
+
+   * The only downside is a slight efficiency loss for displaced
+     tracks
+
+*** =caption_left_most
+
+
+*** =caption_left
+
+
+*** =caption_right_most
+
+--- &fourimages w1:33 w2:33 w3:0 w4:33 imageleft_most:images/effic_eta_PU40_BX25.png imageleft:images/fake_eta_PU40_BX25.png imageright_most:images/effic_r_PU40_BX25.png
+
+## Run2 High PU with Run-1&Run-2 Trk
+
+*** =bottom_text
+
+In this specific comparison, mimicking the harsher conditions
+that we will reasonably face during Run 2, we can appreciate:
+
+   * Using <font class='bold yellow3'>Run2 tracking</font> the same or
+     higher efficiency for prompt tracks is observed.
+
+   * <font class='yellow3 bold'>Run 2 tracking</font> reached up to a
+     <font class='bold'>factor of 6 reduction in fake rate</font>
+     with respect to <font class='blue bold'>Run 1 tracking</font>.
+
+   * The only downside is a slight efficiency loss for displaced
+     tracks
+
+*** =caption_left_most
+
+*** =caption_left
+
+*** =caption_right_most
+
+--- &fourimages w1:33 w2:33 w3:0 w4:33 imageleft_most:images/effic_eta_PU40_BX25_DynInef.png imageleft:images/fake_eta_PU40_BX25_DynInef.png imageright_most:images/iter_PU40_BX25_DynInef.png
+
+## Pixel Dynamic Inefficiencies
+
+*** =bottom_text
+
+* Pixel dynamic inefficiency simulation has been introduced in release
+  to better simulate the behavior of the real pixel detector as a
+  function of the instantaneous luminosity.
+
+* The net efficiency loss (up to 5%) is the result of
+
+    * large reduction of tracks from pixel-triplet-seeded iterations
+
+    * partially recovered by pixel-pair and strip-seeded iterations.
+
+*** =caption_left_most
+
+The effect of the pixel dynamic inefficiency is a reduction of
+efficiency that in some bins could reach up to 5%
+
+*** =caption_left
+
+No major effect is visible on the fake rate.
+
+*** =caption_right_most
+
+The net efficiency loss is the result of 1) large reduction of tracks
+from pixel-triplet-seeded iterations and 2) partially recovered by
+pixel-pair and strip-seeded iterations.
+
+
 --- .segue .nobackground .dark
 
 ## Timing Performances
 
+--- &fourimages w1:33 w2:33 w3:0 w4:33 imageleft_most:images/RecoTimeLUMI_25_BX_25ns_Nehalem.png imageleft:images/RecoTimePU_25_BX_25ns_zoom_Nehalem.png imageright_most:images/IterativeTimeStep_25_BX_720p4_NoDynInef_NoCCC_Nehalem.png
+
+## Timing Performances
+
+*** =bottom_text
+
+* Large time reduction with respect to 53X <font class='red3
+  bold'>(~2x@PU25, ~3x@PU40, ~4x@PU70)</font>
+
+* Tracking time not far from linear vs PU in 72X (for PU up to 70)
+
+* Evaluated on Intel(R) Core(TM) i7-4770K CPU @ 3.50GHz, comparing
+  Run1 release and the current development candidate for Run2
+  data-taking
+
+
+*** =caption_left_most
+
+Timing vs luminosity for ttbar+PU samples with 25 ns bunch
+crossing. Samples with different average pile-up are used as reported
+on the plot. Shown is timing of full CMS reconstruction and of the
+iterative tracking sequence. It was not possible to run on the sample
+with PU~140 with the Run1 release.
+
+*** =caption_left
+
+Timing of iterative tracking sequence vs pile-up for ttbar samples
+with 25 ns bunch crossing. Large time reduction with respect to Run1
+(<font class='red2 bold'>~2x@PU25, ~3x@PU40, ~4x@PU70</font>).
+
+*** =caption_right_most
+
+Timing vs tracking iteration, adding sequentially the new developments
+described above. Both developments reduce the timing of the two
+strip-seeded iterations by 2x, achieving a 3x reduction on the total
+tracking timing.
+
 --- .segue .nobackground .dark
 
 ## Vertexing Performances
+
+--- &twoimages w1:42 w2:42 imageleft:images/selectedOfflinePrimaryVertices_RecoVtx_vs_GenVtx.png imageright:images/selectedOfflinePrimaryVertices_MatchedRecoVtx_vs_GenVtx.png
+
+## Reconstructed Vertices vs PU
+
+*** =bottom_text
+
+* Linear trend with slope ~0.7 up to PU70
+
+* Deviations for PU140 show more reconstructed vertices but less of
+  them are matched: this is a hint that most of them are fakes.
+
+*** =caption_left
+
+Number of reconstructed vertices vs number of generated pile-up
+interactions. We observe a linear scaling up to PU~80 and a strong
+deviation for higher PU.
+
+*** =caption_right
+
+ Number of reconstructed vertices matching a simulated vertex vs
+ number of generated pile-up interactions. We observe an approximately
+ linear scaling on the full range.
+
+--- &twoimages w1:42 w2:42 imageleft:images/selectedOfflinePrimaryVertices_effic_vs_NumVertices.png imageright:images/selectedOfflinePrimaryVertices_fakerate_vs_PU.png
+
+## Efficiency and fake rate vs PU
+
+*** =caption_left
+
+Vertex reconstruction efficiency vs number of generated pile-up
+interactions. Linear decreasing trend is observed in the full range
+with an average of 70%. Efficiency defined as number of matched
+divided by number of simulated vertices.
+
+
+*** =caption_right
+
+Vertex reconstruction fake rate vs number of generated pile-up
+interactions. The rate is below 10% for PU<80 and shows a large
+increase (20-40%) for PU around 140. The increase in fake rate
+reflects poor tracking performance in the same PU range. Fake rate is
+defined as number of non-matched reconstructed vertices divided by
+number of reconstructed vertices.
+
+*** =bottom_text
+
+* The efficiency has a linear decreasing trend on the whole range
+
+* Fake rate, on the contrary, shows a steep increase as the PU increases
+
+
+--- &twoimages w1:42 w2:42 imageleft:images/selectedOfflinePrimaryVertices_merged_vs_ClosestVertexInZ.png imageright:images/selectedOfflinePrimaryVertices_TruePVLocationIndexCumulative.png
+
+## Merge rate and PV identification
+
+*** =caption_left
+
+Vertex merge rate vs longitudinal distance to the closest simulated
+vertex. Resulting curve is nearly PU-independent and thus reflects
+detector resolution and reconstruction performance. Above ~1 mm the
+merge rate is negligible, it reaches ~50% at 100um and 100% at 10
+um. Merged rate defined as number of reconstructed vertices matched to
+more than one simulated vertex divided by number of matched
+reconstructed vertices.
+
+*** =caption_right
+
+The signal vertex is identified as the reconstructed vertex with the
+highest sum of the squared pT of the tracks associated to it. The
+identification performance for ttbar events is similar for PU~25 to
+PU~70, with a large deterioration at PU~140 mostly due to increased
+fake and merged rate.
+
+*** =bottom_text
+
+* Merged rate curve starting below 1 mm separation and ~PU independent.
+
+* For ttbar events, vertex ID based on highest SumPt2 works with
+similar performance up to PU70
+
+---
+
+## Conclusions
+
+* Tracking for Run2 needs to cope with higher PU and 25 ns bunch-crossing
+
+* Dedicated developments reduce impact on timing (and fake)
+
+* Overall tracking performance similar to Run1 (but with worse conditions)
+
+   * much better if compared with same conditions
+
+*  Significant time reduction, now scaling not far from linear up to PU70
+
+    * factors 2-3-4x at PU25-40-70 with BX25ns 
+
+* Vertex performance stable up to PU70
+
+* Large deterioration in all aspects at PU140
 
 
 --- &thankyou

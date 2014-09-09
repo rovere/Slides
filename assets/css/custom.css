@@ -342,7 +342,7 @@ slides > slide.dark {
 /* line 148, ../scss/custom.scss */
 slides > slide:not(.nobackground):before {
   font-size: 10pt;
-  content: "M.Rovere - CMG-CO Tech Meeting - 2014-09-10";
+  content: "TRK POG - PPD General Meeting - 2014-09-10";
   position: absolute;
   bottom: 0.5pt;
   left: 30px;
@@ -389,7 +389,7 @@ slides > slide.backdrop:after, slides > slide.backdrop:before {
 }
 /* line 194, ../scss/custom.scss */
 slides > slide > hgroup + article {
-  margin-top: 50px;
+  margin-top: 20px;
 }
 /* line 198, ../scss/custom.scss */
 slides > slide > hgroup + article.flexbox.vcenter, slides > slide > hgroup + article.flexbox.vleft, slides > slide > hgroup + article.flexbox.vright {
@@ -666,7 +666,7 @@ code {
 /* line 447, ../scss/custom.scss */
 iframe {
   width: 100%;
-  height: 667.33333px;
+  height: 727.33333px;
   background: white;
   border: 1px solid #e6e6e6;
   -webkit-box-sizing: border-box;
