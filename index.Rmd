@@ -45,12 +45,12 @@ higher values in Run2 and Phase1&2 upgrades</font>
 
 ### <font class='red bold'>Offline</font>
 
-1. Buy performant/expensive dedicated hardware
+1. Buy performing/expensive dedicated hardware
 1. Design a fast application
 
 ### <font class='red bold'>RelVal</font>
 
-1. Buy performant/expensive dedicated hardware
+1. Buy performing/expensive dedicated hardware
 1. Design a fast application
 
 ### <font class='red bold'>Online</font>
@@ -64,10 +64,10 @@ higher values in Run2 and Phase1&2 upgrades</font>
 
 ### General considerations
 
-- While buying new hardware is a legittimate step, it is clear that it
+- While buying new hardware is a legitimate step, it is clear that it
 is not going to scale in the longish term
    - computing is going in the opposite direction:
-       - multi-threading and parallelisation
+       - multi-threading and parallelism
        - <font class='red bold'>horizontal scaling</font>
 
 - DQM GUI is no exception in this respect
@@ -77,7 +77,7 @@ is not going to scale in the longish term
 - vocms138 and vocms139 are already <font class='red bold'>out of
   warranty</font> and will soon be retired
 
-- <font class='blue bold'>Need to find adeguate replacements, trying
+- <font class='blue bold'>Need to find adequate replacements, trying
   to satisfy all needs, keeping the highest possible performances,
   possibly improving the system</font>
 
@@ -92,13 +92,13 @@ is not going to scale in the longish term
 
 - Invest in hardware (vertical scaling)
 - Invest in software (horizontal scaling)
-   - Swap the current backend with a viable distributed backend
-   - Modify the current backend to be a distributed backend
+   - Swap the current back-end with a viable distributed back-end
+   - Modify the current back-end to be a distributed back-end
 
 
 
 
-|                                        | Hardware                                                                                                     | Software/Open Source distributed backend                                                                                | Software/Make current backend distributed                       |
+|                                        | Hardware                                                                                                     | Software/Open Source distributed back-end                                                                                | Software/Make current back-end distributed                       |
 |----------------------------------------|--------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------- |
 | <font class='red bold'>CONS</font>     | Expensive                                                                                                    | Big evaluation time                                                     					          | Non-negligible development effort                               |
 |                                        | Not the preferred solution from IT                                                                           | Development integration time                                                                                            |                                                                 |
@@ -113,7 +113,7 @@ is not going to scale in the longish term
 
 ### Current situation/proposal
 
-Moving the current produciton servers to Virtual Machines is not an immediate step.
+Moving the current production servers to Virtual Machines is not an immediate step.
 
 - Current production servers have hardware RAID 6 to cope with
 single(multiple) disk failures.
@@ -128,7 +128,7 @@ reproducible using a VM with an ordinary disk attached.
        - As fast as possible is not a <font class='red bold'>good</font> metric. 
 
 - <font class='yellow bold'>Good occasion to re-think a bit the DQM GUI applications and give a
-  thought about what could be done to cope with less performant
+  thought about what could be done to cope with less performing
   operating hardware</font>
 
 --- .segue .dark .nobackground
@@ -177,14 +177,14 @@ operations (read indexing)</font>
 
 * This could be done allowing the web server to concurrently handle
   multiple sources (<font class='yellow bold'>archive</font>) that
-  point to separate folders with uniques <font class='yellow
+  point to separate folders with unique <font class='yellow
   bold'>aliases</font>.
 
 * The real challenge here is to be sure to <font class='red
   bold'>avoid duplicates</font>, i.e. be sure that <font class='red
   bold'>the same sample is always handled by the same
-  backend</font>. Could be handled by a persistent catalogue on the
-  webserver and an ad-hoc agent.
+  back-end</font>. Could be handled by a persistent catalog on the
+  web-server and an ad-hoc agent.
 
 * <font class='yellow bold'>during migration I did exactly the same
   exercise</font>.
