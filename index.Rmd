@@ -44,7 +44,7 @@ mode        : selfcontained # {standalone,draft}
    * fake rate: all tracks
    * efficiency:
       * vs : pT>0.9 GeV, VZ<30 cm, VR<3.5 cm
-      * vs R: pT>0.5 GeV, VZ<150 cm, ||<2.5 cm
+      * vs R: pT>0.5 GeV, VZ<150 cm, |$\eta$|<2.5 cm
    * vertices, association by position ( $\Delta$ z < 3 $\sigma_z$, $\Delta$ z < 1 mm): 
       * ndof > 4, |z| < 24 cm, R < 2 cm
 
