@@ -161,13 +161,13 @@ operations (read indexing)</font>
 
 --- .segue .dark .nobackground
 
-## Challanges
+## Challenges
 
 ---
 
-## Challanges
+## Challenges
 
-### Main challanges
+### Main challenges
 1. Internal coherence of DQM GUI (relatively easy)
 1. External coherence versus exposed "dynamic" URL (RelMon example)
 1. External coherence versus the already exposed API
@@ -191,9 +191,9 @@ operations (read indexing)</font>
 
 ---
 
-## Challanges
+## Challenges
 
-### Main challanges
+### Main challenges
 1. Internal coherence of DQM GUI (relatively easy)
 1. External coherence versus exposed "dynamic" URL (RelMon example)
 1. External coherence versus the already exposed API
@@ -215,9 +215,9 @@ http://.../dqm/offline/<font class="blue2">plotfairy/</font><font class="red2">a
 
 ---
 
-## Challanges
+## Challenges
 
-### Main challanges
+### Main challenges
 1. Internal coherence of DQM GUI (relatively easy)
 1. External coherence versus exposed "dynamic" URL (RelMon example)
 1. External coherence versus the already exposed API
@@ -239,9 +239,9 @@ http://.../dqm/offline/<font class="blue2">plotfairy/</font><font class="red2">a
 
 ---
 
-## Challanges
+## Challenges
 
-### Main challanges
+### Main challenges
 1. Internal coherence of DQM GUI (relatively easy)
 1. External coherence versus exposed "dynamic" URL (RelMon example)
 1. External coherence versus the already exposed API
