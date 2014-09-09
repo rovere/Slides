@@ -259,6 +259,32 @@ http://.../dqm/offline/<font class="blue2">data/json</font>/<font class="red2">a
 * I could apply the same solution used for the image URL API.
 
 
+--- .segue .dark .nobackground
+
+## Next Steps
+
+---
+
+## Next Steps
+
+1. Being relatively close to data taking, it is always critical to
+  radically redesign production software.
+
+1. First address the imminent migration to VM and SLC6
+
+1. Modify the core component software to handle multiple sources from
+  the local disk
+
+1. Setup a toy cluster of VM to play with.
+
+1. Adapt the deployment procedure to install proper components on each
+  VM.
+
+1. Verify the modified core software on network mounted disks.
+
+1. Embed data replication at configuration level?
+
+
 --- &thankyou
 
 ## Thank you!
