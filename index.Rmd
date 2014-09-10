@@ -29,7 +29,6 @@ mode        : selfcontained # {standalone,draft}
 * Privately produced samples with STARTUP conditions:
    * BX: 50 and 25 ns
    * PU: 25, 40, 70, 140
-   * without (default) and with pixel dynamic
 * Limits on `Nclusters` and `Nseeds` have been removed
    * avoid biasing timing and efficiency
    * they are not tuned for PU > 70
