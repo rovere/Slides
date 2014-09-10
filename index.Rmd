@@ -252,7 +252,7 @@ that we will reasonably face during Run 2, we can appreciate:
 
 ## Timing Performances
 
---- &fourimages w1:33 w2:33 w3:0 w4:33 imageleft_most:images/RecoTimeLUMI_25_BX_25ns_Nehalem.png imageleft:images/RecoTimePU_25_BX_25ns_zoom_Nehalem.png imageright_most:images/IterativeTimeStep_25_BX_720p4_NoDynInef_NoCCC_Nehalem.png
+--- &fourimages w1:33 w2:33 w3:0 w4:33 imageleft_most:images/RecoTimeLUMI_25_BX_25ns.png imageleft:images/RecoTimePU_25_BX_25ns_zoom.png imageright_most:images/IterativeTimeStep_25_BX_720p4_NoDynInef_NoCCC.png
 
 ## Timing Performances
 
