@@ -68,9 +68,7 @@ Previous studies showed that timing of iterations seeded from pairs of
 strip hits diverges at high pile-up. A new seeding algorithm, based on
 hit triplets, whose main feature is a chi2 cut from straight line fit
 of 3 points in the RZ plane has been developer to cure pixelLess=iter5
-and tobTec=iter6. [More
-info](https://indico.cern.ch/event/292572/contribution/1/material/slides/0.pdf)
-
+and tobTec=iter6.
 *** =caption_left
 
 Number of seeds vs eta for the strip-seeded iterations, comparing the
@@ -92,7 +90,7 @@ Another development targeting physics and timing performances is a
 cut on the strip cluster charge, rejecting clusters produced by
 out-of-time particles. It can be applied upfront tracking, during
 seeding or during pattern recognition and accounts for sensor
-thickness and trajectory crossing angle.[More info](https://indico.cern.ch/event/320094/contribution/5/material/slides/0.pdf)
+thickness and trajectory crossing angle.
 
 *** =caption_left
 
@@ -250,38 +248,6 @@ that we will reasonably face during Run 2, we can appreciate:
 *** =caption_left
 
 *** =caption_right_most
-
---- &fourimages w1:33 w2:33 w3:0 w4:33 imageleft_most:images/effic_eta_PU40_BX25_DynInef.png imageleft:images/fake_eta_PU40_BX25_DynInef.png imageright_most:images/iter_PU40_BX25_DynInef.png
-
-## Pixel Dynamic Inefficiencies
-
-*** =bottom_text
-
-* Pixel dynamic inefficiency simulation has been introduced in release
-  to better simulate the behavior of the real pixel detector as a
-  function of the instantaneous luminosity.
-
-* The net efficiency loss (up to 5%) is the result of
-
-    * large reduction of tracks from pixel-triplet-seeded iterations
-
-    * partially recovered by pixel-pair and strip-seeded iterations.
-
-*** =caption_left_most
-
-The effect of the pixel dynamic inefficiency is a reduction of
-efficiency that in some bins could reach up to 5%
-
-*** =caption_left
-
-No major effect is visible on the fake rate.
-
-*** =caption_right_most
-
-The net efficiency loss is the result of 1) large reduction of tracks
-from pixel-triplet-seeded iterations and 2) partially recovered by
-pixel-pair and strip-seeded iterations.
-
 
 --- .segue .nobackground .dark
 
