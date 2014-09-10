@@ -43,9 +43,9 @@ mode        : selfcontained # {standalone,draft}
    * use track association by hits (threshold > 75%)
    * fake rate: all tracks
    * efficiency:
-      * vs : pT>0.9 GeV, $V_Z$<30 cm, $V_R$<3.5 cm
+      * vs $\eta$: pT>0.9 GeV, $V_Z$<30 cm, $V_R$<3.5 cm
       * vs R: pT>0.5 GeV, $V_Z$<150 cm, |$\eta$|<2.5 cm
-   * vertices, association by position ( $\Delta$ z < 3 $\sigma_z$, $\Delta$ z < 1 mm): 
+   * vertices, association by position ( $\Delta$ z < 3 $\sigma_z$, $\Delta$ z < 1 mm):
       * ndof > 4, |z| < 24 cm, R < 2 cm
 
 ### In this talk we will present results related to:
@@ -65,10 +65,11 @@ mode        : selfcontained # {standalone,draft}
 ## Strip Triplet Seeding
 
 Previous studies showed that timing of iterations seeded from pairs of
-strip hits diverges at high pile-up. A new seeding algorithm, based on hit
-triplets, whose main feature is a chi2 cut from straight line fit of 3
-points in the RZ plane has been developer to cure pixelLess=iter5 and
-tobTec=iter6.  
+strip hits diverges at high pile-up. A new seeding algorithm, based on
+hit triplets, whose main feature is a chi2 cut from straight line fit
+of 3 points in the RZ plane has been developer to cure pixelLess=iter5
+and tobTec=iter6. [More
+info](https://indico.cern.ch/event/292572/contribution/1/material/slides/0.pdf)
 
 *** =caption_left
 
@@ -91,7 +92,7 @@ Another development targeting physics and timing performances is a
 cut on the strip cluster charge, rejecting clusters produced by
 out-of-time particles. It can be applied upfront tracking, during
 seeding or during pattern recognition and accounts for sensor
-thickness and trajectory crossing angle.
+thickness and trajectory crossing angle.[More info](https://indico.cern.ch/event/320094/contribution/5/material/slides/0.pdf)
 
 *** =caption_left
 
@@ -150,8 +151,8 @@ cluster charge cut effectively reduces the fake rate by about 2x.
 *** =bottom_text
 * For analysis, the relevant comparison is with nominal PU conditions
    * <font class='bold yellow3'>PU25 BX50ns for Run1 release</font>
-   * <font class='bold blue'>PU40 BX25ns for Run2 release</font>  
-* With much worse conditions, in Run2 we have same efficiency for prompt tracks, 
+   * <font class='bold blue'>PU40 BX25ns for Run2 release</font>
+* With much worse conditions, in Run2 we have same efficiency for prompt tracks,
   slightly higher fake rate, slightly lower efficiency for displaced tracks.
 * Expect CMS physics performance to be the same, at least for tracking
 
@@ -421,7 +422,7 @@ similar performance up to PU70
 
 *  Significant time reduction, now scaling not far from linear up to PU70
 
-    * factors 2-3-4x at PU25-40-70 with BX25ns 
+    * factors 2-3-4x at PU25-40-70 with BX25ns
 
 * Vertex performance stable up to PU70
 
