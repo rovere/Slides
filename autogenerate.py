@@ -77,6 +77,6 @@ if __name__=='__main__':
               print colorstr('indentical', 'DARK_GREEN')
           else:
               before_hash = after_hash
-              print colorstr('Updating', 'DARK_YELLOW')
               os.system("./generate.r &> /dev/null")
+              print colorstr('Updated', 'DARK_YELLOW')
           before = after
