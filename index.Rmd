@@ -10,7 +10,6 @@ widgets     : [mathjax]            # {mathjax, quiz, bootstrap}
 mode        : selfcontained # {standalone,draft}
 
 ---
-
 ## Goals
 
 We hope that, by today, you will become proficient in
@@ -31,11 +30,9 @@ We hope that, by today, you will become proficient in
 * Advanced debugging
 
 --- .segue .dark .nobackground
-
 ## Prerequisites
 
 ---
-
 ## Setup a development area
 
 We will be working with `CMSSW_7_2_0` release, using some ad-hoc
@@ -67,18 +64,25 @@ ssh-add
 git cms-init
 </pre>
 
+---
+## Setup a development area
+
 * Add the code for the Tracking Training Day II
 
 <pre data-lang="shell">
 git submodule add git@github.com:/rovere/TTD TTD
 </pre>
 
---- .segue .nobackground .dark
+* <font class="bold red">The code contained in the TTD package that you
+  just downloaded it fully functional and contains the final version
+  of the exercises that you will be asked to develop and run: be kind
+  to yourself and do not start from them and, in case, use the code
+  there only in case of troubles or as a reference.</font>
 
+--- .segue .nobackground .dark
 ## Locate and browse tracking code
 
 ---
-
 ## Tracking Packages
 
 * The main tracking packages are:
@@ -150,15 +154,18 @@ das_client.py --query='file dataset=/RelValTTbar_13/CMSSW_7_2_0_pre5-PU25ns_POST
 </pre>
 
 * For validation we will need also the GEN-SIM-DIGI-RAW-HLTDEBUG
-  files:
-    *  <font class="bold red">SingleMu</font>
+  files
+*  <font class="bold red">SingleMu</font>
+
 <pre>
 das_client.py \
 --query='file dataset=/RelValSingleMuPt100_UP15/CMSSW_7_2_0_pre3-POSTLS172_V3-v1/GEN-SIM-DIGI-RAW-HLTDEBUG' \
 --format=plain \
 --limit=0
 </pre>
-    *  <font class="bold red">TTbar</font>
+
+*  <font class="bold red">TTbar</font>
+
 <pre>
 das_client.py \
 --query='file dataset=/RelValTTbar_13/CMSSW_7_2_0_pre5-PU25ns_POSTLS172_V3-v1/GEN-SIM-RAW-HLTDEBUG' \
@@ -201,7 +208,7 @@ process.load("RecoPixelVertexing.PixelLowPtUtilities.siPixelClusterShapeCache_cf
 </pre>
 
 ---
-## Run Default Reconstruction Sequence
+## Run Default Reco Sequence
 
 * Now let’s run it:
 
@@ -211,24 +218,354 @@ cmsRun recoTrk_cfg.py
 
 * Open the output file and look for the tracks we have made.
 
-<pre>
+<pre data-lang="ROOT">
 root -l reco_trk.root
 TBrowser b
 Events->Draw("recoTracks_generalTracks__RERECO.@obj.size()")
 Events->Draw("recoTracks_generalTracks__RERECO.obj.chi2_")
 Events->Draw("recoTracks_generalTracks__RERECO.obj.algorithm_")
 Events->Draw("sqrt(recoTracks_generalTracks__RERECO.obj.momentum_.perp2())")
-Enable services for timing summary and memory info and re-run.
 </pre>
+
+* Enable services for timing summary and memory info and re-run.
+
+---
+## Run Custom Reco Sequence (py)
+
+* What are the exact parameters we have used in the default
+  reconstruction?
+
+    * For example, what are the layers used for seeding the initial
+      step of iterative tracking?
+<pre>
+edmConfigDump recoTrk_cfg.py >& dump.recoTrk_cfg.txt
+less dump.recoTrk_cfg.txt
+</pre>
+
+* Look for `process.initialStepSeeds` and then for
+  `initialStepSeedLayers`.
+
+* `initialStepSeedLayers` is the `SeedingLayers` definition of
+  `initialStepSeeds`, and contains the list of layers used to produce
+  the seeds
+
+* Let’s modify the `layerList` by removing the first combination, i.e:
+  `BPix1+BPix2+BPix3`
+    
+    * What differences would you expect?
+
+---
+## Run Custom Reco Sequence
+
+<font class="bold red">Pythonic alternative method to perform the same actions</font>
+
+<pre data-lang="python">
+python -i recoTrk_cfg.py
+>>> <b>process.initialStepSeeds</b>
+cms.EDProducer("SeedGeneratorFromRegionHitsEDProducer",
+    OrderedHitsFactoryPSet = cms.PSet(
+        ComponentName = cms.string('StandardHitTripletGenerator'),
+        ...
+        SeedingLayers = cms.InputTag("initialStepSeedLayers")
+    ),
+</pre>
+
+<pre data-lang="python">
+>>> process.initialStepSeeds.getParameter('OrderedHitsFactoryPSet')
+cms.PSet(
+    ComponentName = cms.string('StandardHitTripletGenerator'),
+    ...
+    SeedingLayers = cms.InputTag("initialStepSeedLayers")
+)
+>>>
+</pre>
+
+<pre data-lang="python">
+>>> process.initialStepSeedLayers
+cms.EDProducer("SeedingLayersEDProducer",
+    layerList = cms.vstring('BPix1+BPix2+BPix3',
+        'BPix1+BPix2+FPix1_pos',
+        'BPix1+BPix2+FPix1_neg',
+        'BPix1+FPix1_pos+FPix2_pos',
+        'BPix1+FPix1_neg+FPix2_neg'),
+...
+</pre>
+
+---
+## Run Custom Reco Sequence (py)
+
+<font class="bold red">Pythonic alternative method to perform the same actions</font>
+
+Look also at the specific code that has been put into the
+`recoTrk_cfg.py` file and uncomment the customization line at will.
+
+<pre data-lang="python">
+### CUSTOMIZATION FUNCTIONS TO BE USED ###
+
+# CUSTOMIZE LAYERS USED TO PRODUCE SEEDS IN THE INITIAL_STEP
+def customize_initialStepSeeds(process):
+    process.initialStepSeedLayers.layerList.remove('BPix1+BPix2+BPix3')
+    process.out.fileName = cms.untracked.string('reco_trk_mod.root')
+    return process
+
+### INVOKE APPROPRIATE CUSTOMIZATION FUNCTION(S) ###
+
+# process = customize_initialStepSeeds(process)
+</pre>
+
+---
+## Run Custom Reco Sequence
+
+* What are the exact parameters we have used in the default
+  reconstruction?
+
+    * For example, what are the layers used for seeding the initial
+      step of iterative tracking?
+<pre>
+edmConfigDump recoTrk_cfg.py >& dump.recoTrk_cfg.txt
+less dump.recoTrk_cfg.txt
+</pre>
+
+* Look for `process.initialStepSeeds` and then for
+  `initialStepSeedLayers`.
+
+* `initialStepSeedLayers` is the `SeedingLayers` definition of
+  `initialStepSeeds`, and contains the list of layers used to produce
+  the seeds
+
+* Let’s modify the `layerList` by removing the first combination, i.e:
+  `BPix1+BPix2+BPix3`
+    
+    * What differences would you expect?
+
+* Modify the output file name to `reco_trk_mod.root` and add the
+following lines to `recoTrk_cfg.py`
+
+<pre data-lang="python">
+process.initialStepSeedLayers.layerList = cms.vstring('BPix1+BPix2+FPix1_pos',
+                                                      'BPix1+BPix2+FPix1_neg',
+                                                      'BPix1+FPix1_pos+FPix2_pos',
+                                                      'BPix1+FPix1_neg+FPix2_neg')
+</pre>
+
+* Rerun and look at the output file:
+
+<pre data-lang="ROOT">
+cmsRun recoTrk_cfg.py
+root -l -n reco_trk_mod.root
+Events->Draw("recoTracks_generalTracks__RERECO.obj.algorithm_")
+</pre>
+
 
 --- .segue .nobackground .dark
 ## Refit Tracks
 
---- .segue .nobackground .dark
-## Analyze Tracks in plain ROOT
+---
+## Refit Tracks
+
+A very useful tool is the <font class="bold red">TrackRefit</font>. 
+
+* It takes as input the track collection and refits the tracks with
+the same or with modified conditions (alignment, magnetic field) or
+algorithms (propagator, cluster parameter estimator).
+
+* <font class="green">Refitting tracks gives access to useful objects,
+like hits positions and the trajectory (see later), and it is much
+faster than full re-tracking</font>.
+
+* Inspired from
+[`RecoTracker/TrackProducer/test/TrackRefit.py`](https://cmssdt.cern.ch/SDT/lxr/source/RecoTracker/TrackProducer/test/TrackRefit.py),
+a configuration file for refitting track was prepared.
+
+* open the cfg 
+
+<pre>
+emacs TTD/DemoTrackAnalyzer/test/refitTrk_cfg.py &
+</pre>
+
+* Where is the TrackRefitter module defined? 
+
+* Can you browse the code and find it?
+
+* Now we can run it and compare original and refitted tracks:
+
+<pre data-lang="ROOT">
+root -l -n refit_trk_analytical.root
+TCanvas c1
+Events->Draw("sqrt(recoTracks_TrackRefitter__Refitting.obj.momentum_.perp2())")
+TCanvas c2
+Events->Draw("sqrt(recoTracks_generalTracks__RERECO.obj.momentum_.perp2())")
+</pre>
+
+---
+## Refit Tracks
+
+* What if we want to refit tracks under different conditions? 
+
+    * e.g., we may want to neglect energy loss (and detailed magnetic
+field description from Runge Kutta propagation). 
+
+* We can add the following lines to `refitTrk_cfg.py`:
+
+<pre data-lang="python">
+process.TrackRefitter.Propagator = cms.string('AnalyticalPropagator')
+process.RKTrajectoryFitter.Propagator = cms.string('AnalyticalPropagator')
+process.RKTrajectorySmoother.Propagator = cms.string('AnalyticalPropagator')
+</pre>
+
+* What would you expect? 
+
+Now, let’s open again the file and check how big was the effect.
 
 --- .segue .nobackground .dark
 ## Analyze Tracks with EDAnalyzer
+
+---
+## Preparing an EDAnalyzer
+
+* Luckily, there is a simple command (`mkedanlzr`) to generate the 
+skeleton of an `EDAnalyzer` accessing tracks and making plots.
+
+<pre>
+mkdir TrackingTests
+cd TrackingTests/
+mkedanlzr DemoTrackAnalyzer example_track example_histo
+cd DemoTrackAnalyzer/
+mv python/ConfFile_cfg.py demoTrackAnalyzer_cfg.py
+</pre>
+
+* you need to edit the following files:
+
+<pre>
+emacs plugins/DemoTrackAnalyzer.cc plugins/BuildFile.xml demoTrackAnalyzer_cfg.py &
+</pre>
+
+* Then we can compile, run and open the output file with the usual
+commands:
+
+<pre>
+scramv1 b -j 8
+cmsRun demoTrackAnalyzer_cfg.py
+root -l trackAnalysis.root
+</pre>
+
+<font class="red bold">But before, let’s edit it step by step</font>.
+
+---
+## Step 1: track variables&hit patter
+
+* As a first step we want to add the plot for the <font class="bold red">track pT</font>, the <font class="bold red">number of crossed
+layers</font> and the <font class="red bold">number of outer layers
+with no hits</font>.
+
+* The skeleton already contains the declaration of the output file, of
+a histogram and a loop over tracks where the histogram is filled.
+
+* You can surely add the plot of the track pT. Any idea how to get the information about 
+layers with/without hits?
+
+* The config file needs to be slightly modified. 
+
+    * First replace the old collection name `ctfWithMaterialTracks`
+      with the up-to-date `generalTracks`.
+
+    * Also, `trackAnalysis.root` looks more appropriate than
+      `histo.root`.
+
+<font class="bold green">Fully functional code can be found at</font>:<br/>
+`TTD/DemoTrackAnalyzer/plugins/DemoTrackAnalyzer.cc`
+
+* Another option for the input collection is a <font class="bold red">custom selection</font>. 
+    
+    * A very useful tool is the string-based `TrackSelector`, for
+      example:
+
+<pre data-lang="python">
+process.selectedTracks = cms.EDFilter('TrackSelector',
+                                      src = cms.InputTag('generalTracks'),
+                                      cut = cms.string("quality('highPurity') & (algo=4) & abs(eta)&lt;0.9")
+)
+</pre>
+
+* <font class="bold red">Ok, this should have been pretty easy. Let’s do something more
+  advanced in the next step</font>.
+
+---
+## Step 2: Access to hit information - 1
+
+* Tracking analyses are often related to <font class="bold red">hit
+properties</font>. In this step we’ll learn how to access hits on a
+track and hits from the inclusive hit collection.
+
+* Two main ingredients that are needed are the 
+`TransientTrackingRecBuilder` and the `TrackRefitter`. 
+
+* In fact, <font class="bold red">hits stored on disk</font>
+[(`TrackingRecHit`)](http://cmssdt.cern.ch/SDT/lxr/source/DataFormats/TrackingRecHit/interface/TrackingRecHit.h)
+miss some relevant information:
+
+    * <font class="bold red">local position is not stored and depends
+      on the track direction hypothesis; therefore hits on track need
+      to be refitted</font>;
+
+    * they do not contain information about the tracker geometry that
+      is needed to translate local into global position; therefore, to
+      access the global position of a hit, a transient version
+      [`TransientTrackingRecHit`](http://cmssdt.cern.ch/SDT/lxr/source/TrackingTools/TransientTrackingRecHit/interface/TransientTrackingRecHit.h)
+      linked to the tracker geometry needs to be created using the
+      `TransientTrackingRecHitBuilder`.
+
+* We already know how to run the Refitter, so we can add it to cfg
+  file and use tracks from refitter as input (keep in mind that to do
+  this you need also the globalTag and the standard includes).
+
+---
+## Step 2: Access to hit information - 2
+
+* Now we need to get a TransientTrackingRecHitBuilder performing the following steps:
+
+    * Include needed files:
+<pre data-lang="C++">
+#include "FWCore/Framework/interface/ESHandle.h"
+#include "TrackingTools/Records/interface/TransientRecHitRecord.h"
+#include "TrackingTools/TransientTrackingRecHit/interface/TransientTrackingRecHitBuilder.h"
+</pre>
+    * Declare the variables for the builder name and the builder itself:
+<pre data-lang="C++">
+std::string builder&#95;name&#95;;
+const TransientTrackingRecHitBuilder* builder&#95;;
+</pre>
+    * In the constructor, get the builder name from the config file:
+<pre data-lang="C++">
+builder&#95;name&#95;(iConfig.getParameter&lt;std::string&gt;("TTRHBuilder"))
+</pre>
+    * Uncomment `beginRun` and get the builder from the EventSetup:
+<pre data-lang="C++">
+virtual void beginRun(edm::Run const&, edm::EventSetup const&) override;
+void DemoTrackAnalyzer::beginRun(edm::Run const& run,
+                                 edm::EventSetup const& setup) {
+  edm::ESHandle&lt;TransientTrackingRecHitBuilder&gt; theBuilder;
+  setup.get&lt;TransientRecHitRecord&gt;().get(builder&#95;name&#95;, theBuilder);
+  builder&#95; = theBuilder.product();
+}
+</pre>
+
+---
+## Step 2: Access to hit information - 3
+
+* In order to get a `TransientTrackingRecHitBuilder` performe the
+  following steps:
+    * Set the builder name in the config file:
+<pre data-lang="C++">
+TTRHBuilder = cms.string('WithAngleAndTemplate')
+</pre>
+    * Add the proper library in the `BuildFile.xml`:
+<pre data-lang="BuildFile">
+&lt;use name="TrackingTools/Records"/&gt;
+&lt;use name="TrackingTools/TransientTrackingRecHit"/&gt;
+</pre>
+
+
 
 --- .segue .nobackground .dark
 ## Run Track Validation Code
