@@ -170,6 +170,57 @@ das_client.py \
 --- .segue .nobackground .dark
 ## Run Track Reconstruction
 
+---
+## Run Default Reconstruction Sequence
+
+* We need a configuration file with standard setting to run the default tracking 
+sequence. 
+
+* A file was already prepared for you: let’s take a look at it:
+<pre>
+emacs TTD/DemoTrackAnalyzer/test/recoTrk_cfg.py &
+</pre>
+
+* The main ingredients are:
+    * input file, 
+    * GlobalTag
+    * default services&sequences. 
+
+* RECO files store clusters, not hits. Before running tracking we need
+to produce hits and add some other mandatory ingredient:
+
+<pre data-lang="python">
+# need to recreate hits from clusters (which are stored in RECO)
+process.clustToHits = cms.Sequence(
+    process.siPixelRecHits*process.siStripMatchedRecHits
+)
+
+# This is needed for tracking to work properly
+process.load("RecoTracker.MeasurementDet.MeasurementTrackerEventProducer_cfi")
+process.load("RecoPixelVertexing.PixelLowPtUtilities.siPixelClusterShapeCache_cfi")
+</pre>
+
+---
+## Run Default Reconstruction Sequence
+
+* Now let’s run it:
+
+<pre>
+cmsRun recoTrk_cfg.py
+</pre>
+
+* Open the output file and look for the tracks we have made.
+
+<pre>
+root -l reco_trk.root
+TBrowser b
+Events->Draw("recoTracks_generalTracks__RERECO.@obj.size()")
+Events->Draw("recoTracks_generalTracks__RERECO.obj.chi2_")
+Events->Draw("recoTracks_generalTracks__RERECO.obj.algorithm_")
+Events->Draw("sqrt(recoTracks_generalTracks__RERECO.obj.momentum_.perp2())")
+Enable services for timing summary and memory info and re-run.
+</pre>
+
 --- .segue .nobackground .dark
 ## Refit Tracks
 
