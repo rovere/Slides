@@ -414,9 +414,9 @@ pre {
   padding: 10px 0 10px $slide-left-right-padding;
   letter-spacing: -1px;
   margin-bottom: 20px;
-  width: 106%;
+  width: 100%;
   background-color: $gray-1;
-  left: -$slide-left-right-padding;
+  left: 0px; /* -$slide-left-right-padding;*/
   position: relative;
   @include box-sizing(border-box);
   /*overflow: hidden;*/
@@ -807,6 +807,10 @@ slide.bigger {
 }
 .prettyprint .pln {
   color: $gray-4;
+}
+
+.prettyprint {
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, .1);
 }
 
 .note {
