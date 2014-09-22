@@ -1,6 +1,6 @@
 ---
 title       : News
-subtitle    : Tracking POG Meeting, 2014-09-08
+subtitle    : Tracking POG Meeting, 2014-09-22
 author      : Marco Rovere, Giuseppe Cerati, Vincenzo Innocente
 job         : CERN
 framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
@@ -8,27 +8,47 @@ highlighter : prettify      # {highlight.js, prettify, highlight}
 hitheme     : twitter-bootstrap # sunburst      #
 widgets     : []            # {mathjax, quiz, bootstrap}
 mode        : selfcontained # {standalone,draft}
----
 
+
+---
 ## Releases
 
-### CMSSW_7_2_0_pre5 is out
+### CMSSW_7_2_0_pre6 is out
 
-### Changes since CMSSW_7_2_0_pre4:
-https://github.com/cms-sw/cmssw/compare/CMSSW_7_2_0_pre4...CMSSW_7_2_0_pre5
+### Changes since CMSSW_7_2_0_pre5:
+https://github.com/cms-sw/cmssw/compare/CMSSW_7_2_0_pre5...CMSSW_7_2_0_pre6
 
 
-1. [5030](http://github.com/cms-sw/cmssw/pull/5030)  from @avartak: Tk Validation dedx plot bugfix and adding eff/fake vs dR plots `dqm`
+1. [5265](http://github.com/cms-sw/cmssw/pull/5265)  from @VinInn: Clean RunningAverage use `reconstruction`
 
-1. [4973](http://github.com/cms-sw/cmssw/pull/4973)  from @quertenmont: Update RecoTracker/dEdx package `alca`  `analysis`  `dqm`  `operations`  `reconstruction`
+1. [5151](http://github.com/cms-sw/cmssw/pull/5151)  from @nickmccoll: <font class="bold red">New strip cpe</font> `reconstruction`
 
-1. [4937](http://github.com/cms-sw/cmssw/pull/4937)  from @mtosi: tracking and PV validation@HLT `dqm`  `simulation`
+1. [5173](http://github.com/cms-sw/cmssw/pull/5173)  from @Dr15Jones: Have TkCloner return std::unique_ptr for factory functions `core`  `reconstruction`
 
-1. [4872](http://github.com/cms-sw/cmssw/pull/4872)  from @rovere: Move Vertex Validation histograms in a more appropriate folder. `dqm`
+1. [5163](http://github.com/cms-sw/cmssw/pull/5163)  from @mtosi: HLT track monitor in 2015 `dqm`
 
-1. [4947](http://github.com/cms-sw/cmssw/pull/4947)  from @VinInn: Tracker geom det `alca`  `fastsim`  `geometry`  `reconstruction`  `visualization`
+1. [5152](http://github.com/cms-sw/cmssw/pull/5152)  from @boudoul: removing fake dependency `reconstruction`
 
-* Keep an eye on PR  [5151](http://github.com/cms-sw/cmssw/pull/5151), still pending but relevant to tracking.
+---
+## Releases
+
+### CMSSW_7_2_0_pre6 is out
+
+1. [5116](http://github.com/cms-sw/cmssw/pull/5116)  from @wmtford: Add a few new pixel recHit validation histograms `dqm`
+
+1. [5133](http://github.com/cms-sw/cmssw/pull/5133)  from @boudoul: Pixel Phase1 xmls for 72X `geometry`
+
+1. [5124](http://github.com/cms-sw/cmssw/pull/5124)  from @cerati: Rebin vertex validation histos v2 `dqm`
+
+1. [5087](http://github.com/cms-sw/cmssw/pull/5087)  from @rovere: Improve histo ranges `dqm`
+
+1. [5076](http://github.com/cms-sw/cmssw/pull/5076)  from @mtosi: strip cluster on/off track dqm@hlt `dqm`  `reconstruction`
+
+1. [5097](http://github.com/cms-sw/cmssw/pull/5097)  from @wmtford: Add a few new strip recHit validation histograms `dqm`
+
+1. [5102](http://github.com/cms-sw/cmssw/pull/5102)  from @VinInn: fix long standing typo in TIDLayer `reconstruction`
+
+1. [5065](http://github.com/cms-sw/cmssw/pull/5065)  from @Dr15Jones: Use static only when debugging PixelThresholdClusterizer `reconstruction`
 
 ---
 
@@ -43,6 +63,5 @@ https://github.com/cms-sw/cmssw/compare/CMSSW_7_2_0_pre4...CMSSW_7_2_0_pre5
 ## Today's Agenda
 
 <article class="flexbox vcenter">
-<img src="images/20140908_TrackingPOGAgenda.png" alt="Agenda" title="Agenda" width="90%">
+<img src="images/20140922_TrackingPOGAgenda.png" alt="Agenda" title="Agenda" width="90%">
 </article>
-
