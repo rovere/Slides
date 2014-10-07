@@ -14,20 +14,20 @@ mode        : selfcontained # {standalone,draft}
 
 We hope that, by today, you will become proficient in
 
-* locate and browse tracking-related code
-* find samples for development and testing
-* run track reconstruction sequence (default or modified)
+* <font class="red bold">locate and browse tracking-related code</font>
+* <font class="red bold">find samples for development and testing</font>
+* <font class="red bold">run track reconstruction sequence</font> (default or modified)
     * check also timing and memory usage
-* refit tracks
-* analyze tracks using EDM root files and plain ROOT
-* analyze tracks with EDAnalyzer
-    * select tracks
-    * track parameters and `HitPattern`
-    * hits and track hits
-    * seeds and trajectories
-* run track validation code
+* <font class="red bold">refit tracks</font>
+* <font class="red bold">analyze tracks using EDM root files and plain ROOT</font>
+* <font class="red bold">analyze tracks with EDAnalyzer</font>
+    * <font class="blue bold">Step 1 -</font> select tracks, track parameters and `HitPattern`
+    * <font class="blue bold">Step 2 -</font> hits properties
+    * <font class="blue bold">Step 3 -</font> seeds and trajectories
+    * <font class="blue bold">Step 4 -</font> seeding efficiency w.r.t tracking
+* <font class="red bold">run track validation code</font>
     * MultiTrackValidator
-* Advanced debugging
+* <font class="red bold">Advanced debugging</font>
 
 --- .segue .dark .nobackground
 ## Prerequisites
@@ -72,6 +72,18 @@ git cms-init
 <pre data-lang="shell">
 git submodule add git@github.com:/rovere/TTD TTD
 </pre>
+
+* Different Steps of the exercises related to the `EDAnalyzer` part of
+  the training are stored in different branches in github.
+
+    * If you want to explore/modify code for a specific step, please
+      remember to checkout the proper branch
+
+ <pre data-lang="shell/git">
+ cd src/TTD
+ <b>git checkout step1</b>
+ </pre>
+
 
 * <font class="bold red">The code contained in the TTD package that you
   just downloaded it fully functional and contains the final version
