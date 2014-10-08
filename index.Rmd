@@ -60,7 +60,7 @@ ssh-add
 
 * Setup an empty git repository for the CMSSW area you just created
 
-<pre data-lang="shell">
+<pre data-lang="git">
 git cms-init
 </pre>
 
@@ -190,7 +190,7 @@ das_client.py \
 ## Run Track Reconstruction
 
 ---
-## Run Default Reconstruction Sequence
+## Run Default Reco Sequence
 
 * We need a configuration file with standard setting to run the default tracking 
 sequence. 
@@ -242,13 +242,14 @@ Events->Draw("sqrt(recoTracks_generalTracks__RERECO.obj.momentum_.perp2())")
 * Enable services for timing summary and memory info and re-run.
 
 ---
-## Run Custom Reco Sequence (py)
+## Run Custom Reco Sequence
 
 * What are the exact parameters we have used in the default
   reconstruction?
 
     * For example, what are the layers used for seeding the initial
       step of iterative tracking?
+
 <pre>
 edmConfigDump recoTrk_cfg.py >& dump.recoTrk_cfg.txt
 less dump.recoTrk_cfg.txt
@@ -268,6 +269,50 @@ less dump.recoTrk_cfg.txt
 
 ---
 ## Run Custom Reco Sequence
+
+* What are the exact parameters we have used in the default
+  reconstruction?
+
+    * For example, what are the layers used for seeding the initial
+      step of iterative tracking?
+
+<pre>
+edmConfigDump recoTrk_cfg.py >& dump.recoTrk_cfg.txt
+less dump.recoTrk_cfg.txt
+</pre>
+
+* Look for `process.initialStepSeeds` and then for
+  `initialStepSeedLayers`.
+
+* `initialStepSeedLayers` is the `SeedingLayers` definition of
+  `initialStepSeeds`, and contains the list of layers used to produce
+  the seeds
+
+* Let’s modify the `layerList` by removing the first combination, i.e:
+  `BPix1+BPix2+BPix3`
+    
+    * What differences would you expect?
+
+* Modify the output file name to `reco_trk_mod.root` and add the
+following lines to `recoTrk_cfg.py`
+
+<pre data-lang="python">
+process.initialStepSeedLayers.layerList = cms.vstring('BPix1+BPix2+FPix1_pos',
+                                                      'BPix1+BPix2+FPix1_neg',
+                                                      'BPix1+FPix1_pos+FPix2_pos',
+                                                      'BPix1+FPix1_neg+FPix2_neg')
+</pre>
+
+* Rerun and look at the output file:
+
+<pre data-lang="ROOT">
+cmsRun recoTrk_cfg.py
+root -l -n reco_trk_mod.root
+Events->Draw("recoTracks_generalTracks__RERECO.obj.algorithm_")
+</pre>
+
+---
+## Run Custom Reco Sequence [python]
 
 <font class="bold red">Pythonic alternative method to perform the same actions</font>
 
@@ -304,7 +349,7 @@ cms.EDProducer("SeedingLayersEDProducer",
 </pre>
 
 ---
-## Run Custom Reco Sequence (py)
+## Run Custom Reco Sequence [python]
 
 <font class="bold red">Pythonic alternative method to perform the same actions</font>
 
@@ -323,49 +368,6 @@ def customize_initialStepSeeds(process):
 ### INVOKE APPROPRIATE CUSTOMIZATION FUNCTION(S) ###
 
 # process = customize_initialStepSeeds(process)
-</pre>
-
----
-## Run Custom Reco Sequence
-
-* What are the exact parameters we have used in the default
-  reconstruction?
-
-    * For example, what are the layers used for seeding the initial
-      step of iterative tracking?
-<pre>
-edmConfigDump recoTrk_cfg.py >& dump.recoTrk_cfg.txt
-less dump.recoTrk_cfg.txt
-</pre>
-
-* Look for `process.initialStepSeeds` and then for
-  `initialStepSeedLayers`.
-
-* `initialStepSeedLayers` is the `SeedingLayers` definition of
-  `initialStepSeeds`, and contains the list of layers used to produce
-  the seeds
-
-* Let’s modify the `layerList` by removing the first combination, i.e:
-  `BPix1+BPix2+BPix3`
-    
-    * What differences would you expect?
-
-* Modify the output file name to `reco_trk_mod.root` and add the
-following lines to `recoTrk_cfg.py`
-
-<pre data-lang="python">
-process.initialStepSeedLayers.layerList = cms.vstring('BPix1+BPix2+FPix1_pos',
-                                                      'BPix1+BPix2+FPix1_neg',
-                                                      'BPix1+FPix1_pos+FPix2_pos',
-                                                      'BPix1+FPix1_neg+FPix2_neg')
-</pre>
-
-* Rerun and look at the output file:
-
-<pre data-lang="ROOT">
-cmsRun recoTrk_cfg.py
-root -l -n reco_trk_mod.root
-Events->Draw("recoTracks_generalTracks__RERECO.obj.algorithm_")
 </pre>
 
 
@@ -509,8 +511,8 @@ process.selectedTracks = cms.EDFilter('TrackSelector',
 properties</font>. In this step we’ll learn how to access hits on a
 track and hits from the inclusive hit collection.
 
-* Two main ingredients that are needed are the 
-`TransientTrackingRecBuilder` and the `TrackRefitter`. 
+* The main ingredient that is needed is the `TrackRefitter` (well,
+  assuming you are not already performing a full reco step).
 
 * In fact, <font class="bold red">hits stored on disk</font>
 [(`TrackingRecHit`)](http://cmssdt.cern.ch/SDT/lxr/source/DataFormats/TrackingRecHit/interface/TrackingRecHit.h)
@@ -521,61 +523,86 @@ miss some relevant information:
       to be refitted</font>;
 
     * they do not contain information about the tracker geometry that
-      is needed to translate local into global position; therefore, to
-      access the global position of a hit, a transient version
-      [`TransientTrackingRecHit`](http://cmssdt.cern.ch/SDT/lxr/source/TrackingTools/TransientTrackingRecHit/interface/TransientTrackingRecHit.h)
-      linked to the tracker geometry needs to be created using the
-      `TransientTrackingRecHitBuilder`.
+      is needed to translate local into global position; 
 
 * We already know how to run the Refitter, so we can add it to cfg
-  file and use tracks from refitter as input (keep in mind that to do
-  this you need also the globalTag and the standard includes).
+  file and use tracks from the refitter as input (keep in mind that to
+  do this you need also the globalTag and the standard includes).
 
 ---
 ## Step 2: Access to hit information - 2
 
-* Now we need to get a TransientTrackingRecHitBuilder performing the following steps:
+### Goals
 
-    * Include needed files:
-<pre data-lang="C++">
-#include "FWCore/Framework/interface/ESHandle.h"
-#include "TrackingTools/Records/interface/TransientRecHitRecord.h"
-#include "TrackingTools/TransientTrackingRecHit/interface/TransientTrackingRecHitBuilder.h"
-</pre>
-    * Declare the variables for the builder name and the builder itself:
-<pre data-lang="C++">
-std::string builder&#95;name&#95;;
-const TransientTrackingRecHitBuilder* builder&#95;;
-</pre>
-    * In the constructor, get the builder name from the config file:
-<pre data-lang="C++">
-builder&#95;name&#95;(iConfig.getParameter&lt;std::string&gt;("TTRHBuilder"))
-</pre>
-    * Uncomment `beginRun` and get the builder from the EventSetup:
-<pre data-lang="C++">
-virtual void beginRun(edm::Run const&, edm::EventSetup const&) override;
-void DemoTrackAnalyzer::beginRun(edm::Run const& run,
-                                 edm::EventSetup const& setup) {
-  edm::ESHandle&lt;TransientTrackingRecHitBuilder&gt; theBuilder;
-  setup.get&lt;TransientRecHitRecord&gt;().get(builder&#95;name&#95;, theBuilder);
-  builder&#95; = theBuilder.product();
-}
-</pre>
+* We want to plot 2D maps of the hits, on the ZR plane for the hits on
+  track and on the XY plane for all pixel barrel hits.
+
+* Also, for pixel hits, we want to know how the various layers are
+  populated (number of hits per layer).
+
+### Procedure
+
+* First we should include TH2.h, then declare and book the histograms:
+  what are sensible ranges and binning?
+
+* Can you find out how to loop over track hits?
+
+* Once you found it you can then fill the ZR map with the proper
+  information.
+
+* To access pixel hits, as you recall, first we need to add
+  `process.siPixelRecHits` to the `Path` because only clusters are
+  saved in RECO data format.
+
+* To discover in which part of the detector a specific hit is located
+  we will use `TrackerTopology`'s methods queried using the `DetId`
+  associated to each hit.
 
 ---
 ## Step 2: Access to hit information - 3
 
-* In order to get a `TransientTrackingRecHitBuilder` performe the
-  following steps:
-    * Set the builder name in the config file:
+* For the pixel hits part, you should add the following code to the C++
+
 <pre data-lang="C++">
-TTRHBuilder = cms.string('WithAngleAndTemplate')
+  // Retrieve tracker topology from geometry
+  ESHandle<TrackerTopology> tTopoHandle;
+  iSetup.get<IdealGeometryRecord>().get(tTopoHandle);
+  const TrackerTopology* const tTopo = tTopoHandle.product();
+  ...
+  // Access to hit information: loop over all pixel hits
+  // auto --> edmNew::DetSetVector<SiPixelRecHit>
+  for (auto const& pixel_rechit_per_detid : *pixelHits) {
+    DetId hitId = pixel_rechit_per_detid.detId();
+    for (auto const& a_pixel_rechit : pixel_rechit_per_detid) {
+      if (a_pixel_rechit.isValid()) {
+        if (hitId.subdetId() ==
+            static_cast<int>(PixelSubdetector::PixelBarrel)) {
+          h_hit_pixelbarrel_map_->Fill(a_pixel_rechit.globalPosition().x(),
+                                       a_pixel_rechit.globalPosition().y());
+          h_hit_pixel_layers_->Fill(tTopo->pxbLayer(hitId));
+        } else {
+          h_hit_pixel_layers_->Fill(3 + tTopo->pxfDisk(hitId));
+        }
+      }
+    }
+  }
 </pre>
-    * Add the proper library in the `BuildFile.xml`:
-<pre data-lang="BuildFile">
-&lt;use name="TrackingTools/Records"/&gt;
-&lt;use name="TrackingTools/TransientTrackingRecHit"/&gt;
-</pre>
+
+* Do you understand the structure of this code?
+
+* Could you do something similar for strips?
+
+Now you can run the analyzer!
+
+---
+## Step 3: Seeds and Trajectories - 1
+
+Increasing complexity, two key components of tracking are <font class="bold red">seeds</font> and the <font class="bold red">trajectory</font>.
+The seed is is the starting point for track building and it is made of a vector of hits and a trajectory state (i.e. track parameters) positioned on the last hit along the direction. The trajectory state stored in the seed is a persistent version (PTrajectoryStateOnDet) that needs to be converted to the usual TrajectoryStateOnSurface via a helper function that needs the MagneticField and the hit surface. Again, one can access to the seed collection or to the seed that originated a specific track.
+The trajectory is the object used during the track fit and is made (mainly) of a vector of TrajectoryMeasurements, where each measurement contains a hit plus the trajectory states (predicted and updated). Trajectories are not saved in EDM files but are put into the event when tracks are made (full tracking or refitting). A trajectory-track map can be used to get one from the other.
+
+---
+## Step 4: Seeding eff. w.r.t Tracking - 1
 
 
 
