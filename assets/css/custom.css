@@ -906,7 +906,7 @@ slide.fill {
 /* line 608, ../scss/custom.scss */
 article p, article ul, article li {
   font-size: 25px;
-  line-height: 25px;
+  line-height: 1.2;
   letter-spacing: 0;
 }
 /* line 614, ../scss/custom.scss */

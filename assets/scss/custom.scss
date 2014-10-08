@@ -607,7 +607,7 @@ slide.fill {
 article {
   p, ul, li {
     font-size: $font_size_slide;
-    line-height: $font_size_slide;
+    line-height: 1.2 /*$font_size_slide*/;
     letter-spacing: 0;
   }
   ul {
