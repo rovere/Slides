@@ -597,9 +597,100 @@ Now you can run the analyzer!
 ---
 ## Step 3: Seeds and Trajectories - 1
 
-Increasing complexity, two key components of tracking are <font class="bold red">seeds</font> and the <font class="bold red">trajectory</font>.
-The seed is is the starting point for track building and it is made of a vector of hits and a trajectory state (i.e. track parameters) positioned on the last hit along the direction. The trajectory state stored in the seed is a persistent version (PTrajectoryStateOnDet) that needs to be converted to the usual TrajectoryStateOnSurface via a helper function that needs the MagneticField and the hit surface. Again, one can access to the seed collection or to the seed that originated a specific track.
-The trajectory is the object used during the track fit and is made (mainly) of a vector of TrajectoryMeasurements, where each measurement contains a hit plus the trajectory states (predicted and updated). Trajectories are not saved in EDM files but are put into the event when tracks are made (full tracking or refitting). A trajectory-track map can be used to get one from the other.
+Increasing complexity, two key components of tracking are <font
+class="bold red">seeds</font> and the <font class="bold
+blue">trajectory</font>.
+
+### SEED
+
+* The <font class="bold red">seed</font> is the starting point for
+  track building and it is made of
+
+   * a vector of hits
+
+   * a trajectory state (i.e. track parameters) positioned on the last
+     hit along the direction.
+
+* The trajectory state stored in the seed is a persistent version
+  (`PTrajectoryStateOnDet`) that needs to be converted to the usual
+  `TrajectoryStateOnSurface` via a helper function that needs the
+  `MagneticField` and the hit surface.
+
+* Again, one can access the seed collection or the seed that
+  originated a specific track.
+
+### TRAJECTORY
+
+* The <font class="blue bold">trajectory</font> is the object used
+  during the track fit and is made (mainly) of a vector of
+  `TrajectoryMeasurements`, where each measurement contains a hit plus
+  the trajectory states (predicted and updated).
+
+* Trajectories are not saved in EDM files but are put into the event
+  when tracks are made (either via full tracking or refitting).
+
+* A trajectory-track map can be used to get one from the other.
+
+---
+## Step 3: Seeds and Trajectories - 2
+
+### Goals
+
+* We want to plot the $p_T$ of the seeds that originated a track and
+  the pseudorapidity of all the seeds used in the `InitialStep`.
+
+### Procedure
+
+* Please declare and book the corresponding histograms. 
+
+* Include the headers:
+<pre data-lang="C++">
+   #include "DataFormats/TrajectorySeed/interface/TrajectorySeed.h"
+   #include "DataFormats/TrajectorySeed/interface/TrajectorySeedCollection.h"
+   #include "TrackingTools/TrajectoryState/interface/TrajectoryStateTransform.h"
+   #include "MagneticField/Engine/interface/MagneticField.h"
+   #include "MagneticField/Records/interface/IdealMagneticFieldRecord.h"
+</pre>
+
+* You need to declare a variable for the `MagneticField` and get it
+  from the `EventSetup` (no name is needed in this case). Can you do
+  it?
+
+---
+## Step 3: Seeds and Trajectories - 3
+
+* Inside the track loop, get the track seed, convert the persistent
+  state to a `TSOS` and fill the histogram with the seed $p_T$:
+
+<pre data-lang="C++">
+auto tkseed = itTrack.seedRef();
+// To pick-up the last hit on the seed you can either use
+// seed->recHits().first + (num_rechits_in_seed - 1) or use
+// seed->recHits().second - 1.
+TrajectoryStateOnSurface state = trajectoryStateTransform::transientState(
+    tkseed->startingState(),
+    (tkseed->recHits().second - 1)->surface(),
+    magneticField.product());
+h_seed_pt_->Fill(state.globalMomentum().perp());
+
+</pre>
+
+* Can you get the `InitialStep` seed collection, loop over it and fill
+  the $\eta$ plot?
+
+* Keep in mind that you also need to modify the BuildFile:
+
+<pre data-lang="Buildfile">
+   &lt;use name="MagneticField/Engine"/&gt;
+   &lt;use name="TrackingTools/TrajectoryState"/&gt;
+</pre>
+
+* Remember that the seed collection is not stored in RECO, so you need to
+  re-run the tracking to get access
+    
+    * modify the cfg file accordingly.
+
+
 
 ---
 ## Step 4: Seeding eff. w.r.t Tracking - 1
