@@ -1022,7 +1022,7 @@ slide.bigger {
   color: white;
 
   h2 {
-    font-size: 60px;
+    font-size: $font_size_thankyou;
   }
 
   article > p {
@@ -1086,12 +1086,12 @@ aside.gdbar {
       line-height: 1.4;
       letter-spacing: -3px;
       color: $gray-4;
-      text-shadow: #fff 0px 4px 0px,rgba(0,0,0,0.3) 0 5px 5px;
+      /* text-shadow: #fff 0px 4px 0px,rgba(0,0,0,0.3) 0 5px 5px; */
     }
 
     h2 {
       font-size: 34px;
-      color: $gray-2;
+      color: $gray-4;
       font-weight: inherit;
     }
 

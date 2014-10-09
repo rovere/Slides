@@ -1,7 +1,7 @@
 ---
 title       : Tracking Training Day - II
 subtitle    : The Revenge
-author      : G.Cerati, V.Innocente, M.Rovere 
+author      : G.Cerati, V.Innocente, M.Rovere
 job         : CERN
 framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
 highlighter : prettify      # {highlight.js, prettify, highlight}
@@ -110,10 +110,10 @@ git submodule add git@github.com:/rovere/TTD TTD
         * follow code by clicking directly into the code
         * free text search with (limited) regexp capabilities
 * Let's open few of them:
-    * [https://cmssdt.cern.ch/SDT/lxr/source/DataFormats/TrackReco/interface/Track.h](https://cmssdt.cern.ch/SDT/lxr/source/DataFormats/TrackReco/interface/Track.h) 
-    * [https://cmssdt.cern.ch/SDT/lxr/source/RecoTracker/IterativeTracking/python/iterativeTk_cff.py](https://cmssdt.cern.ch/SDT/lxr/source/RecoTracker/IterativeTracking/python/iterativeTk_cff.py) 
-    * [https://cmssdt.cern.ch/SDT/lxr/source/DataFormats/TrajectorySeed/interface/TrajectorySeed.h](https://cmssdt.cern.ch/SDT/lxr/source/DataFormats/TrajectorySeed/interface/TrajectorySeed.h) 
-    * [https://cmssdt.cern.ch/SDT/lxr/source/TrackingTools/PatternTools/interface/Trajectory.h](https://cmssdt.cern.ch/SDT/lxr/source/TrackingTools/PatternTools/interface/Trajectory.h) 
+    * [https://cmssdt.cern.ch/SDT/lxr/source/DataFormats/TrackReco/interface/Track.h](https://cmssdt.cern.ch/SDT/lxr/source/DataFormats/TrackReco/interface/Track.h)
+    * [https://cmssdt.cern.ch/SDT/lxr/source/RecoTracker/IterativeTracking/python/iterativeTk_cff.py](https://cmssdt.cern.ch/SDT/lxr/source/RecoTracker/IterativeTracking/python/iterativeTk_cff.py)
+    * [https://cmssdt.cern.ch/SDT/lxr/source/DataFormats/TrajectorySeed/interface/TrajectorySeed.h](https://cmssdt.cern.ch/SDT/lxr/source/DataFormats/TrajectorySeed/interface/TrajectorySeed.h)
+    * [https://cmssdt.cern.ch/SDT/lxr/source/TrackingTools/PatternTools/interface/Trajectory.h](https://cmssdt.cern.ch/SDT/lxr/source/TrackingTools/PatternTools/interface/Trajectory.h)
 
 --- .segue .nobackground .dark
 ## Sample Discovery
@@ -192,8 +192,8 @@ das_client.py \
 ---
 ## Run Default Reco Sequence
 
-* We need a configuration file with standard setting to run the default tracking 
-sequence. 
+* We need a configuration file with standard setting to run the default tracking
+sequence.
 
 * A file was already prepared for you: let’s take a look at it:
 <pre>
@@ -201,9 +201,9 @@ emacs TTD/DemoTrackAnalyzer/test/recoTrk_cfg.py &
 </pre>
 
 * The main ingredients are:
-    * input file, 
+    * input file,
     * GlobalTag
-    * default services&sequences. 
+    * default services&sequences.
 
 * RECO files store clusters, not hits. Before running tracking we need
 to produce hits and add some other mandatory ingredient:
@@ -264,7 +264,7 @@ less dump.recoTrk_cfg.txt
 
 * Let’s modify the `layerList` by removing the first combination, i.e:
   `BPix1+BPix2+BPix3`
-    
+
     * What differences would you expect?
 
 ---
@@ -290,11 +290,11 @@ less dump.recoTrk_cfg.txt
 
 * Let’s modify the `layerList` by removing the first combination, i.e:
   `BPix1+BPix2+BPix3`
-    
+
     * What differences would you expect?
 
 * Modify the output file name to `reco_trk_mod.root` and add the
-following lines to `recoTrk_cfg.py`
+  following lines to `recoTrk_cfg.py`, run and look at the output file:
 
 <pre data-lang="python">
 process.initialStepSeedLayers.layerList = cms.vstring('BPix1+BPix2+FPix1_pos',
@@ -302,9 +302,6 @@ process.initialStepSeedLayers.layerList = cms.vstring('BPix1+BPix2+FPix1_pos',
                                                       'BPix1+FPix1_pos+FPix2_pos',
                                                       'BPix1+FPix1_neg+FPix2_neg')
 </pre>
-
-* Rerun and look at the output file:
-
 <pre data-lang="ROOT">
 cmsRun recoTrk_cfg.py
 root -l -n reco_trk_mod.root
@@ -377,7 +374,7 @@ def customize_initialStepSeeds(process):
 ---
 ## Refit Tracks
 
-A very useful tool is the <font class="bold red">TrackRefit</font>. 
+A very useful tool is the <font class="bold red">TrackRefit</font>.
 
 * It takes as input the track collection and refits the tracks with
 the same or with modified conditions (alignment, magnetic field) or
@@ -391,15 +388,14 @@ faster than full re-tracking</font>.
 [`RecoTracker/TrackProducer/test/TrackRefit.py`](https://cmssdt.cern.ch/SDT/lxr/source/RecoTracker/TrackProducer/test/TrackRefit.py),
 a configuration file for refitting track was prepared.
 
-* open the cfg 
+* open the cfg
 
 <pre>
 emacs TTD/DemoTrackAnalyzer/test/refitTrk_cfg.py &
 </pre>
 
-* Where is the TrackRefitter module defined? 
-
-* Can you browse the code and find it?
+* Where is the TrackRefitter module defined? Can you browse the code
+  and find it?
 
 * Now we can run it and compare original and refitted tracks:
 
@@ -414,10 +410,10 @@ Events->Draw("sqrt(recoTracks_generalTracks__RERECO.obj.momentum_.perp2())")
 ---
 ## Refit Tracks
 
-* What if we want to refit tracks under different conditions? 
+* What if we want to refit tracks under different conditions?
 
     * e.g., we may want to neglect energy loss (and detailed magnetic
-field description from Runge Kutta propagation). 
+field description from Runge Kutta propagation).
 
 * We can add the following lines to `refitTrk_cfg.py`:
 
@@ -427,7 +423,7 @@ process.RKTrajectoryFitter.Propagator = cms.string('AnalyticalPropagator')
 process.RKTrajectorySmoother.Propagator = cms.string('AnalyticalPropagator')
 </pre>
 
-* What would you expect? 
+* What would you expect?
 
 Now, let’s open again the file and check how big was the effect.
 
@@ -437,7 +433,7 @@ Now, let’s open again the file and check how big was the effect.
 ---
 ## Preparing an EDAnalyzer
 
-* Luckily, there is a simple command (`mkedanlzr`) to generate the 
+* Luckily, there is a simple command (`mkedanlzr`) to generate the
 skeleton of an `EDAnalyzer` accessing tracks and making plots.
 
 <pre>
@@ -475,10 +471,10 @@ with no hits</font>.
 * The skeleton already contains the declaration of the output file, of
 a histogram and a loop over tracks where the histogram is filled.
 
-* You can surely add the plot of the track pT. Any idea how to get the information about 
+* You can surely add the plot of the track pT. Any idea how to get the information about
 layers with/without hits?
 
-* The config file needs to be slightly modified. 
+* The config file needs to be slightly modified.
 
     * First replace the old collection name `ctfWithMaterialTracks`
       with the up-to-date `generalTracks`.
@@ -489,8 +485,8 @@ layers with/without hits?
 <font class="bold green">Fully functional code can be found at</font>:<br/>
 `TTD/DemoTrackAnalyzer/plugins/DemoTrackAnalyzer.cc`
 
-* Another option for the input collection is a <font class="bold red">custom selection</font>. 
-    
+* Another option for the input collection is a <font class="bold red">custom selection</font>.
+
     * A very useful tool is the string-based `TrackSelector`, for
       example:
 
@@ -501,8 +497,8 @@ process.selectedTracks = cms.EDFilter('TrackSelector',
 )
 </pre>
 
-* <font class="bold red">Ok, this should have been pretty easy. Let’s do something more
-  advanced in the next step</font>.
+* <font class="bold red">Let’s do something more advanced in the next
+  step</font>.
 
 ---
 ## Step 2: Access to hit information - 1
@@ -523,7 +519,7 @@ miss some relevant information:
       to be refitted</font>;
 
     * they do not contain information about the tracker geometry that
-      is needed to translate local into global position; 
+      is needed to translate local into global position;
 
 * We already know how to run the Refitter, so we can add it to cfg
   file and use tracks from the refitter as input (keep in mind that to
@@ -592,8 +588,6 @@ miss some relevant information:
 
 * Could you do something similar for strips?
 
-Now you can run the analyzer!
-
 ---
 ## Step 3: Seeds and Trajectories - 1
 
@@ -634,14 +628,14 @@ blue">trajectory</font>.
 ---
 ## Step 3: Seeds and Trajectories - 2
 
-### Goals
+### SEED - Goals
 
 * We want to plot the $p_T$ of the seeds that originated a track and
   the pseudorapidity of all the seeds used in the `InitialStep`.
 
 ### Procedure
 
-* Please declare and book the corresponding histograms. 
+* Please declare and book the corresponding histograms.
 
 * Include the headers:
 <pre data-lang="C++">
@@ -687,21 +681,239 @@ h_seed_pt_->Fill(state.globalMomentum().perp());
 
 * Remember that the seed collection is not stored in RECO, so you need to
   re-run the tracking to get access
-    
+
     * modify the cfg file accordingly.
 
+---
+## Step 3: Seeds and Trajectories - 4
+
+### TRAJECTORY - Goals
+
+* Compute the pull (residual divided by error) of TOB hit local x positions with respect to the forward predicted state.
+
+### Procedure
+
+* Declare and book the histogram
+
+* Include the proper headers
+
+<pre data-lang="C++">
+  #include "TrackingTools/PatternTools/interface/Trajectory.h"
+  #include "TrackingTools/PatternTools/interface/TrajTrackAssociation.h"
+</pre>
+
+* Before the track loop, get the association map and initialize an
+  iterator to the beginning of the map:
+
+<pre data-lang="C++">
+TrajTrackAssociationCollection::const_iterator tji;
+iEvent.getByToken(genericSeeds_token_, genericSeeds);
+iEvent.getByToken(trajTrackAssociation_token_, trajTrackAssociation);
+tji = trajTrackAssociation-&gt;begin();
+</pre>
+
+* Don’t forget to increment (`++`) the iterator inside the track loop
+  to keep the two collections in sync.
+
+---
+## Step 3: Seeds and Trajectories - 4
+
+* Inside the track loop, get the trajectory, loop over the
+  `TrajectoryMeasurements` and, if we are in TOB, fill the pull
+  histogram:
+
+<pre data-lang="C++">
+// Access to Trajectory: pull distribution for TOB
+Ref&lt;std::vector&lt;Trajectory&gt; &gt; traj = tji-&gt;key;
+for (auto const& measurement : traj-&gt;measurements()) {
+  TrackingRecHit::ConstRecHitPointer hit = measurement.recHit();
+  DetId hitId = hit-&gt;geographicalId();
+  if (hit-&gt;isValid() &&
+      hitId.subdetId() == static_cast&lt;int&gt;(StripSubdetector::TOB)) {
+    TrajectoryStateOnSurface fwdState = measurement.forwardPredictedState();
+    float delta = hit-&gt;localPosition().x() - fwdState.localPosition().x();
+    float err2 = hit-&gt;localPositionError().xx() +
+        fwdState.localError().positionError().xx();
+    if (err2) h_tob_xpull_-&gt;Fill(delta / sqrt(err2));
+  }
+}
+</pre>
+
+* Run it on 5k single muon events and 50 ttbar events: do you
+  understand the results?
 
 
 ---
 ## Step 4: Seeding eff. w.r.t Tracking - 1
 
+### Goal
+
+* We want to see how many of the seeds created in a specific iteration
+  have been fully reconstructed as a final `HighPurity` track.
+
+### Procedure
+
+* We need to get the proper <font class="bold blue">seed
+  collection</font> for the iteration we want to monitor. Assuming you
+  would like to monitor the `TobTec` iteration, can you find the
+  proper `InputTag` that needs to be used to retrieve it?
+
+* Once you have the seed collection, loop over the seeds and fill an
+  histogram of their distribution as a function of $\eta$, computing
+  $\eta$ using the `TSOS` of its last hit.
+
+* You also need to get the <font class="bold blue">track
+  collection</font> of `HighPurity` tracks that have been
+  reconstructed using the algorithm that correspond to the iteration
+  you would like to monitor. Can you find the link between the algo
+  assignment and the iteration name/number?
+
+    * <font class="bold yellow">Hint:</font> use a `TrackSelector`
+      filter in your cfg file and its label as `InputTag` to have the
+      collection of proper tracks available in the event.
+
+---
+## Step 4: Seeding eff. w.r.t Tracking - 2
+
+* Loop over the selected tracks and fill an $\eta$ distribution.
+
+* Always remember that the seed collections are not persisted on disk,
+  to you will have to rerun full-tracking and take the temporary
+  collection out of the event.
+
+* Can you write a simple ROOT macro that takes the $\eta$ distribution
+  you created in the previous points and draw their ratio?
+
+* Did you expect the result you obtained?
 
 
 --- .segue .nobackground .dark
 ## Run Track Validation Code
 
+---
+## Run Track Validation Code
+
+* The tracking validation suite is located under the `Validation/RecoTrack` package.
+
+* An example of typical configuration files are in the `test` directory:
+
+    * `MultiTrackValidator_cfg.py` and `MTV_HARVESTING.py`
+
+    * Copy it locally and open it:
+
+<pre data-lang="SHELL">
+cp ${CMSSW_RELEASE_BASE}/src/Validation/RecoTrack/test/MultiTrackValidator_cfg.py .
+cp ${CMSSW_RELEASE_BASE}/src/Validation/RecoTrack/test/MTV_HARVESTING.py .
+emacs MultiTrackValidator_cfg.py &
+</pre>
+
+* You need to run two separate steps in order to obtain the results:
+
+    * A first step in which you book and fill all necessary histograms
+
+    * A second step (called <font class="bold
+      red">harvesting</font>). in which you aggregate statistics and
+      compute efficiencies, fake rates, etc...
+
+* You need to fix a few things before running (<font class="bold green">they will be fixed asap in release</font>):
+    * Update files with the list we found with `das`
+    * Update the globalTag
+    * `GeometryPilot2_cff` is outdated, use `Geometry_cff` (<font class="bold green">fix queued in release</font>)
+
+---
+## Run Track Validation Code
+
+* Run it!
+
+<pre data-lang="SHELL">
+cmsRun MultiTrackValidator_cfg.py
+cmsRun MTV_HARVESTING.py
+</pre>
+
+* This will produce validation plots for all highPurity tracks (see
+  how `cutsRecoTracks` selector is defined).
+
+* You can add other collection names to
+  `process.multiTrackValidator.label` (e.g. `generalTracks` or every
+  iterative step as done in
+  `Validation/RecoTrack/python/TrackValidation_cff.py`).
+
+* <font class="bold red">Official validation plots for each release
+  are at</font>:
+  [clickMe](http://cmsdoc.cern.ch/cms/Physics/tracking/validation/MC/)
+
+---
+## Run Track Validation Code
+
+* By default, each efficiency plot is made with a different
+  selection. They are defined in:
+  `Validation/RecoTrack/python/TrackingParticleSelectionsForEfficiency_cff.py`
+
+* You can modify the `TrackingParticle` selection to test effciencies
+  in a different phase space. 
+
+* For example, in order to use the same selection for all plots you
+  can do:
+
+<pre data-lang="python">
+process.multiTrackValidator.ptMinTP = cms.double(0.4)
+process.multiTrackValidator.lipTP = cms.double(35.0)
+process.multiTrackValidator.tipTP = cms.double(70.0)
+process.multiTrackValidator.histoProducerAlgoBlock.generalTpSelector.ptMin = cms.double(0.4)
+process.multiTrackValidator.histoProducerAlgoBlock.generalTpSelector.lip = cms.double(35.0)
+process.multiTrackValidator.histoProducerAlgoBlock.generalTpSelector.tip = cms.double(70.0)
+process.multiTrackValidator.histoProducerAlgoBlock.TpSelectorForEfficiencyVsEta  =
+        process.multiTrackValidator.histoProducerAlgoBlock.generalTpSelector.clone()
+process.multiTrackValidator.histoProducerAlgoBlock.TpSelectorForEfficiencyVsPhi  =
+        process.multiTrackValidator.histoProducerAlgoBlock.generalTpSelector.clone()
+process.multiTrackValidator.histoProducerAlgoBlock.TpSelectorForEfficiencyVsPt   =
+        process.multiTrackValidator.histoProducerAlgoBlock.generalTpSelector.clone()
+process.multiTrackValidator.histoProducerAlgoBlock.TpSelectorForEfficiencyVsVTXR =
+        process.multiTrackValidator.histoProducerAlgoBlock.generalTpSelector.clone()
+process.multiTrackValidator.histoProducerAlgoBlock.TpSelectorForEfficiencyVsVTXZ =
+        process.multiTrackValidator.histoProducerAlgoBlock.generalTpSelector.clone()
+</pre>
+
 --- .segue .nobackground .dark
 ## Advanced Debugging
+
+---
+## Debug Pattern Recognition
+
+* This is only for reference (<font class="bold yellow">and for brave
+  people!</font>).
+
+* We won’t go over it at the training day.
+
+* Checkout the `RecoTracker/CkfPattern` and
+  `RecoTracker/MeasurementDet packages and compile with the debug
+  option:
+
+<pre data-lang="SHELL">
+(cd $LOCALRT && env USER_CXXFLAG="-DEDM_ML_DEBUG" scramv1 b -j 8)
+</pre>
+
+* Enable the following categories for the message logger:
+
+    * `TkStripMeasurementDet`,
+    * `TkPixelMeasurementDet`, 
+    * `CkfPattern`,
+    * `CkfTrackCandidateMakerBase`
+
+* Also, you may want to uncomment the following line in
+  `RecoTracker/CkfPattern/src/TrajectorySegmentBuilder.cc`:
+
+<pre data-lang="C++">
+//#define DBG_TSB
+</pre>
+
+* You may want to take a look at the customization function
+  `customizeMessageLogger` in the `python/demo_customizations.py` file
+  to have a rough understanding on how to properly configure the
+  `MessageLogger` to convince it to make what you really want.
+
+
+In this way, from a single seed you can follow the evolution of the combinatorial pattern recognition.
 
 --- &thankyou
 ## Thank you!

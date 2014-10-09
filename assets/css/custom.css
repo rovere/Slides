@@ -1451,7 +1451,7 @@ slide.bigger figcaption p {
 }
 /* line 1024, ../scss/custom.scss */
 .thank-you-slide h2 {
-  font-size: 60px;
+  font-size: 55px;
 }
 /* line 1028, ../scss/custom.scss */
 .thank-you-slide article > p {
@@ -1540,12 +1540,12 @@ aside.gdbar img {
   line-height: 1.4;
   letter-spacing: -3px;
   color: #515151;
-  text-shadow: white 0px 4px 0px, rgba(0, 0, 0, 0.3) 0 5px 5px;
+  /* text-shadow: #fff 0px 4px 0px,rgba(0,0,0,0.3) 0 5px 5px; */
 }
 /* line 1092, ../scss/custom.scss */
 .title-slide hgroup h2 {
   font-size: 34px;
-  color: darkgrey;
+  color: #515151;
   font-weight: inherit;
 }
 /* line 1098, ../scss/custom.scss */
