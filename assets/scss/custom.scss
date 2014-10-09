@@ -18,6 +18,40 @@
   background-size: 60px 60px;
 }
 
+@mixin pre-definitions {
+  font-family: 'Source Code Pro', 'Courier New', monospace;
+  font-size: $font_size_pre;
+  line-height: 1.3;
+  padding: 10px 0 10px $slide-left-right-padding;
+  letter-spacing: -1px;
+  margin-bottom: 20px;
+  width: 100%;
+  background-color: #fefefe;
+  left: 0px; /* -$slide-left-right-padding;*/
+  position: relative;
+  @include box-sizing(border-box);
+  /*overflow: hidden;*/
+
+  &[data-lang]:after {
+    content: attr(data-lang);
+    background-color: $gray-2;
+    right: 0;
+    top: 0;
+    position: absolute;
+    font-size: 12pt;
+    color: white;
+    padding: 2px 25px;
+    text-transform: uppercase;
+  }
+  ol.linenums li {
+    font-family: 'Source Code Pro', 'Courier New', monospace;
+    font-size: $font_size_pre;
+    line-height: 1.2;
+    margin-bottom: 0em;
+    margin-left: $font_size_pre;
+    padding-left: 0px;
+  }
+}
 
 /**
  * Theme Styles
@@ -407,32 +441,7 @@ ul {
   }
 }
 
-pre {
-  font-family: 'Source Code Pro', 'Courier New', monospace;
-  font-size: 20px;
-  line-height: 28px;
-  padding: 10px 0 10px $slide-left-right-padding;
-  letter-spacing: -1px;
-  margin-bottom: 20px;
-  width: 100%;
-  background-color: $gray-1;
-  left: 0px; /* -$slide-left-right-padding;*/
-  position: relative;
-  @include box-sizing(border-box);
-  /*overflow: hidden;*/
-
-  &[data-lang]:after {
-    content: attr(data-lang);
-    background-color: $gray-2;
-    right: 0;
-    top: 0;
-    position: absolute;
-    font-size: 16pt;
-    color: white;
-    padding: 2px 25px;
-    text-transform: uppercase;
-  }
-}
+pre {@include pre-definitions}
 
 pre[data-lang="go"] {
   color: #333;
@@ -607,7 +616,7 @@ slide.fill {
 article {
   p, ul, li {
     font-size: $font_size_slide;
-    line-height: 1.2 /*$font_size_slide*/;
+    line-height: 1.1 /*$font_size_slide*/;
     letter-spacing: 0;
   }
   ul {
@@ -630,11 +639,7 @@ article {
       font-size: $font_size_table_td_th;
     }
   }
-  pre {
-    font-size: $font_size_pre;
-    line-height: 20px;
-    letter-spacing: 0;
-  }
+  pre { @include pre-definitions }
   q {
     font-size: $font_size_title;
     line-height: 48px;
@@ -779,38 +784,34 @@ slide.bigger {
 
 /* Pretty print */
 
-.prettyprint .str, /* string content */
-.prettyprint .atv { /* a markup attribute value */
-  color: $brand-green-secondary2; //rgb(0, 138, 53);
-}
-.prettyprint .kwd, /* a keyword */
-.prettyprint .tag { /* a markup tag name */
-  color: rgb(0, 102, 204);
-}
+.prettyprint  .pln { color: $gray-3 }  /* plain text */
+.prettyprint  .str { color: $brand-blue-secondary2 }  /* string content */
+.prettyprint  .kwd { color: $brand-green }  /* a keyword */
+.prettyprint  .com { color: $brand-red }  /* a comment */
+.prettyprint  .typ { color: $brand-blue }  /* a type name */
+.prettyprint  .lit { color: $brand-blue-secondary }  /* a literal value */
+  /* punctuation, lisp open bracket, lisp close bracket */
+.prettyprint  .pun, .opn, .clo { color: $gray-4 }
+.prettyprint  .tag { color: $gray-4 }  /* a markup tag name */
+.prettyprint  .atn { color: $brand-red }  /* a markup attribute name */
+.prettyprint  .atv { color: $brand-green }  /* a markup attribute value */
+.prettyprint  .dec, .var { color: $brand-yellow }  /* a declaration; a variable name */
+.prettyprint  .fun { color: $brand-red }  /* a function name */
+
 .prettyprint .com { /* a comment */
-  color: $gray-3; //rgb(127, 127, 127);
   font-style: italic;
-}
-.prettyprint .lit { /* a literal value */
-  color: rgb(127, 0, 0);
-}
-.prettyprint .pun, /* punctuation, lisp open bracket, lisp close bracket */
-.prettyprint .opn,
-.prettyprint .clo {
-  color: $gray-4; //rgb(127, 127, 127);
-}
-.prettyprint .typ, /* a type name */
-.prettyprint .atn, /* a markup attribute name */
-.prettyprint .dec,
-.prettyprint .var { /* a declaration; a variable name */
-  color: $brand-red-secondary2; //rgb(127, 0, 127);
-}
-.prettyprint .pln {
-  color: $gray-4;
 }
 
 .prettyprint {
-  box-shadow: inset 0 2px 6px rgba(0, 0, 0, .1);
+  background-color: #fefefe;
+/*  box-shadow: inset 0 2px 6px rgba(0, 0, 0, .1);*/
+}
+
+/* Put a border around prettyprinted code snippets. */
+pre.prettyprint { padding: 2px; border: 1px solid #888 }
+
+ol.linenums li {
+  line-height: 1.1;
 }
 
 .note {
