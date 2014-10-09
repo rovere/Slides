@@ -196,6 +196,7 @@ das_client.py \
 sequence.
 
 * A file was already prepared for you: let’s take a look at it:
+
 <pre>
 emacs TTD/DemoTrackAnalyzer/test/recoTrk_cfg.py &
 </pre>
@@ -559,29 +560,29 @@ miss some relevant information:
 
 * For the pixel hits part, you should add the following code to the C++
 
-<pre data-lang="C++">
-  // Retrieve tracker topology from geometry
-  ESHandle<TrackerTopology> tTopoHandle;
-  iSetup.get<IdealGeometryRecord>().get(tTopoHandle);
-  const TrackerTopology* const tTopo = tTopoHandle.product();
-  ...
-  // Access to hit information: loop over all pixel hits
-  // auto --> edmNew::DetSetVector<SiPixelRecHit>
-  for (auto const& pixel_rechit_per_detid : *pixelHits) {
-    DetId hitId = pixel_rechit_per_detid.detId();
-    for (auto const& a_pixel_rechit : pixel_rechit_per_detid) {
-      if (a_pixel_rechit.isValid()) {
-        if (hitId.subdetId() ==
-            static_cast<int>(PixelSubdetector::PixelBarrel)) {
-          h_hit_pixelbarrel_map_->Fill(a_pixel_rechit.globalPosition().x(),
-                                       a_pixel_rechit.globalPosition().y());
-          h_hit_pixel_layers_->Fill(tTopo->pxbLayer(hitId));
-        } else {
-          h_hit_pixel_layers_->Fill(3 + tTopo->pxfDisk(hitId));
-        }
+<pre data-lang="C++" class="linenums">
+// Retrieve tracker topology from geometry
+ESHandle&lt;TrackerTopology&gt; tTopoHandle;
+iSetup.get&lt;IdealGeometryRecord&gt;().get(tTopoHandle);
+const TrackerTopology* const tTopo = tTopoHandle.product();
+...
+// Access to hit information: loop over all pixel hits
+// auto --&gt; edmNew::DetSetVector&lt;SiPixelRecHit&gt;
+for (auto const& pixel_rechit_per_detid : *pixelHits) {
+  DetId hitId = pixel_rechit_per_detid.detId();
+  for (auto const& a_pixel_rechit : pixel_rechit_per_detid) {
+    if (a_pixel_rechit.isValid()) {
+      if (hitId.subdetId() ==
+          static_cast&lt;int&gt;(PixelSubdetector::PixelBarrel)) {
+        h_hit_pixelbarrel_map_-&gt;Fill(a_pixel_rechit.globalPosition().x(),
+                                     a_pixel_rechit.globalPosition().y());
+        h_hit_pixel_layers_-&gt;Fill(tTopo-&gt;pxbLayer(hitId));
+      } else {
+        h_hit_pixel_layers_-&gt;Fill(3 + tTopo-&gt;pxfDisk(hitId));
       }
     }
   }
+}
 </pre>
 
 * Do you understand the structure of this code?
@@ -638,12 +639,13 @@ blue">trajectory</font>.
 * Please declare and book the corresponding histograms.
 
 * Include the headers:
+
 <pre data-lang="C++">
-   #include "DataFormats/TrajectorySeed/interface/TrajectorySeed.h"
-   #include "DataFormats/TrajectorySeed/interface/TrajectorySeedCollection.h"
-   #include "TrackingTools/TrajectoryState/interface/TrajectoryStateTransform.h"
-   #include "MagneticField/Engine/interface/MagneticField.h"
-   #include "MagneticField/Records/interface/IdealMagneticFieldRecord.h"
+#include "DataFormats/TrajectorySeed/interface/TrajectorySeed.h"
+#include "DataFormats/TrajectorySeed/interface/TrajectorySeedCollection.h"
+#include "TrackingTools/TrajectoryState/interface/TrajectoryStateTransform.h"
+#include "MagneticField/Engine/interface/MagneticField.h"
+#include "MagneticField/Records/interface/IdealMagneticFieldRecord.h"
 </pre>
 
 * You need to declare a variable for the `MagneticField` and get it
@@ -656,7 +658,7 @@ blue">trajectory</font>.
 * Inside the track loop, get the track seed, convert the persistent
   state to a `TSOS` and fill the histogram with the seed $p_T$:
 
-<pre data-lang="C++">
+<pre data-lang="C++" class="linenums">
 auto tkseed = itTrack.seedRef();
 // To pick-up the last hit on the seed you can either use
 // seed->recHits().first + (num_rechits_in_seed - 1) or use
@@ -675,8 +677,8 @@ h_seed_pt_->Fill(state.globalMomentum().perp());
 * Keep in mind that you also need to modify the BuildFile:
 
 <pre data-lang="Buildfile">
-   &lt;use name="MagneticField/Engine"/&gt;
-   &lt;use name="TrackingTools/TrajectoryState"/&gt;
+&lt;use name="MagneticField/Engine"/&gt;
+&lt;use name="TrackingTools/TrajectoryState"/&gt;
 </pre>
 
 * Remember that the seed collection is not stored in RECO, so you need to
@@ -698,8 +700,8 @@ h_seed_pt_->Fill(state.globalMomentum().perp());
 * Include the proper headers
 
 <pre data-lang="C++">
-  #include "TrackingTools/PatternTools/interface/Trajectory.h"
-  #include "TrackingTools/PatternTools/interface/TrajTrackAssociation.h"
+#include "TrackingTools/PatternTools/interface/Trajectory.h"
+#include "TrackingTools/PatternTools/interface/TrajTrackAssociation.h"
 </pre>
 
 * Before the track loop, get the association map and initialize an
@@ -722,7 +724,7 @@ tji = trajTrackAssociation-&gt;begin();
   `TrajectoryMeasurements` and, if we are in TOB, fill the pull
   histogram:
 
-<pre data-lang="C++">
+<pre data-lang="C++" class="linenums">
 // Access to Trajectory: pull distribution for TOB
 Ref&lt;std::vector&lt;Trajectory&gt; &gt; traj = tji-&gt;key;
 for (auto const& measurement : traj-&gt;measurements()) {
