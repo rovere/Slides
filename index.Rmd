@@ -310,7 +310,7 @@ Events->Draw("recoTracks_generalTracks__RERECO.obj.algorithm_")
 </pre>
 
 ---
-## Run Custom Reco Sequence [python]
+## Run Custom Reco Sequence <font class="bold yellow">[python]</font>
 
 <font class="bold red">Pythonic alternative method to perform the same actions</font>
 
@@ -347,7 +347,7 @@ cms.EDProducer("SeedingLayersEDProducer",
 </pre>
 
 ---
-## Run Custom Reco Sequence [python]
+## Run Custom Reco Sequence <font class="bold yellow">[python]</font>
 
 <font class="bold red">Pythonic alternative method to perform the same actions</font>
 
@@ -465,15 +465,21 @@ root -l trackAnalysis.root
 ---
 ## Step 1: track variables&hit patter
 
-* As a first step we want to add the plot for the <font class="bold red">track pT</font>, the <font class="bold red">number of crossed
+
+### Goal
+
+As a first step we want to add the plot for the <font class="bold
+red">track pT</font>, the <font class="bold red">number of crossed
 layers</font> and the <font class="red bold">number of outer layers
 with no hits</font>.
 
-* The skeleton already contains the declaration of the output file, of
-a histogram and a loop over tracks where the histogram is filled.
+### Procedure
 
-* You can surely add the plot of the track pT. Any idea how to get the information about
-layers with/without hits?
+* The skeleton already contains the declaration of the output file, of
+  a histogram and a loop over tracks where the histogram is filled.
+
+* You can surely add the plot of the track pT. Any idea how to get the
+  information about layers with/without hits?
 
 * The config file needs to be slightly modified.
 
@@ -483,19 +489,27 @@ layers with/without hits?
     * Also, `trackAnalysis.root` looks more appropriate than
       `histo.root`.
 
-<font class="bold green">Fully functional code can be found at</font>:<br/>
-`TTD/DemoTrackAnalyzer/plugins/DemoTrackAnalyzer.cc`
-
 * Another option for the input collection is a <font class="bold red">custom selection</font>.
 
     * A very useful tool is the string-based `TrackSelector`, for
       example:
+
+---
+## Step 1: track variables&hit patter
 
 <pre data-lang="python">
 process.selectedTracks = cms.EDFilter('TrackSelector',
                                       src = cms.InputTag('generalTracks'),
                                       cut = cms.string("quality('highPurity') & (algo=4) & abs(eta)&lt;0.9")
 )
+</pre>
+
+### Worked-out example
+
+<pre data-lang="git">
+cd $LOCALRT/src/TTD
+git branch --track TTD2_step1 remotes/origin/TTD2_step1
+git checkout TTD2_step1
 </pre>
 
 * <font class="bold red">Let’s do something more advanced in the next
@@ -555,6 +569,14 @@ miss some relevant information:
   we will use `TrackerTopology`'s methods queried using the `DetId`
   associated to each hit.
 
+<pre data-lang="c++">
+#include "DataFormats/TrackerCommon/interface/TrackerTopology.h"
+</pre>
+
+<pre data-lang="Buildfile">
+&lt;use name="DataFormats/TrackerCommon"/&gt;
+</pre>
+
 ---
 ## Step 2: Access to hit information - 3
 
@@ -588,6 +610,17 @@ for (auto const& pixel_rechit_per_detid : *pixelHits) {
 * Do you understand the structure of this code?
 
 * Could you do something similar for strips?
+
+---
+## Step 2: Access to hit information - 3
+
+### Worked-out example
+
+<pre data-lang="git">
+cd $LOCALRT/src/TTD
+git branch --track TTD2_steps remotes/origin/TTD2_step2
+git checkout TTD2_step2
+</pre>
 
 ---
 ## Step 3: Seeds and Trajectories - 1
@@ -744,6 +777,14 @@ for (auto const& measurement : traj-&gt;measurements()) {
 * Run it on 5k single muon events and 50 ttbar events: do you
   understand the results?
 
+### Worked-out example
+
+<pre data-lang="git">
+cd $LOCALRT/src/TTD
+git branch --track TTD2_step3 remotes/origin/TTD2_step3
+git checkout TTD2_step3
+</pre>
+
 
 ---
 ## Step 4: Seeding eff. w.r.t Tracking - 1
@@ -787,6 +828,14 @@ for (auto const& measurement : traj-&gt;measurements()) {
   you created in the previous points and draw their ratio?
 
 * Did you expect the result you obtained?
+
+### Worked-out example
+
+<pre data-lang="git">
+cd $LOCALRT/src/TTD
+git branch --track TTD2_step4 remotes/origin/TTD2_step4
+git checkout TTD2_step4
+</pre>
 
 
 --- .segue .nobackground .dark
