@@ -901,7 +901,7 @@ cmsRun MTV_HARVESTING.py
   `Validation/RecoTrack/python/TrackingParticleSelectionsForEfficiency_cff.py`
 
 * You can modify the `TrackingParticle` selection to test effciencies
-  in a different phase space. 
+  in a different phase space.
 
 * For example, in order to use the same selection for all plots you
   can do:
@@ -947,7 +947,7 @@ process.multiTrackValidator.histoProducerAlgoBlock.TpSelectorForEfficiencyVsVTXZ
 * Enable the following categories for the message logger:
 
     * `TkStripMeasurementDet`,
-    * `TkPixelMeasurementDet`, 
+    * `TkPixelMeasurementDet`,
     * `CkfPattern`,
     * `CkfTrackCandidateMakerBase`
 
@@ -965,6 +965,80 @@ process.multiTrackValidator.histoProducerAlgoBlock.TpSelectorForEfficiencyVsVTXZ
 
 
 In this way, from a single seed you can follow the evolution of the combinatorial pattern recognition.
+
+
+---.segue .nobackground .dark
+
+## Useful Tools
+
+---
+## RunTheMatrix
+
+* Sometimes you need to test few changes in a <font class="bold
+  yellow">quick and effective</font> way, w/o the need of paying to
+  much attention to building the proper reconstruction sequence, to
+  include the proper globalTag, add all mandatory services, etc...
+
+* In these, and probably many other cases, the utility
+  `runTheMatrix.py` comes at rescue.
+
+* Its purpose is to create a fully working/tested/reliable
+  configuration file that will run the steps you request it to run,
+  taking care of all the error-prone manual handling that is usually
+  painful&boring.
+
+* It is directly available to you after you source the CMSSW environments.
+
+* This is not meant to be a full review of its many capabilities and
+  we will focus only on a the ones that could be of interest to us.
+
+### Get some help!
+
+<pre data-lang="shell">
+runTheMatrix.py --help | less
+</pre>
+
+### What pre-assembled workflows are there??
+
+<pre data-lang="shell">
+runTheMatrix.py -n -e | less
+</pre>
+
+---
+## RunTheMatrix
+
+Tipical output:
+
+<pre data-lang="">
+25.0   TTbar+DIGI+RECO+HARVEST+ALCATT      [1]: cmsDriver.py TTbar_Tauola_8TeV_cfi  --conditions auto:run1_mc -s GEN,SIM \
+                                                --datatier GEN-SIM -n 10 --relval 9000,100 --eventcontent RAWSIM
+                                           [2]: cmsDriver.py step2  --datatier GEN-SIM-DIGI-RAW-HLTDEBUG --conditions \
+                                                auto:run1_mc -s DIGI:pdigi_valid,L1,DIGI2RAW,HLT:@relval,RAW2DIGI,L1Reco \
+                                                --eventcontent FEVTDEBUGHLT -n 100
+                                           [3]: cmsDriver.py step3  --datatier GEN-SIM-RECO,DQMIO --conditions auto:run1_mc \
+                                                -s RAW2DIGI,L1Reco,RECO,EI,VALIDATION,DQM --eventcontent RECOSIM,DQM -n 100
+                                           [4]: cmsDriver.py step4  --scenario pp --filetype DQM --conditions auto:run1_mc \
+                                                --mc -s HARVESTING:validationHarvesting+dqmHarvesting -n 100
+                                           [5]: cmsDriver.py step5  --conditions auto:run1_mc --filein file:step3.root \
+                                                -s ALCA:TkAlMuonIsolated+TkAlMinBias+EcalCalElectron+HcalCalIsoTrk+MuAlOverlaps \
+                                                --datatier ALCARECO -n 1000 --eventcontent ALCARECO
+</pre>
+
+### Wait! Let me take a look first!
+
+A handy option to give to `runTheMatrix.py` is `--no_exec` which will
+tell it to stop soon after having produced the configuration file for
+the specific worklfow you asked for, so that you can have time to go,
+study and hack it at will before actually running it.
+
+### Recycle
+
+Sometimes you do not need to re-run the `GEN-SIM` step and the `-i
+all` option will tell `runTheMatrix.py` to recycle the `GEN-SIM` step
+for all the workflows that you asked it to run. This is a real
+time-saver option.
+
+
 
 --- &thankyou
 ## Thank you!
