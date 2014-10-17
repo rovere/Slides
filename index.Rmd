@@ -35,7 +35,7 @@ We hope that, by today, you will become proficient in
 ---
 ## Setup a development area
 
-We will be working with `CMSSW_7_2_0` release, using some ad-hoc
+We will be working with `CMSSW_7_2_0_pre8` release, using some ad-hoc
 package that we have prepared for this training.
 
 * Setup a development aread
@@ -45,8 +45,8 @@ package that we have prepared for this training.
 cd scratch0
 mkdir TrackingTutorial
 cd TrackingTutorial
-<b>cmsrel CMSSW_7_2_0
-cd CMSSW_7_2_0/src
+<b>cmsrel CMSSW_7_2_0_pre8
+cd CMSSW_7_2_0_pre8/src
 cmsenv</b>
 </pre>
 
@@ -81,7 +81,7 @@ git submodule add git@github.com:/rovere/TTD TTD
 
  <pre data-lang="shell/git">
  cd src/TTD
- <b>git checkout step1</b>
+ <b>git checkout -b step1 remotes/origin/TTD2_step1</b>
  </pre>
 
 
@@ -135,13 +135,13 @@ every (pre-) release and thus are always up to date.
 * Let’s start from a <font class="bold red">SingleMu</font> sample. We want it to be at CERN for a quick access:
 
 <pre>
-das_client.py --query='dataset dataset=/RelValSingleMu*/*CMSSW_7_2_0*/GEN-SIM-RECO' --format=plain --limit=0
+das_client.py --query='dataset dataset=/RelValSingleMu*/*CMSSW_7_2_0_pre8*/GEN-SIM-RECO' --format=plain --limit=0
 </pre>
 
 * Now, let’s choose Pt100 and find the files:
 
 <pre>
-das_client.py --query='file dataset=/RelValSingleMuPt100_UP15/CMSSW_7_2_0_pre3-POSTLS172_V3-v1/GEN-SIM-RECO' \
+das_client.py --query='file dataset=/RelValSingleMuPt100_UP15/CMSSW_7_2_0_pre8-PRE_LS172_V15-v1/GEN-SIM-RECO' \
 --format=plain \
 --limit=0
 </pre>
@@ -149,7 +149,7 @@ das_client.py --query='file dataset=/RelValSingleMuPt100_UP15/CMSSW_7_2_0_pre3-P
 * Another useful sample is <font class="bold red">TTbar</font>:
 
 <pre>
-das_client.py --query='dataset dataset=/RelValTTbar*/*CMSSW_7_2_0*/GEN-SIM-RECO' \
+das_client.py --query='dataset dataset=/RelValTTbar*/*CMSSW_7_2_0_pre8*/GEN-SIM-RECO' \
 --format=plain \
 --limit=0
 </pre>
@@ -160,7 +160,7 @@ das_client.py --query='dataset dataset=/RelValTTbar*/*CMSSW_7_2_0*/GEN-SIM-RECO'
 * Let’s pick the 13TeV inclusive sample with PU:
 
 <pre>
-das_client.py --query='file dataset=/RelValTTbar_13/CMSSW_7_2_0_pre5-PU25ns_POSTLS172_V3-v1/GEN-SIM-RECO' \
+das_client.py --query='file dataset=/RelValTTbar_13/CMSSW_7_2_0_pre8-PU25ns_PRE_LS172_V15-v1/GEN-SIM-RECO' \
 --format=plain \
 --limit=0
 </pre>
@@ -171,7 +171,7 @@ das_client.py --query='file dataset=/RelValTTbar_13/CMSSW_7_2_0_pre5-PU25ns_POST
 
 <pre>
 das_client.py \
---query='file dataset=/RelValSingleMuPt100_UP15/CMSSW_7_2_0_pre3-POSTLS172_V3-v1/GEN-SIM-DIGI-RAW-HLTDEBUG' \
+--query='file dataset=/RelValSingleMuPt100_UP15/CMSSW_7_2_0_pre8-PRE_LS172_V15-v1/GEN-SIM-DIGI-RAW-HLTDEBUG' \
 --format=plain \
 --limit=0
 </pre>
@@ -180,7 +180,7 @@ das_client.py \
 
 <pre>
 das_client.py \
---query='file dataset=/RelValTTbar_13/CMSSW_7_2_0_pre5-PU25ns_POSTLS172_V3-v1/GEN-SIM-RAW-HLTDEBUG' \
+--query='file dataset=/RelValTTbar_13/CMSSW_7_2_0_pre8-PU25ns_PRE_LS172_V15-v1/GEN-SIM-DIGI-RAW-HLTDEBUG' \
 --format=plain \
 --limit=0
 </pre>
@@ -401,7 +401,7 @@ emacs TTD/DemoTrackAnalyzer/test/refitTrk_cfg.py &
 * Now we can run it and compare original and refitted tracks:
 
 <pre data-lang="ROOT">
-root -l -n refit_trk_analytical.root
+root -l -n refit_trk.root
 TCanvas c1
 Events->Draw("sqrt(recoTracks_TrackRefitter__Refitting.obj.momentum_.perp2())")
 TCanvas c2
@@ -463,7 +463,7 @@ root -l trackAnalysis.root
 <font class="red bold">But before, let’s edit it step by step</font>.
 
 ---
-## Step 1: track variables&hit patter
+## Step 1: track variables&hit pattern
 
 
 ### Goal
@@ -495,7 +495,7 @@ with no hits</font>.
       example:
 
 ---
-## Step 1: track variables&hit patter
+## Step 1: track variables&hit pattern
 
 <pre data-lang="python">
 process.selectedTracks = cms.EDFilter('TrackSelector',
@@ -610,6 +610,9 @@ for (auto const& pixel_rechit_per_detid : *pixelHits) {
 * Do you understand the structure of this code?
 
 * Could you do something similar for strips?
+
+* Keep in mind that you will likely need to add a bunch of include
+  files and a few libraries in the BuildFile: can you sort this out?
 
 ---
 ## Step 2: Access to hit information - 3
@@ -1026,7 +1029,7 @@ Tipical output:
 
 ### Wait! Let me take a look first!
 
-A handy option to give to `runTheMatrix.py` is `--no_exec` which will
+A handy option to give to `cmsDriver.py` is `--no_exec` which will
 tell it to stop soon after having produced the configuration file for
 the specific worklfow you asked for, so that you can have time to go,
 study and hack it at will before actually running it.
