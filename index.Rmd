@@ -80,15 +80,15 @@ git submodule add git@github.com:/rovere/TTD TTD
       remember to checkout the proper branch
 
  <pre data-lang="shell/git">
- cd src/TTD
+ cd TTD
  <b>git checkout -b step1 remotes/origin/TTD2_step1</b>
  </pre>
 
 
-* <font class="bold red">The code contained in the TTD package that you
-  just downloaded it fully functional and contains the final version
-  of the exercises that you will be asked to develop and run: be kind
-  to yourself and do not start from them and, in case, use the code
+* <font class="bold red">The code contained in the TTD package that
+  you just downloaded is fully functional and contains the final
+  version of the exercises that you will be asked to develop and run:
+  be kind to yourself and do not start from them and use the code
   there only in case of troubles or as a reference.</font>
 
 --- .segue .nobackground .dark
@@ -105,7 +105,7 @@ git submodule add git@github.com:/rovere/TTD TTD
     * <font class="bold red">TrackingTools</font>
         * common utilities shared with muon tracking
 * The recommended access point to browse code is `CMSSW LXR` main page at [https://cmssdt.cern.ch/SDT/lxr/](https://cmssdt.cern.ch/SDT/lxr/)
-    * it is much more that a code browser and allows you to, e.g.:
+    * it is much more than a code browser and allows you to, e.g.:
         * search specific identifiers (class, variable, functions, ...)
         * follow code by clicking directly into the code
         * free text search with (limited) regexp capabilities
@@ -123,7 +123,7 @@ git submodule add git@github.com:/rovere/TTD TTD
 
 * We will use the official CMS sample-discovery tool, DAS, via its CLI, `das_client.py`
 
-* The best samples for developing and testing Tracking are RelVal.
+* The best samples for developing and testing Tracking are RelVals.
 
 * Typical developments do not need huge datasets: RelVals are made for
 every (pre-) release and thus are always up to date.
@@ -198,7 +198,7 @@ sequence.
 * A file was already prepared for you: let’s take a look at it:
 
 <pre>
-emacs TTD/DemoTrackAnalyzer/test/recoTrk_cfg.py &
+emacs DemoTrackAnalyzer/test/recoTrk_cfg.py &
 </pre>
 
 * The main ingredients are:
@@ -226,13 +226,14 @@ process.load("RecoPixelVertexing.PixelLowPtUtilities.siPixelClusterShapeCache_cf
 * Now let’s run it:
 
 <pre>
+cd DemoTrackAnalyzer/test
 cmsRun recoTrk_cfg.py
 </pre>
 
 * Open the output file and look for the tracks we have made.
 
 <pre data-lang="ROOT">
-root -l reco_trk.root
+root -l -n reco_trk.root
 TBrowser b
 Events->Draw("recoTracks_generalTracks__RERECO.@obj.size()")
 Events->Draw("recoTracks_generalTracks__RERECO.obj.chi2_")
@@ -392,7 +393,7 @@ a configuration file for refitting track was prepared.
 * open the cfg
 
 <pre>
-emacs TTD/DemoTrackAnalyzer/test/refitTrk_cfg.py &
+emacs DemoTrackAnalyzer/test/refitTrk_cfg.py &
 </pre>
 
 * Where is the TrackRefitter module defined? Can you browse the code
@@ -438,6 +439,7 @@ Now, let’s open again the file and check how big was the effect.
 skeleton of an `EDAnalyzer` accessing tracks and making plots.
 
 <pre>
+cd $LOCALRT/src
 mkdir TrackingTests
 cd TrackingTests/
 mkedanlzr DemoTrackAnalyzer example_track example_histo
@@ -457,7 +459,7 @@ commands:
 <pre>
 scramv1 b -j 8
 cmsRun demoTrackAnalyzer_cfg.py
-root -l trackAnalysis.root
+root -l -n trackAnalysis.root
 </pre>
 
 <font class="red bold">But before, let’s edit it step by step</font>.
@@ -488,6 +490,12 @@ with no hits</font>.
 
     * Also, `trackAnalysis.root` looks more appropriate than
       `histo.root`.
+
+    * Also use proper input files.
+
+    * Also, for every object/class you use, check that the appropriate
+      include file has been included and that the corresponding
+      library/plugin has been added to the `BuildFile.xml`
 
 * Another option for the input collection is a <font class="bold red">custom selection</font>.
 
@@ -536,9 +544,10 @@ miss some relevant information:
     * they do not contain information about the tracker geometry that
       is needed to translate local into global position;
 
-* We already know how to run the Refitter, so we can add it to cfg
-  file and use tracks from the refitter as input (keep in mind that to
-  do this you need also the globalTag and the standard includes).
+* <font class="bold yellow">We already know how to run the Refitter,
+  so we can add it to cfg file and use tracks from the refitter as
+  input (keep in mind that to do this you need also the globalTag and
+  the standard includes)</font>
 
 ---
 ## Step 2: Access to hit information - 2
@@ -617,6 +626,14 @@ for (auto const& pixel_rechit_per_detid : *pixelHits) {
 ---
 ## Step 2: Access to hit information - 3
 
+* <font class="bold yellow">Hint</font>: add to the `BuildFile.xml`
+
+<pre data-lang="BuildFile">
+&lt;use name="Geometry/Records"/&gt;
+&lt;use name="Geometry/TrackerGeometryBuilder"/&gt;
+</pre>
+
+
 ### Worked-out example
 
 <pre data-lang="git">
@@ -679,6 +696,7 @@ blue">trajectory</font>.
 <pre data-lang="C++">
 #include "DataFormats/TrajectorySeed/interface/TrajectorySeed.h"
 #include "DataFormats/TrajectorySeed/interface/TrajectorySeedCollection.h"
+#include "TrackingTools/TrajectoryState/interface/TrajectoryStateOnSurface.h"
 #include "TrackingTools/TrajectoryState/interface/TrajectoryStateTransform.h"
 #include "MagneticField/Engine/interface/MagneticField.h"
 #include "MagneticField/Records/interface/IdealMagneticFieldRecord.h"
@@ -713,7 +731,7 @@ h_seed_pt_->Fill(state.globalMomentum().perp());
 * Keep in mind that you also need to modify the BuildFile:
 
 <pre data-lang="Buildfile">
-&lt;use name="MagneticField/Engine"/&gt;
+&lt;use name="MagneticField/Records"/&gt;
 &lt;use name="TrackingTools/TrajectoryState"/&gt;
 </pre>
 
