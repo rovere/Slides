@@ -1,6 +1,6 @@
 ---
 title       : News
-subtitle    : Tracking POG Meeting, 2014-11-03
+subtitle    : Tracking POG Meeting, 2014-11-17
 author      : G.Cerati, V.Innocente, M.Rovere
 job         : CERN
 framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
@@ -14,53 +14,61 @@ mode        : selfcontained # {standalone,draft}
 
 ## Releases
 
-### CMSSW_7_3_0_pre1 is out( [Changes since CMSSW_7_2_0_pre8](https://github.com/cms-sw/cmssw/compare/CMSSW_7_2_0_pre8...CMSSW_7_3_0_pre1))
+* The Release schedule for the <font class="bold red">73X</font> and
+  <font class="bold blue">74X</font> cycles has been changed, as
+  announced by O&C management over hypernews ([link to the
+  message](https://hypernews.cern.ch/HyperNews/CMS/get/swDevelopment/3107.html))
 
-1. [5688](http://github.com/cms-sw/cmssw/pull/5688)  from @VinInn: Speedup Hit-in-Track, HitPattern and MultiTrackSelector `alca`  `analysis`  `core`  `dqm`  `fastsim`  `reconstruction`  `simulation`  `visualization` 
+* You can find the current schedule for the <font class="bold
+  blue">74X</font> cycle at the usual [TWiki
+  page](https://twiki.cern.ch/twiki/bin/view/CMS/CMSSW_7_4_0)
 
-1. [5591](http://github.com/cms-sw/cmssw/pull/5591)  from @franzoni: switch pileup to 35 for relvals `operations` 
+### The summary for planned deadlines for 73X is:
 
-1. [5476](http://github.com/cms-sw/cmssw/pull/5476)  from @VinInn: Replaced pixelVertices by firstStepPrimaryVertices made from iter0 tracks `dqm`  `fastsim`  `operations`  `reconstruction` 
-
-1. [5583](http://github.com/cms-sw/cmssw/pull/5583)  from @gpetruc: Strip cluster shape filter with subcluster info `reconstruction` 
-
-1. [5490](http://github.com/cms-sw/cmssw/pull/5490)  from @VinInn: Avoid Nans in primary vertex `reconstruction` 
-
-1. [5464](http://github.com/cms-sw/cmssw/pull/5464)  from @franzoni: Beamspot nominal collision2015: set new default `operations`  `simulation` 
-
-1. [5431](http://github.com/cms-sw/cmssw/pull/5431)  from @VinInn: Traj float `fastsim`  `reconstruction` 
-
-1. [5382](http://github.com/cms-sw/cmssw/pull/5382)  from @mtosi: DQM: fix tracking summary map `dqm` 
-
+* CMSSW_7_3_0_pre1: 13 October 2014
+* CMSSW_7_3_0_pre2: 27 October 2014 (Last open for substantial local reco/digitization features)
+* CMSSW_7_3_0_pre3: 18 November 2014 (<font class="bold red">LAST OPEN RELEASE</font>)
+* CMSSW_7_3_0: 8 December 2014
 
 ---
+## Releases
 
-## Tracking Training Day II - The Revenge
+### The summary for planned deadlines for 74X is:
 
-* The second edition of the Tracking Training Day has happened on
-  Monday 20th of October.
+* CMSSW_7_4_0_pre1: 25 November 2014
+* CMSSW_7_4_0_pre2: 9 December 2014 (<font class="bold red">Last open for substantial tracking changes</font>)
+* CMSSW_7_4_0_pre3: 6 January 2015
+* CMSSW_7_4_0_pre4: 26 January 2015
+* CMSSW_7_4_0_pre5: 3 February 2015 (Last open prerelease)
+* CMSSW_7_4_0_pre6: 17 February 2015 (bug fix release as needed)
+* CMSSW_7_4_0: 11 March 2014
 
-* The attendance was good and the (private) feedback that we received
-  so far was good.
+---
+## Releases
 
-* The quality of the theoretical session was indeed outstanding.
+### CMSSW_7_3_0_pre2_DEVEL
+#### [Changes since CMSSW_7_3_0_pre1](https://github.com/cms-sw/cmssw/compare/CMSSW_7_3_0_pre1...CMSSW_7_3_0_pre2)
 
-    * Special thanks to <font class="bold red">Boris Mangano</font>
-      and <font class="bold red">Giacomo Sguazzoni</font> for their
-      availability.
+1. [6285](http://github.com/cms-sw/cmssw/pull/6285)  from @bartokm: Pixel Dynamic Inefficiency factors for RUN2 `simulation` 
 
-* We are thinking to review a bit the hand-on session to make it a
-  little more interactive and useful:
+1. [5951](http://github.com/cms-sw/cmssw/pull/5951)  from @fojensen: V0branch - modifications to V0Fitter (V0Producer) for PU `reconstruction` 
 
-    * suggestions on this specific topic are very welcome.
+1. [6252](http://github.com/cms-sw/cmssw/pull/6252)  from @StoyanStoynev: Update types of event/run/lumi in Tracking/Vertexing `reconstruction` 
 
+1. [6029](http://github.com/cms-sw/cmssw/pull/6029)  from @mtosi: fix new CCC parameter naming introduced in 5853 `reconstruction` 
+
+1. [5853](http://github.com/cms-sw/cmssw/pull/5853)  from @VinInn: Cluster Charge Cut rework `reconstruction` 
+
+1. [5807](http://github.com/cms-sw/cmssw/pull/5807)  from @JuantAldea: Tracking iteration names changed to match iteration Python labels `alca`  `analysis`  `dqm`  `fastsim`  `reconstruction` 
+
+1. [5743](http://github.com/cms-sw/cmssw/pull/5743)  from @VinInn: Prepare for cluster splitting step0 `alca`  `daq`  `dqm`  `reconstruction` 
 
 --- .image
 
 ## Today's Agenda
 
 <article class="flexbox vcenter center">
-<img src="images/20141103_TrackingPOGAgenda.png" alt="Agenda" title="Agenda" width="90%">
+<img src="images/20141117_TrackingPOGAgenda.png" alt="Agenda" title="Agenda" width="90%">
 </article>
 
 
