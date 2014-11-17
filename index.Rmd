@@ -18,17 +18,17 @@ mode        : selfcontained # {standalone,draft}
   <font class="bold blue">74X</font> cycles has been changed, as
   announced by O&C management over hypernews ([link to the
   message](https://hypernews.cern.ch/HyperNews/CMS/get/swDevelopment/3107.html))
-
-* You can find the current schedule for the <font class="bold
-  blue">74X</font> cycle at the usual [TWiki
-  page](https://twiki.cern.ch/twiki/bin/view/CMS/CMSSW_7_4_0)
+  [TWiki page with new schedule](https://twiki.cern.ch/twiki/bin/view/CMS/CMSSW_7_4_0)
 
 ### The summary for planned deadlines for 73X is:
 
-* CMSSW_7_3_0_pre1: 13 October 2014
-* CMSSW_7_3_0_pre2: 27 October 2014 (Last open for substantial local reco/digitization features)
+* $\ldots$
 * CMSSW_7_3_0_pre3: 18 November 2014 (<font class="bold red">LAST OPEN RELEASE</font>)
 * CMSSW_7_3_0: 8 December 2014
+
+<article class="flexbox vcenter center">
+<img src="images/73XReleaseMilestones.png" alt="Agenda" title="Agenda" width="90%">
+</article>
 
 ---
 ## Releases
@@ -42,6 +42,13 @@ mode        : selfcontained # {standalone,draft}
 * CMSSW_7_4_0_pre5: 3 February 2015 (Last open prerelease)
 * CMSSW_7_4_0_pre6: 17 February 2015 (bug fix release as needed)
 * CMSSW_7_4_0: 11 March 2014
+
+--- .image
+## 74X Milestones - From PC -
+
+<article class="flexbox vcenter center">
+<img src="images/74XReleaseMilestones.png" alt="Agenda" title="Agenda" width="90%">
+</article>
 
 ---
 ## Releases
