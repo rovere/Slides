@@ -69,7 +69,7 @@ in the coming days.
 https://github.com/cms-sw/cmssw/compare/CMSSW_7_4_0_pre3...CMSSW_7_4_0_pre5
 No major tracking-related development entered into pre5 w.r.t pre3
 
---- &singleimage w1:90% image:images/20150112_TrackingPOGAgenda.png
+--- &singleimage w1:90% image:images/20150126_TrackingPOGAgenda.png
 
 ## Today's Agenda
 
