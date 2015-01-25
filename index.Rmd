@@ -1,6 +1,6 @@
 ---
 title       : News
-subtitle    : Tracking POG Meeting, 2015-01-12
+subtitle    : Tracking POG Meeting, 2015-01-26
 author      : V.Innocente, M.Rovere
 job         : CERN
 framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
@@ -9,10 +9,6 @@ hitheme     : twitter-bootstrap # sunburst      #
 widgets     : [mathjax]            # {mathjax, quiz, bootstrap}
 mode        : selfcontained # {standalone,draft}
 
---- &singleimage w1:90% image:images/happy-new-year-banner.jpg
-## 2015
-
-
 --- .segue .dark .nobackground
 
 ## General Announcements
@@ -20,35 +16,38 @@ mode        : selfcontained # {standalone,draft}
 ---
 ## Announcements
 
+### Man-power situation became even more critical
+
+* HLT Tracking Validation is currently uncovered since Valentina Gori
+  left
+* Offline Beamspot is currently partially covered
+    * Kevin Burkett expressed his desire to step down in this
+      activity:
+    * <font class="bold red">Since this a a Tracking POG/Physics related activity, we have
+      passed the information also to Physics Coordination to try and
+      find a replacement soon.</font>
+
+
 ### The call for the 2016/18 Tracking POG has been officially made:
 
 1. Jan 5: call has been made
-1. Feb 2: close nominations, send mail to all candidates
-1. Feb 9 – deadline for candidates to give availability
-1. Feb 12 – show list of nominations to SC
-1. Mar 12 – propose selection of L2s to SC
-1. Apr 20 – proposed list of nominations to MB
-
-### EPR 2015
-1. We will try to review and finalize the EPR for 2015, together with an updated list of open tasks, in the coming days/weeks.
-1. The result will be available in a page similar to the one used last year [2014](https://twiki.cern.ch/twiki/bin/viewauth/CMS/TrackingPOGTasks2014).
+1. <font class="bold red">Feb 2: close nominations, send mail to all candidates</font>
+1. Feb 9: deadline for candidates to give availability
+1. Feb 12: show list of nominations to SC
+1. Mar 12: propose selection of L2s to SC
+1. Apr 20: proposed list of nominations to MB
 
 ---
-## Releases
 
-### 7_3 Series has ended with _pre3, released late last year:
+## Announcements
 
-### CMSSW_7_3_0_pre3
-#### Changes since CMSSW_7_3_0_pre2:
-https://github.com/cms-sw/cmssw/compare/CMSSW_7_3_0_pre2...CMSSW_7_3_0_pre3
 
-1. [6528](http://github.com/cms-sw/cmssw/pull/6528)  from @VinInn: replace divisions by multiplications in TkRadialStripTopology `geometry`
-
-1. [6166](http://github.com/cms-sw/cmssw/pull/6166)  from @arizzi: Jet Core pixel cluster splitter `reconstruction`
-
-1. [6349](http://github.com/cms-sw/cmssw/pull/6349)  from @wmtford: Flag merged clusters for relaxed CPE errors `reconstruction`
-
-1. [6331](http://github.com/cms-sw/cmssw/pull/6331)  from @mtosi: fix track algoName for HLT tracking `dqm`  `reconstruction`
+### EPR 2015
+1. A very preliminary version of EPR for 2015 is available at the
+following link:
+[2015](https://twiki.cern.ch/twiki/bin/viewauth/CMS/TrackingPOGTasks2015).
+1. Keep in mind it is still preliminary and few changes will be made
+in the coming days.
 
 
 ---
@@ -65,43 +64,10 @@ https://github.com/cms-sw/cmssw/compare/CMSSW_7_3_0_pre2...CMSSW_7_3_0_pre3
 * CMSSW_7_4_0: 11 March 2014
 
 
----
-## Releases
-
-# CMSSW_7_4_0_pre1
-#### Changes since CMSSW_7_3_0_pre3:
-https://github.com/cms-sw/cmssw/compare/CMSSW_7_3_0_pre3...CMSSW_7_4_0_pre1
-
-1. [6670](http://github.com/cms-sw/cmssw/pull/6670)  from @mtosi: migration from EDFilter to stream::EDFilter (JetVertexChecker) `reconstruction`
-
-1. [6593](http://github.com/cms-sw/cmssw/pull/6593)  from @mtosi: fix track cluster remover template definition `reconstruction`
-
-1. [6611](http://github.com/cms-sw/cmssw/pull/6611)  from @VinInn: Revert back to SSE `reconstruction`
-
-1. [6605](http://github.com/cms-sw/cmssw/pull/6605)  from @mtosi: add copyMVA parameter in MultiTrackMerger (forward port of #6535) `reconstruction`
-
----
-## Releases
-
-### CMSSW_7_4_0_pre2
-#### Changes since CMSSW_7_4_0_pre1:
-https://github.com/cms-sw/cmssw/compare/CMSSW_7_4_0_pre1...CMSSW_7_4_0_pre2
-
-1. [6831](http://github.com/cms-sw/cmssw/pull/6831)  from @wmtford: Option to use old CPE error if charge exceeds one MIP `reconstruction`
-
-1. [6822](http://github.com/cms-sw/cmssw/pull/6822)  from @rovere: Enable cluster splitting in jet core `alca`  `operations`  `reconstruction`
-
-1. [6832](http://github.com/cms-sw/cmssw/pull/6832)  from @wmtford: Add associateCluster method `simulation`
-
-1. [6671](http://github.com/cms-sw/cmssw/pull/6671)  from @mtosi: migration from EDProducer to stream::EDProducer (BeamSpotOnlineProducer) `alca`  `reconstruction`
-
-1. [6760](http://github.com/cms-sw/cmssw/pull/6760)  from @VinInn: switch CCC on in Conversion Pattern recognition `reconstruction`
-
-1. [6658](http://github.com/cms-sw/cmssw/pull/6658)  from @mtosi: migration from EDProducer to stream::EDProducer (SeedGeneratorFromProtoTracksEDProducer) `reconstruction`
-
-1. [6659](http://github.com/cms-sw/cmssw/pull/6659)  from @mtosi: migration from EDProducer to stream::EDProducer (SiStripExcludedFEDListProducer) `reconstruction`
-
-1. [6662](http://github.com/cms-sw/cmssw/pull/6662)  from @mtosi: migration from EDProducer to stream::EDProducer (PixelVertexProducer) `reconstruction`
+### CMSSW_7_4_0_pre5
+#### Changes since CMSSW_7_4_0_pre3:
+https://github.com/cms-sw/cmssw/compare/CMSSW_7_4_0_pre3...CMSSW_7_4_0_pre5
+No major tracking-related development entered into pre5 w.r.t pre3
 
 --- &singleimage w1:90% image:images/20150112_TrackingPOGAgenda.png
 
