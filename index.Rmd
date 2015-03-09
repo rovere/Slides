@@ -1,6 +1,6 @@
 ---
 title       : News
-subtitle    : Tracking POG Meeting, 2015-01-26
+subtitle    : Tracking POG Meeting, 2015-03-09
 author      : V.Innocente, M.Rovere
 job         : CERN
 framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
@@ -10,66 +10,83 @@ widgets     : [mathjax]            # {mathjax, quiz, bootstrap}
 mode        : selfcontained # {standalone,draft}
 
 --- .segue .dark .nobackground
-
-## General Announcements
-
----
-## Announcements
-
-### Man-power situation became even more critical
-
-* HLT Tracking Validation is currently uncovered since Valentina Gori
-  left
-* Offline Beamspot is currently partially covered
-    * Kevin Burkett expressed his desire to step down in this
-      activity:
-    * <font class="bold red">Since this a a Tracking POG/Physics related activity, we have
-      passed the information also to Physics Coordination to try and
-      find a replacement soon.</font>
-
-
-### The call for the 2016/18 Tracking POG has been officially made:
-
-1. Jan 5: call has been made
-1. <font class="bold red">Feb 2: close nominations, send mail to all candidates</font>
-1. Feb 9: deadline for candidates to give availability
-1. Feb 12: show list of nominations to SC
-1. Mar 12: propose selection of L2s to SC
-1. Apr 20: proposed list of nominations to MB
-
----
-
-## Announcements
-
-
-### EPR 2015
-1. A very preliminary version of EPR for 2015 is available at the
-following link:
-[2015](https://twiki.cern.ch/twiki/bin/viewauth/CMS/TrackingPOGTasks2015).
-1. Keep in mind it is still preliminary and few changes will be made
-in the coming days.
-
-
----
 ## Releases
 
-### The planned deadlines for 74X is:
+---
+## CMSSW_7_4_X release cycle
 
-* CMSSW_7_4_0_pre1: 25 November 2014
-* CMSSW_7_4_0_pre2: 9 December 2014 (<font class="bold red">Last open for substantial tracking changes</font>)
-* CMSSW_7_4_0_pre3: 6 January 2015
-* CMSSW_7_4_0_pre4: 26 January 2015
-* CMSSW_7_4_0_pre5: 3 February 2015 (Last open prerelease)
-* CMSSW_7_4_0_pre6: 17 February 2015 (bug fix release as needed)
-* CMSSW_7_4_0: 11 March 2014
+* Last report we gave was about pre5: since then we reached pre8 and opened 75X
+
+### CMSSW_7_4_0_pre6
+
+Changes since CMSSW_7_4_0_pre5: [here](https://github.com/cms-sw/cmssw/compare/CMSSW_7_4_0_pre5...CMSSW_7_4_0_pre6)
+
+1. [7285](http://github.com/cms-sw/cmssw/pull/7285) from @arizzi: Introduce better PV sorting [[Talk@RecoMeeting](https://indico.cern.ch/event/364004/session/5/contribution/2/material/slides/0.pdf)]
+1. [6623](http://github.com/cms-sw/cmssw/pull/6623)  from @BenjaminRS: Update CkfTrajectoryBuilder to handle hitless seeds.
+1. [7218](http://github.com/cms-sw/cmssw/pull/7218)  from @VinInn: demote to Warning TrackNaN as the quality of the event is not affected
+1. [7110](http://github.com/cms-sw/cmssw/pull/7110)  from @mtosi: add new strip dQdx MEs [[Talk from Bill Ford](https://indico.cern.ch/event/342236/session/5/contribution/10/material/slides/0.pdf)]
+
+---
+## CMSSW_7_4_X release cycle
+
+### CMSSW_7_4_0_pre7
+
+Changes since CMSSW_7_4_0_pre6: [here](https://github.com/cms-sw/cmssw/compare/CMSSW_7_4_0_pre6...CMSSW_7_4_0_pre7)
+
+1. [7557](http://github.com/cms-sw/cmssw/pull/7557)  from @makortel: Fix MultiTrackValidator example configuration
+1. [7541](http://github.com/cms-sw/cmssw/pull/7541)  from @trocino: Clean up cosmic mu reco in pp
+1. [7521](http://github.com/cms-sw/cmssw/pull/7521)  from @rovere: Add DontCountDetsAboveNClusters to standard cosmic seeders
+1. [7505](http://github.com/cms-sw/cmssw/pull/7505)  from @lviliani: Geant4e integration in 7_4_X
+1. [7526](http://github.com/cms-sw/cmssw/pull/7526)  from @suchandradutta: Tk data vs MC validation tool
+1. [7474](http://github.com/cms-sw/cmssw/pull/7474)  from @rovere: Fix get by labels
+
+---
+## CMSSW_7_4_X release cycle
+
+### CMSSW_7_4_0_pre8
+
+Changes since CMSSW_7_4_0_pre7: [here](https://github.com/cms-sw/cmssw/compare/CMSSW_7_4_0_pre7...CMSSW_7_4_0_pre8)
+
+1. [7937](http://github.com/cms-sw/cmssw/pull/7937)  from @mdhildreth: 74 x pixel dynamic eff in pre mixing
+1. [7894](http://github.com/cms-sw/cmssw/pull/7894)  from @wmtford: Remove occupancy-based flagging of merged clusters
+1. [7756](http://github.com/cms-sw/cmssw/pull/7756)  from @makortel: Fixes to primary vertex validation
+
+### CMSSW_7_5_X release cycle
+
+[Schedule](https://twiki.cern.ch/twiki/bin/view/CMS/CMSSW_7_5_0)
+
+* CMSSW_7_5_0_pre1: 9 March 2015
+* CMSSW_7_5_0_pre2: 30 March 2015
+* CMSSW_7_5_0_pre3: 13 April 2015
+* CMSSW_7_5_0_pre4: 27 April 2015
+* CMSSW_7_5_0_pre5: 11 May 2015 (Last open release)
+* CMSSW_7_5_0_pre6: 25 May 2015 (Bug fix release as needed
+* CMSSW_7_5_0: 8 June 2015
 
 
-### CMSSW_7_4_0_pre5
-#### Changes since CMSSW_7_4_0_pre3:
-https://github.com/cms-sw/cmssw/compare/CMSSW_7_4_0_pre3...CMSSW_7_4_0_pre5
-No major tracking-related development entered into pre5 w.r.t pre3
+--- .segue .dark .nobackground
+## Announcements
 
---- &singleimage w1:90% image:images/20150126_TrackingPOGAgenda.png
+---
+## Announcements
+
+* Offline Beamspot is currently covered by the Milano Bicocca Group:
+    * a huge thanks to them for their involvement
+    * knowledge transfer is already in progress between them and Kevin
+      Burkett, to whom we give our big thank for the incredible work
+      he did in the past N years.
+
+* There is a very interesting talk opportunity at CHEP related to Tracking:
+
+   * Link into
+     [CINCO](https://cms-mgt-conferences.web.cern.ch/cms-mgt-conferences/conferences/pres_display.aspx?cid=1514&pid=10418)
+
+   * Title: "CMS reconstruction improvements for the tracking in large pile-up events"
+
+   * Please nominate yourself if you feel like giving this talk, but
+     hurry up, the deadline is quickly approaching: March 15th.
+
+--- &singleimage w1:90% image:images/20150309_TrackingPOGAgenda.png
 
 ## Today's Agenda
 
