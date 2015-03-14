@@ -30,9 +30,9 @@ for line in css.readlines():
         css_description[current_class].setdefault(current_quantile, current_color)
 #pprint.pprint(css_description)
 #cl_sorted = sorted(css_description.keys())
-print '<div id="All" style="width:%dpx">' % (len(css_description.keys())*((10+24+10)+(10+86+10)))
+print '<div id="All" style="width:%dpx">' % (len(css_description.keys())*((10+24+2)+(2+98+10)))
 for cl in css_description.keys():
-    print '<div id="%s" style="float: left; padding: 0px 10px 0px 10px;">' % cl
+    print '<div id="%s" style="float: left; padding: 0px 2px 0px 10px;">' % cl
     print '  <svg width="24" height="%d">' % (len(css_description[cl].keys()) * 24)
 #    quantile_sorted = sorted(css_description[cl].keys())
     distance = 0
@@ -41,12 +41,12 @@ for cl in css_description.keys():
         distance += 1
     print '  </svg>'
     print '</div>'
-    print '<div style="float: left; padding: 0px 10px 0px 10px;">'
+    print '<div style="float: left; padding: 0px 10px 0px 2px;">'
     first = True
     for i in css_description[cl].keys():
         if first:
             first = False
-            print '<textarea readonly style="line-height:24px; width:80px;height:%dpx">%s %s' % (len(css_description[cl].keys()) * 24,
+            print '<textarea readonly style="line-height:24px; width:92px;height:%dpx">%s %s' % (len(css_description[cl].keys()) * 24,
                                                                                                  cl, 
                                                                                                  i)
         else:
