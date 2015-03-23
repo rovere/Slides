@@ -1,6 +1,6 @@
 ---
 title       : News
-subtitle    : Tracking POG Meeting, 2015-03-09
+subtitle    : Tracking POG Meeting, 2015-03-23
 author      : V.Innocente, M.Rovere
 job         : CERN
 framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
@@ -15,78 +15,87 @@ mode        : selfcontained # {standalone,draft}
 ---
 ## CMSSW_7_4_X release cycle
 
-* Last report we gave was about pre5: since then we reached pre8 and opened 75X
+### CMSSW_7_4_0_pre9
 
-### CMSSW_7_4_0_pre6
+#### Changes since CMSSW_7_4_0_pre8:
+https://github.com/cms-sw/cmssw/compare/CMSSW_7_4_0_pre8...CMSSW_7_4_0_pre9
 
-Changes since CMSSW_7_4_0_pre5: [here](https://github.com/cms-sw/cmssw/compare/CMSSW_7_4_0_pre5...CMSSW_7_4_0_pre6)
 
-1. [7285](http://github.com/cms-sw/cmssw/pull/7285) from @arizzi: Introduce better PV sorting [[Talk@RecoMeeting](https://indico.cern.ch/event/364004/session/5/contribution/2/material/slides/0.pdf)]
-1. [6623](http://github.com/cms-sw/cmssw/pull/6623)  from @BenjaminRS: Update CkfTrajectoryBuilder to handle hitless seeds.
-1. [7218](http://github.com/cms-sw/cmssw/pull/7218)  from @VinInn: demote to Warning TrackNaN as the quality of the event is not affected
-1. [7110](http://github.com/cms-sw/cmssw/pull/7110)  from @mtosi: add new strip dQdx MEs [[Talk from Bill Ford](https://indico.cern.ch/event/342236/session/5/contribution/10/material/slides/0.pdf)]
+1. [8386](http://github.com/cms-sw/cmssw/pull/8386)  from @MilanoBicocca-pix: Transition to Minuit2 for BeamSpotProducer `alca`  `reconstruction`
 
----
-## CMSSW_7_4_X release cycle
+1. [8397](http://github.com/cms-sw/cmssw/pull/8397)  from @VinInn: reduce CCC by 6% `reconstruction`
 
-### CMSSW_7_4_0_pre7
+1. [8374](http://github.com/cms-sw/cmssw/pull/8374)  from @VinInn: protect for constraint fit (port of 8342 from 73X to 74X `reconstruction`)
 
-Changes since CMSSW_7_4_0_pre6: [here](https://github.com/cms-sw/cmssw/compare/CMSSW_7_4_0_pre6...CMSSW_7_4_0_pre7)
+1. [8343](http://github.com/cms-sw/cmssw/pull/8343)  from @cms-tsg-storm: CCC PSet migration with HLT for 74X `alca`  `fastsim`  `hlt`  `reconstruction`
 
-1. [7557](http://github.com/cms-sw/cmssw/pull/7557)  from @makortel: Fix MultiTrackValidator example configuration
-1. [7541](http://github.com/cms-sw/cmssw/pull/7541)  from @trocino: Clean up cosmic mu reco in pp
-1. [7521](http://github.com/cms-sw/cmssw/pull/7521)  from @rovere: Add DontCountDetsAboveNClusters to standard cosmic seeders
-1. [7505](http://github.com/cms-sw/cmssw/pull/7505)  from @lviliani: Geant4e integration in 7_4_X
-1. [7526](http://github.com/cms-sw/cmssw/pull/7526)  from @suchandradutta: Tk data vs MC validation tool
-1. [7474](http://github.com/cms-sw/cmssw/pull/7474)  from @rovere: Fix get by labels
+1. [8247](http://github.com/cms-sw/cmssw/pull/8247)  from @VinInn: Workaround for FPIX shift for 74X `reconstruction`
+
+1. [8102](http://github.com/cms-sw/cmssw/pull/8102)  from @arizzi: PrimaryVertex sorter fix and store of the score vector - 74X version `reconstruction`
+
+1. [7979](http://github.com/cms-sw/cmssw/pull/7979)  from @suchandradutta: Bug fix in event filters, LorentzVector was wrongly initialised `dqm`
 
 ---
-## CMSSW_7_4_X release cycle
+## CMSSW_7_5_X release cycle
 
-### CMSSW_7_4_0_pre8
+[Updated Schedule](https://twiki.cern.ch/twiki/bin/view/CMS/CMSSW_7_5_0)
 
-Changes since CMSSW_7_4_0_pre7: [here](https://github.com/cms-sw/cmssw/compare/CMSSW_7_4_0_pre7...CMSSW_7_4_0_pre8)
-
-1. [7937](http://github.com/cms-sw/cmssw/pull/7937)  from @mdhildreth: 74 x pixel dynamic eff in pre mixing
-1. [7894](http://github.com/cms-sw/cmssw/pull/7894)  from @wmtford: Remove occupancy-based flagging of merged clusters
-1. [7756](http://github.com/cms-sw/cmssw/pull/7756)  from @makortel: Fixes to primary vertex validation
-
-### CMSSW_7_5_X release cycle
-
-[Schedule](https://twiki.cern.ch/twiki/bin/view/CMS/CMSSW_7_5_0)
-
-* CMSSW_7_5_0_pre1: 9 March 2015
-* CMSSW_7_5_0_pre2: 30 March 2015
-* CMSSW_7_5_0_pre3: 13 April 2015
-* CMSSW_7_5_0_pre4: 27 April 2015
-* CMSSW_7_5_0_pre5: 11 May 2015 (Last open release)
-* CMSSW_7_5_0_pre6: 25 May 2015 (Bug fix release as needed
-* CMSSW_7_5_0: 8 June 2015
-
+* CMSSW_7_5_0_pre1: 22 March 2015
+* CMSSW_7_5_0_pre2: 6  April 2015
+* CMSSW_7_5_0_pre3: 20 April 2015
+* CMSSW_7_5_0_pre4: 4  May   2015
+* CMSSW_7_5_0_pre5: 18 May 2015 (Last open release)
+* CMSSW_7_5_0_pre6: 1  June 2015 (Bug fix release as needed
+* CMSSW_7_5_0: 15 June 2015
 
 --- .segue .dark .nobackground
 ## Announcements
 
+--- &singleimage w1:50 image:images/LHC_Schedule2015_closeup.png 
+## Early-data activities
+
+* Last week we had a chat with Physics Coordination to plan
+  Tracking-related activities on the first data we will collect.
+
+*** =caption
+Current LHC Schedule
+
 ---
-## Announcements
+## Tentative plan
 
-* Offline Beamspot is currently covered by the Milano Bicocca Group:
-    * a huge thanks to them for their involvement
-    * knowledge transfer is already in progress between them and Kevin
-      Burkett, to whom we give our big thank for the incredible work
-      he did in the past N years.
+* Be ready with basic performance plots of tracking and vertexing for
+  the summer conferences in July, based on low-lumi and 50ns
+  runs.
 
-* There is a very interesting talk opportunity at CHEP related to Tracking:
+* Given the limited time, we agreed to provide only DP Notes, saving
+  more refined studies/PAS for later on.
 
-   * Link into
-     [CINCO](https://cms-mgt-conferences.web.cern.ch/cms-mgt-conferences/conferences/pres_display.aspx?cid=1514&pid=10418)
+* In particular we agreed to focus our attention on:
 
-   * Title: "CMS reconstruction improvements for the tracking in large pile-up events"
+   * close collaboration with FSQ group to be ready with the very
+     first paper $dN/d\eta$ .
 
-   * Please nominate yourself if you feel like giving this talk, but
-     hurry up, the deadline is quickly approaching: March 15th.
+   * Beampipe position measurements
 
---- &singleimage w1:90% image:images/20150309_TrackingPOGAgenda.png
+   * V0's
+
+   * Vertex efficiency
+
+   * Tracking efficiency from D* decays
+
+   * Beamspot Plots
+
+* We would like to have, for each specific topic, a pool of people
+  that would commit to follow up the analysis, both with early data
+  and, possibly, also later on, with 25 ns data.
+
+* There are some "natural" candidates that come to out mind: yet we
+  would like to x-check with you all if you are available.
+
+* <font class="bold green">This is not a request coming from Tracking POG, but it is coming
+  from CMS/Physics Coordination</font>
+
+--- &singleimage w1:90 image:images/20150323_TrackingPOGAgenda.png
 
 ## Today's Agenda
 
