@@ -1,6 +1,6 @@
 ---
 title       : News
-subtitle    : Tracking POG Meeting, 2015-03-09
+subtitle    : Tracking POG Meeting, 2015-06-01
 author      : V.Innocente, M.Rovere
 job         : CERN
 framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
@@ -10,81 +10,128 @@ widgets     : [mathjax]            # {mathjax, quiz, bootstrap}
 mode        : selfcontained # {standalone,draft}
 
 --- .segue .dark .nobackground
-## Releases
+## Current State
 
 ---
-## CMSSW_7_4_X release cycle
+## 0 Tesla saga
 
-* Last report we gave was about pre5: since then we reached pre8 and opened 75X
+* As everyone knows by now, we are having few problems with the CMS
+  Magnet
 
-### CMSSW_7_4_0_pre6
+* Many runs in the past days have been taken w/ beam (and collisions)
+  with 0T, w/o pixels.
 
-Changes since CMSSW_7_4_0_pre5: [here](https://github.com/cms-sw/cmssw/compare/CMSSW_7_4_0_pre5...CMSSW_7_4_0_pre6)
+* The vanilla RunII candidate tracking is not performing at the top
+  (many caveat here: 0T, no pixels, wrong timing, CCC, cluster shape
+  filters, conditions, Gains, ...)
 
-1. [7285](http://github.com/cms-sw/cmssw/pull/7285) from @arizzi: Introduce better PV sorting [[Talk@RecoMeeting](https://indico.cern.ch/event/364004/session/5/contribution/2/material/slides/0.pdf)]
-1. [6623](http://github.com/cms-sw/cmssw/pull/6623)  from @BenjaminRS: Update CkfTrajectoryBuilder to handle hitless seeds.
-1. [7218](http://github.com/cms-sw/cmssw/pull/7218)  from @VinInn: demote to Warning TrackNaN as the quality of the event is not affected
-1. [7110](http://github.com/cms-sw/cmssw/pull/7110)  from @mtosi: add new strip dQdx MEs [[Talk from Bill Ford](https://indico.cern.ch/event/342236/session/5/contribution/10/material/slides/0.pdf)]
+* Few patches have been (privately) produced and privately applied in
+  the release to reach better performances (mainly by our Tracker DPG
+  friends).
+
+* We are foreseen to take data this week, with 50ns BX, pixel on and
+  0T.
+
+* In order to maximize the "tracking outcome", we backported the
+  RunI-like tracking configuration in 74X (it was already in in 75X)
+  (see [PR-9269](https://github.com/cms-sw/cmssw/pull/9296))
+
+* A new 74 release will be soon out with this configuration suggested
+  by us as the default tracking configuration for runs at 0T: all
+  other runs taken in "nominal" conditions will use the vanilla RunII
+  tracking, that has been developed and optimized in the past 2 years
+  for this purpose.
+
+
+--- &twoimages w1:48 imageleft:images/Run245194_WithTIBandTOBHits.png w2:48 imageright:images/Run245194_RunIReco.png
+## Comparison RunI-like and RunII-patched on recent data
+
+* we privately tested the performance of the RunII-patched and
+  RunI-like tracking both on recently taken data and on an old run
+  taken during RunI/Run2012C, with 0T and with pixels: results are
+  encouraging.
+
+*** {name: caption_left}
+RunII-patched tracking
+
+*** {name: caption_right}
+RunI-like tracking
+
+
+--- &singleimage w1:80 image:images/Run200786_RunI-like.png
+## Comparison RunI-like and RunII-patched on recent data
+
+*** {name: caption}
+RunI-like tracking
 
 ---
-## CMSSW_7_4_X release cycle
+## 0Tesla samples
 
-### CMSSW_7_4_0_pre7
+* On EOS, announced [here](http://cms-project-relval.web.cern.ch/cms-project-relval/relval_stats/2015_05_31_2.txt)
+* and also [here](http://cms-project-relval.web.cern.ch/cms-project-relval/relval_stats/2015_05_31_3.txt)
 
-Changes since CMSSW_7_4_0_pre6: [here](https://github.com/cms-sw/cmssw/compare/CMSSW_7_4_0_pre6...CMSSW_7_4_0_pre7)
+* A small subset:
 
-1. [7557](http://github.com/cms-sw/cmssw/pull/7557)  from @makortel: Fix MultiTrackValidator example configuration
-1. [7541](http://github.com/cms-sw/cmssw/pull/7541)  from @trocino: Clean up cosmic mu reco in pp
-1. [7521](http://github.com/cms-sw/cmssw/pull/7521)  from @rovere: Add DontCountDetsAboveNClusters to standard cosmic seeders
-1. [7505](http://github.com/cms-sw/cmssw/pull/7505)  from @lviliani: Geant4e integration in 7_4_X
-1. [7526](http://github.com/cms-sw/cmssw/pull/7526)  from @suchandradutta: Tk data vs MC validation tool
-1. [7474](http://github.com/cms-sw/cmssw/pull/7474)  from @rovere: Fix get by labels
+| Datasets                                                                                       |  Events |
+|------------------------------------------------------------------------------------------------|---------|
+|/RelValNuGun_UP15/CMSSW_7_4_4-PU50ns_MCRUN2_740TV0_0TV2-v1/GEN-SIM-DIGI-RAW-HLTDEBUG            |    9000 |
+|/RelValNuGun_UP15/CMSSW_7_4_4-PU50ns_MCRUN2_740TV0_0TV2-v1/GEN-SIM-RECO                         |    9000 |
+|/RelValNuGun_UP15/CMSSW_7_4_4-PU50ns_MCRUN2_740TV0_0TV2-v1/MINIAODSIM                           |    9000 |
+|/RelValNuGun_UP15/CMSSW_7_4_4-PU50ns_MCRUN2_740TV0_0TV2-v1/DQMIO                                |       0 |
+|/RelValTTbar_13/CMSSW_7_4_4-PU50ns_MCRUN2_740TV0_0TV2-v1/GEN-SIM-DIGI-RAW-HLTDEBUG              |    9000 |
+|/RelValTTbar_13/CMSSW_7_4_4-PU50ns_MCRUN2_740TV0_0TV2-v1/GEN-SIM-RECO                           |    9000 |
+|/RelValTTbar_13/CMSSW_7_4_4-PU50ns_MCRUN2_740TV0_0TV2-v1/MINIAODSIM                             |    9000 |
+|/RelValTTbar_13/CMSSW_7_4_4-PU50ns_MCRUN2_740TV0_0TV2-v1/DQMIO                                  |       0 |
+|/RelValZEE_13/CMSSW_7_4_4-PU50ns_MCRUN2_740TV0_0TV2-v1/GEN-SIM-DIGI-RAW-HLTDEBUG                |    9000 |
+|/RelValZEE_13/CMSSW_7_4_4-PU50ns_MCRUN2_740TV0_0TV2-v1/GEN-SIM-RECO                             |    9000 |
+|/RelValZEE_13/CMSSW_7_4_4-PU50ns_MCRUN2_740TV0_0TV2-v1/MINIAODSIM                               |    9000 |
+|/RelValZEE_13/CMSSW_7_4_4-PU50ns_MCRUN2_740TV0_0TV2-v1/DQMIO                                    |       0 |
+|/RelValZMM_13/CMSSW_7_4_4-PU50ns_MCRUN2_740TV0_0TV2-v1/GEN-SIM-DIGI-RAW-HLTDEBUG                |    8719 |
+|/RelValZMM_13/CMSSW_7_4_4-PU50ns_MCRUN2_740TV0_0TV2-v1/GEN-SIM-RECO                             |    8719 |
+|/RelValZMM_13/CMSSW_7_4_4-PU50ns_MCRUN2_740TV0_0TV2-v1/MINIAODSIM                               |    8719 |
+|/RelValZMM_13/CMSSW_7_4_4-PU50ns_MCRUN2_740TV0_0TV2-v1/DQMIO                                    |       0 |
 
----
-## CMSSW_7_4_X release cycle
-
-### CMSSW_7_4_0_pre8
-
-Changes since CMSSW_7_4_0_pre7: [here](https://github.com/cms-sw/cmssw/compare/CMSSW_7_4_0_pre7...CMSSW_7_4_0_pre8)
-
-1. [7937](http://github.com/cms-sw/cmssw/pull/7937)  from @mdhildreth: 74 x pixel dynamic eff in pre mixing
-1. [7894](http://github.com/cms-sw/cmssw/pull/7894)  from @wmtford: Remove occupancy-based flagging of merged clusters
-1. [7756](http://github.com/cms-sw/cmssw/pull/7756)  from @makortel: Fixes to primary vertex validation
-
-### CMSSW_7_5_X release cycle
-
-[Schedule](https://twiki.cern.ch/twiki/bin/view/CMS/CMSSW_7_5_0)
-
-* CMSSW_7_5_0_pre1: 9 March 2015
-* CMSSW_7_5_0_pre2: 30 March 2015
-* CMSSW_7_5_0_pre3: 13 April 2015
-* CMSSW_7_5_0_pre4: 27 April 2015
-* CMSSW_7_5_0_pre5: 11 May 2015 (Last open release)
-* CMSSW_7_5_0_pre6: 25 May 2015 (Bug fix release as needed
-* CMSSW_7_5_0: 8 June 2015
 
 
 --- .segue .dark .nobackground
-## Announcements
+## Releases
 
 ---
-## Announcements
+## CMSSW_7_5_X release cycle
 
-* Offline Beamspot is currently covered by the Milano Bicocca Group:
-    * a huge thanks to them for their involvement
-    * knowledge transfer is already in progress between them and Kevin
-      Burkett, to whom we give our big thank for the incredible work
-      he did in the past N years.
+# CMSSW_7_5_0_pre4
+#### Changes since CMSSW_7_5_0_pre3:
+https://github.com/cms-sw/cmssw/compare/CMSSW_7_5_0_pre3...CMSSW_7_5_0_pre4
 
-* There is a very interesting talk opportunity at CHEP related to Tracking:
 
-   * Link into
-     [CINCO](https://cms-mgt-conferences.web.cern.ch/cms-mgt-conferences/conferences/pres_display.aspx?cid=1514&pid=10418)
+1. [8888](http://github.com/cms-sw/cmssw/pull/8888)  from @makortel: Use common track-TP association in track and vertex validation 
 
-   * Title: "CMS reconstruction improvements for the tracking in large pile-up events"
+1. [8951](http://github.com/cms-sw/cmssw/pull/8951)  from @rovere: Reco material effects: updates to tools
 
-   * Please nominate yourself if you feel like giving this talk, but
-     hurry up, the deadline is quickly approaching: March 15th.
+1. [8814](http://github.com/cms-sw/cmssw/pull/8814)  from @namapane: Set StandardSequences to take MF geometry and configuration from the DB
+
+1. [8826](http://github.com/cms-sw/cmssw/pull/8826)  from @VinInn: implement correct track breaking if propagation fails
+
+
+# CMSSW_7_5_0_pre3
+#### Changes since CMSSW_7_5_0_pre2:
+https://github.com/cms-sw/cmssw/compare/CMSSW_7_5_0_pre2...CMSSW_7_5_0_pre3
+
+1. [8679](http://github.com/cms-sw/cmssw/pull/8679)  from @VinInn: upgrade RecoTrackSelector to allow BTV-like cuts
+
+1. [8691](http://github.com/cms-sw/cmssw/pull/8691)  from @rovere: Run 1 reco tuning
+
+---
+## CMSSW_7_5_X release cycle
+
+# CMSSW_7_5_0_pre2
+#### Changes since CMSSW_7_5_0_pre1:
+https://github.com/cms-sw/cmssw/compare/CMSSW_7_5_0_pre1...CMSSW_7_5_0_pre2
+
+
+1. [8412](http://github.com/cms-sw/cmssw/pull/8412)  from @makortel: Add purity plots to vertex validation plus some cleanup
+
+1. [8464](http://github.com/cms-sw/cmssw/pull/8464)  from @mtosi: fix propagator in SeedFromConsecutiveHitsCreator config file
 
 --- &singleimage w1:90% image:images/20150309_TrackingPOGAgenda.png
 
