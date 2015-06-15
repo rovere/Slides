@@ -42,9 +42,10 @@ mode        : selfcontained # {standalone,draft}
   tracking, that has been developed and optimized in the past 2 years
   for this purpose.
 
+* Fresh of the press: [plots](http://cmsdoc.cern.ch/cms/Physics/tracking/validation/MC/CMSSW_7_4_4/MCRUN2_740TV1_0Tv2_noPU_highPurity/RelValTTbar/effandfake1.pdf)
 
 --- &twoimages w1:48 imageleft:images/Run245194_WithTIBandTOBHits.png w2:48 imageright:images/Run245194_RunIReco.png
-## Comparison RunI-like and RunII-patched on recent data
+## RunI-like, RunII-patched on recent data
 
 * we privately tested the performance of the RunII-patched and
   RunI-like tracking both on recently taken data and on an old run
@@ -133,7 +134,7 @@ https://github.com/cms-sw/cmssw/compare/CMSSW_7_5_0_pre1...CMSSW_7_5_0_pre2
 
 1. [8464](http://github.com/cms-sw/cmssw/pull/8464)  from @mtosi: fix propagator in SeedFromConsecutiveHitsCreator config file
 
---- &singleimage w1:90% image:images/20150309_TrackingPOGAgenda.png
+--- &singleimage w1:90% image:images/20150601_TrackingPOGAgenda.png
 
 ## Today's Agenda
 
