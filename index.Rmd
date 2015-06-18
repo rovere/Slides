@@ -16,7 +16,7 @@ mode        : selfcontained # {standalone,draft}
 HH:MM | Monday | Tuesday | Wednesday | Thursday | Friday
 ------|--------|---------|-----------|----------|-------
 11:00(+1)| [CMG Meeting](https://indico.cern.ch/category/1236/) | | | [TPO](https://indico.cern.ch/category/1065/) |
-14:00(+2) | [TSG Coordination](https://indico.cern.ch/category/1576/) | [DQM{,Core,PdmV}](https://indico.cern.ch/category/3904/) <br/> [X-POG](https://indico.cern.ch/category/5517/) | [PPD General Meeting](https://indico.cern.ch/category/3905/) | [Weekly Joint PPD/Off/Trig/Comp Ops Meeting](https://indico.cern.ch/category/4448/) |
+14:00(+2) | [TSG Coordination](https://indico.cern.ch/category/1576/) | [DQM{,Core,PdmV}](https://indico.cern.ch/category/3904/) <br/> [X-POG](https://indico.cern.ch/category/5517/) | [PPD General Meeting](https://indico.cern.ch/category/3905/) | [Weekly Joint PPD/Off/Trig/Comp Ops Meeting](https://indico.cern.ch/category/4448/) <br/> [Strip Calibration and Local Reconstruction](https://indico.cern.ch/category/1358/)|
 1{4,6}:00(+2) | [TrackingPOG](https://indico.cern.ch/category/2029/) | | | |
 15:00(+2/+3) | [AlCaDB](https://indico.cern.ch/category/3903/) | | | | [Tracker DPG - Tracking POG general meeting] (https://indico.cern.ch/category/1358/)
 15:30(+2.5/+1.5)|        | [RunMeeting](https://indico.cern.ch/category/1354/)     |           |          | [Simulation] (https://indico.cern.ch/category/1370/)
