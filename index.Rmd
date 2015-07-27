@@ -1,6 +1,6 @@
 ---
 title       : News
-subtitle    : Tracking POG Meeting, 2015-06-15
+subtitle    : Tracking POG Meeting, 2015-07-27
 author      : V.Innocente, M.Rovere
 job         : CERN
 framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
@@ -13,47 +13,71 @@ mode        : selfcontained # {standalone,draft}
 ## Releases
 
 ---
-## CMSSW_7_5_X release cycle
+## CMSSW_7_6_X release cycle
+
+# CMSSW_7_6_0_pre1
+#### Changes since CMSSW_7_5_0:
+https://github.com/cms-sw/cmssw/compare/CMSSW_7_5_0...CMSSW_7_6_0_pre1
 
 
-# CMSSW_7_5_0_pre5
-#### Changes since CMSSW_7_5_0_pre4:
-https://github.com/cms-sw/cmssw/compare/CMSSW_7_5_0_pre4...CMSSW_7_5_0_pre5
+1. [10048](http://github.com/cms-sw/cmssw/pull/10048)  from @MilanoBicocca-pix: Add vtx smearing parameters: nominal beam parameters, realistic centroid `operations`  `simulation`
 
-1. [9119](http://github.com/cms-sw/cmssw/pull/9119)  from @mhwalker: New mixed triplet seed layers and updates to MVA selectors
+1. [10083](http://github.com/cms-sw/cmssw/pull/10083)  from @bartokm: Fixing of bunchspacing handling in the SipixelDigitizer Dynamic Inefficiency in 76X `simulation`
 
-1. [9223](http://github.com/cms-sw/cmssw/pull/9223)  from @makortel: Transform VertexAssociatorByTracks to EDProduct style
+1. [10014](http://github.com/cms-sw/cmssw/pull/10014)  from @makortel: Fix MultiTrackValidator efficiency summary and efficiency vs. deltaR plots `analysis`  `dqm`  `geometry`  `reconstruction`  `simulation`
 
-1. [9225](http://github.com/cms-sw/cmssw/pull/9225)  from @makortel: Sort the output of ClusterTPAssociationProducer
+1. [10068](http://github.com/cms-sw/cmssw/pull/10068)  from @makortel: Fix one histogram name in MultiTrackValidator `dqm`
 
-1. [9260](http://github.com/cms-sw/cmssw/pull/9260)  from @VinInn: avoid relocation of SiStripCluster DetSetVector in case of onDemand
+1. [10090](http://github.com/cms-sw/cmssw/pull/10090)  from @mtosi: fix bug in the plot of number of layers per track profile `dqm`
 
-1. [9239](http://github.com/cms-sw/cmssw/pull/9239)  from @slava77: Put some order in old MF configs; asymptotic default will be MagneticField_cff.py
+1. [10094](http://github.com/cms-sw/cmssw/pull/10094)  from @mtosi: fix rec hits vs ls in tracking DQM code `dqm`
 
-1. [9218](http://github.com/cms-sw/cmssw/pull/9218)  from @VinInn: fix for root5 in TrackBase
+1. [9979](http://github.com/cms-sw/cmssw/pull/9979)  from @ramankhurana: Edm pick events crab3 updates from cmssw 7 4 0 `analysis`
 
-1. [9149](http://github.com/cms-sw/cmssw/pull/9149)  from @mtosi: point seeded tracking regions
+1. [10016](http://github.com/cms-sw/cmssw/pull/10016)  from @makortel: Simplify class stucture of hit generators `reconstruction`
+
+1. [9949](http://github.com/cms-sw/cmssw/pull/9949)  from @makortel: Generalize makeTrackValidationPlots.py script `dqm`
+
+1. [10006](http://github.com/cms-sw/cmssw/pull/10006)  from @threus: Fix QTest for offline Tracking DQM 76x `dqm`
 
 ---
-## CMSSW_7_5_X release cycle
+## CMSSW_7_6_X release cycle
+
+# CMSSW_7_6_0_pre1
+#### Changes since CMSSW_7_5_0:
+https://github.com/cms-sw/cmssw/compare/CMSSW_7_5_0...CMSSW_7_6_0_pre1
+
+1. [9904](http://github.com/cms-sw/cmssw/pull/9904)  from @makortel: Add ObjectSelectorStreamProducer template and use it for RecoTrackViewRefSelector `analysis`  `dqm`  `reconstruction`
+
+1. [9959](http://github.com/cms-sw/cmssw/pull/9959)  from @makortel: Migrate HitPattern to use TrackerTopology `analysis`  `dqm`  `fastsim`  `reconstruction`  `simulation`
+
+1. [9737](http://github.com/cms-sw/cmssw/pull/9737)  from @mdhildreth: TrackingParticle updates for pre mixing `operations`  `simulation`
+
+1. [9858](http://github.com/cms-sw/cmssw/pull/9858)  from @MilanoBicocca-pix: BeamSpot Fitter: added parameters to the migrad functor to supersede EDM defaults `alca`  `reconstruction`
+
+1. [9882](http://github.com/cms-sw/cmssw/pull/9882)  from @makortel: Update tracking MC validation scripts `dqm`
+
+1. [9834](http://github.com/cms-sw/cmssw/pull/9834)  from @MilanoBicocca-pix: Offline DQM: fix d0-phi plot under AlcaBeamMonitor/Validation `dqm`
+
+1. [9798](http://github.com/cms-sw/cmssw/pull/9798)  from @makortel: Refactor RecoTrackSelector and RecoTrackRefSelector `analysis`  `reconstruction`
 
 
-# CMSSW_7_5_0_pre5
-#### Changes since CMSSW_7_5_0_pre4:
-https://github.com/cms-sw/cmssw/compare/CMSSW_7_5_0_pre4...CMSSW_7_5_0_pre5
+---
+## Data Taking related News
 
-1. [9197](http://github.com/cms-sw/cmssw/pull/9197)  from @VinInn: Remove obsolete KalmanAlignmentAlgorithm
+* We have been (happily) taking data for the past weeks and we
+  delivered most of the results we promised few months back to Physics
+  Coordination.
+* A HUGE thanks to everybody who promptly performed all the studies.
 
-1. [9099](http://github.com/cms-sw/cmssw/pull/9099)  from @makortel: Add protection againt NaNs for IP significance histograms in Tracking DQM
+* The results are nicely summarized in a common DP note [[link]](http://cds.cern.ch/record/2037373/files/DP2015_016.pdf?version=1) and in a central TWiki page [[link]](https://twiki.cern.ch/twiki/bin/view/CMSPublic/PublicPlotsEPS2015)
 
-1. [9073](http://github.com/cms-sw/cmssw/pull/9073)  from @VinInn: Add mask to keep track of all algos where a track is reconstructed (and also move detachedTripletStep right after initialStep in priority order where it should be) Class TkMCQuality is also modified to produce a vector of "qualities" instead of writing a new track collection with a fake quality bit set.
+* We, as Tracking POG, would like to have dedicated TWiki pages for each single contribution that has been approved for EPS in a TWiki page that will be linked from the main Tracking POG Results page ([[link]](https://twiki.cern.ch/twiki/bin/view/CMSPublic/PhysicsResultsTRK))
+   * Please create the page and either link it directly from within the main page or send us the link to your TWiki.
 
-1. [9000](http://github.com/cms-sw/cmssw/pull/9000)  from @makortel: Fix associationMapFilterValues() for empty input AssociationMap
+* New samples with proper PU and beamspot has been requested by us and have been announced today ([[link]](https://hypernews.cern.ch/HyperNews/CMS/get/relval/3909.html) and link to samples: [[link]](http://cms-project-relval.web.cern.ch/cms-project-relval/relval_stats/2015_07_24_2_0.txt))
+   * Feel free to use them for both Data/Mc comparison and for assessing if the shifted BS is affecting your studies.
 
-1. [8996](http://github.com/cms-sw/cmssw/pull/8996)  from @appeltel: New HeavyIon ClusterCompatibility object and producer for beam scraping removal
-
-1. [8988](http://github.com/cms-sw/cmssw/pull/8988)  from @makortel: Improve MultiTrackValidator performance
-
---- &singleimage w1:90% image:images/20150615_TrackingPOGAgenda.png
+--- &singleimage w1:90% image:images/20150727_TrackingPOGAgenda.png
 
 ## Today's Agenda
