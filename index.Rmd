@@ -1,6 +1,6 @@
 ---
 title       : News
-subtitle    : Tracking POG Meeting, 2015-06-01
+subtitle    : Tracking POG Meeting, 2015-06-15
 author      : V.Innocente, M.Rovere
 job         : CERN
 framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
@@ -10,132 +10,50 @@ widgets     : [mathjax]            # {mathjax, quiz, bootstrap}
 mode        : selfcontained # {standalone,draft}
 
 --- .segue .dark .nobackground
-## Current State
-
----
-## 0 Tesla saga
-
-* As everyone knows by now, we are having few problems with the CMS
-  Magnet
-
-* Many runs in the past days have been taken w/ beam (and collisions)
-  with 0T, w/o pixels.
-
-* The vanilla RunII candidate tracking is not performing at the top
-  (many caveat here: 0T, no pixels, wrong timing, CCC, cluster shape
-  filters, conditions, Gains, ...)
-
-* Few patches have been (privately) produced and privately applied in
-  the release to reach better performances (mainly by our Tracker DPG
-  friends).
-
-* We are foreseen to take data this week, with 50ns BX, pixel on and
-  0T.
-
-* In order to maximize the "tracking outcome", we backported the
-  RunI-like tracking configuration in 74X (it was already in in 75X)
-  (see [PR-9269](https://github.com/cms-sw/cmssw/pull/9296))
-
-* A new 74 release will be soon out with this configuration suggested
-  by us as the default tracking configuration for runs at 0T: all
-  other runs taken in "nominal" conditions will use the vanilla RunII
-  tracking, that has been developed and optimized in the past 2 years
-  for this purpose.
-
-* Fresh of the press: [plots](http://cmsdoc.cern.ch/cms/Physics/tracking/validation/MC/CMSSW_7_4_4/MCRUN2_740TV1_0Tv2_noPU_highPurity/RelValTTbar/effandfake1.pdf)
-
---- &twoimages w1:48 imageleft:images/Run245194_WithTIBandTOBHits.png w2:48 imageright:images/Run245194_RunIReco.png
-## RunI-like, RunII-patched on recent data
-
-* we privately tested the performance of the RunII-patched and
-  RunI-like tracking both on recently taken data and on an old run
-  taken during RunI/Run2012C, with 0T and with pixels: results are
-  encouraging.
-
-*** {name: caption_left}
-RunII-patched tracking
-
-*** {name: caption_right}
-RunI-like tracking
-
-
---- &singleimage w1:80 image:images/Run200786_RunI-like.png
-## Comparison RunI-like and RunII-patched on recent data
-
-*** {name: caption}
-RunI-like tracking
-
----
-## 0Tesla samples
-
-* On EOS, announced [here](http://cms-project-relval.web.cern.ch/cms-project-relval/relval_stats/2015_05_31_2.txt)
-* and also [here](http://cms-project-relval.web.cern.ch/cms-project-relval/relval_stats/2015_05_31_3.txt)
-
-* A small subset:
-
-| Datasets                                                                                       |  Events |
-|------------------------------------------------------------------------------------------------|---------|
-|/RelValNuGun_UP15/CMSSW_7_4_4-PU50ns_MCRUN2_740TV0_0TV2-v1/GEN-SIM-DIGI-RAW-HLTDEBUG            |    9000 |
-|/RelValNuGun_UP15/CMSSW_7_4_4-PU50ns_MCRUN2_740TV0_0TV2-v1/GEN-SIM-RECO                         |    9000 |
-|/RelValNuGun_UP15/CMSSW_7_4_4-PU50ns_MCRUN2_740TV0_0TV2-v1/MINIAODSIM                           |    9000 |
-|/RelValNuGun_UP15/CMSSW_7_4_4-PU50ns_MCRUN2_740TV0_0TV2-v1/DQMIO                                |       0 |
-|/RelValTTbar_13/CMSSW_7_4_4-PU50ns_MCRUN2_740TV0_0TV2-v1/GEN-SIM-DIGI-RAW-HLTDEBUG              |    9000 |
-|/RelValTTbar_13/CMSSW_7_4_4-PU50ns_MCRUN2_740TV0_0TV2-v1/GEN-SIM-RECO                           |    9000 |
-|/RelValTTbar_13/CMSSW_7_4_4-PU50ns_MCRUN2_740TV0_0TV2-v1/MINIAODSIM                             |    9000 |
-|/RelValTTbar_13/CMSSW_7_4_4-PU50ns_MCRUN2_740TV0_0TV2-v1/DQMIO                                  |       0 |
-|/RelValZEE_13/CMSSW_7_4_4-PU50ns_MCRUN2_740TV0_0TV2-v1/GEN-SIM-DIGI-RAW-HLTDEBUG                |    9000 |
-|/RelValZEE_13/CMSSW_7_4_4-PU50ns_MCRUN2_740TV0_0TV2-v1/GEN-SIM-RECO                             |    9000 |
-|/RelValZEE_13/CMSSW_7_4_4-PU50ns_MCRUN2_740TV0_0TV2-v1/MINIAODSIM                               |    9000 |
-|/RelValZEE_13/CMSSW_7_4_4-PU50ns_MCRUN2_740TV0_0TV2-v1/DQMIO                                    |       0 |
-|/RelValZMM_13/CMSSW_7_4_4-PU50ns_MCRUN2_740TV0_0TV2-v1/GEN-SIM-DIGI-RAW-HLTDEBUG                |    8719 |
-|/RelValZMM_13/CMSSW_7_4_4-PU50ns_MCRUN2_740TV0_0TV2-v1/GEN-SIM-RECO                             |    8719 |
-|/RelValZMM_13/CMSSW_7_4_4-PU50ns_MCRUN2_740TV0_0TV2-v1/MINIAODSIM                               |    8719 |
-|/RelValZMM_13/CMSSW_7_4_4-PU50ns_MCRUN2_740TV0_0TV2-v1/DQMIO                                    |       0 |
-
-
-
---- .segue .dark .nobackground
 ## Releases
 
 ---
 ## CMSSW_7_5_X release cycle
 
-# CMSSW_7_5_0_pre4
-#### Changes since CMSSW_7_5_0_pre3:
-https://github.com/cms-sw/cmssw/compare/CMSSW_7_5_0_pre3...CMSSW_7_5_0_pre4
 
+# CMSSW_7_5_0_pre5
+#### Changes since CMSSW_7_5_0_pre4:
+https://github.com/cms-sw/cmssw/compare/CMSSW_7_5_0_pre4...CMSSW_7_5_0_pre5
 
-1. [8888](http://github.com/cms-sw/cmssw/pull/8888)  from @makortel: Use common track-TP association in track and vertex validation 
+1. [9119](http://github.com/cms-sw/cmssw/pull/9119)  from @mhwalker: New mixed triplet seed layers and updates to MVA selectors
 
-1. [8951](http://github.com/cms-sw/cmssw/pull/8951)  from @rovere: Reco material effects: updates to tools
+1. [9223](http://github.com/cms-sw/cmssw/pull/9223)  from @makortel: Transform VertexAssociatorByTracks to EDProduct style
 
-1. [8814](http://github.com/cms-sw/cmssw/pull/8814)  from @namapane: Set StandardSequences to take MF geometry and configuration from the DB
+1. [9225](http://github.com/cms-sw/cmssw/pull/9225)  from @makortel: Sort the output of ClusterTPAssociationProducer
 
-1. [8826](http://github.com/cms-sw/cmssw/pull/8826)  from @VinInn: implement correct track breaking if propagation fails
+1. [9260](http://github.com/cms-sw/cmssw/pull/9260)  from @VinInn: avoid relocation of SiStripCluster DetSetVector in case of onDemand
 
+1. [9239](http://github.com/cms-sw/cmssw/pull/9239)  from @slava77: Put some order in old MF configs; asymptotic default will be MagneticField_cff.py
 
-# CMSSW_7_5_0_pre3
-#### Changes since CMSSW_7_5_0_pre2:
-https://github.com/cms-sw/cmssw/compare/CMSSW_7_5_0_pre2...CMSSW_7_5_0_pre3
+1. [9218](http://github.com/cms-sw/cmssw/pull/9218)  from @VinInn: fix for root5 in TrackBase
 
-1. [8679](http://github.com/cms-sw/cmssw/pull/8679)  from @VinInn: upgrade RecoTrackSelector to allow BTV-like cuts
-
-1. [8691](http://github.com/cms-sw/cmssw/pull/8691)  from @rovere: Run 1 reco tuning
+1. [9149](http://github.com/cms-sw/cmssw/pull/9149)  from @mtosi: point seeded tracking regions
 
 ---
 ## CMSSW_7_5_X release cycle
 
-# CMSSW_7_5_0_pre2
-#### Changes since CMSSW_7_5_0_pre1:
-https://github.com/cms-sw/cmssw/compare/CMSSW_7_5_0_pre1...CMSSW_7_5_0_pre2
 
+# CMSSW_7_5_0_pre5
+#### Changes since CMSSW_7_5_0_pre4:
+https://github.com/cms-sw/cmssw/compare/CMSSW_7_5_0_pre4...CMSSW_7_5_0_pre5
 
-1. [8412](http://github.com/cms-sw/cmssw/pull/8412)  from @makortel: Add purity plots to vertex validation plus some cleanup
+1. [9197](http://github.com/cms-sw/cmssw/pull/9197)  from @VinInn: Remove obsolete KalmanAlignmentAlgorithm
 
-1. [8464](http://github.com/cms-sw/cmssw/pull/8464)  from @mtosi: fix propagator in SeedFromConsecutiveHitsCreator config file
+1. [9099](http://github.com/cms-sw/cmssw/pull/9099)  from @makortel: Add protection againt NaNs for IP significance histograms in Tracking DQM
 
---- &singleimage w1:90% image:images/20150601_TrackingPOGAgenda.png
+1. [9073](http://github.com/cms-sw/cmssw/pull/9073)  from @VinInn: Add mask to keep track of all algos where a track is reconstructed (and also move detachedTripletStep right after initialStep in priority order where it should be) Class TkMCQuality is also modified to produce a vector of "qualities" instead of writing a new track collection with a fake quality bit set.
+
+1. [9000](http://github.com/cms-sw/cmssw/pull/9000)  from @makortel: Fix associationMapFilterValues() for empty input AssociationMap
+
+1. [8996](http://github.com/cms-sw/cmssw/pull/8996)  from @appeltel: New HeavyIon ClusterCompatibility object and producer for beam scraping removal
+
+1. [8988](http://github.com/cms-sw/cmssw/pull/8988)  from @makortel: Improve MultiTrackValidator performance
+
+--- &singleimage w1:90% image:images/20150615_TrackingPOGAgenda.png
 
 ## Today's Agenda
-
-
