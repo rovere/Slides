@@ -55,7 +55,10 @@ https://github.com/cms-sw/cmssw/compare/CMSSW_7_6_0_pre2...CMSSW_7_6_0_pre3
 
 
 ---
-## Data Taking related News
+## News
+
+* The next Tracking POG meeting will overlap with CMS Physics&Upgrade
+  Week in Ischia and will be cancelled.
 
 * We have been (finally) taking data with 25ns (and 50ns again)
   buch-crossing for the past days with magnet on.
@@ -69,12 +72,10 @@ https://github.com/cms-sw/cmssw/compare/CMSSW_7_6_0_pre2...CMSSW_7_6_0_pre3
 
 * The final goal is to produce a public PAS that contains the most
   relevant results obtained with the first data collected. The idea is
-  that <font class="bold red">each individual group/responsible
-  will produce an AN that contains all the details and studies
-  performed</font>.
-
-* All the ANs will then be <font class="red bold">merged</font> into
-  the final PAS.
+  that <font class="bold red">each individual group/responsible will
+  produce an AN that contains all the details and studies
+  performed</font>. All the ANs will then be <font class="red
+  bold">merged</font> into the final PAS.
 
 * So far we envisage the following contribution:
 
