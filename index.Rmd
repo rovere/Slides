@@ -1,6 +1,6 @@
 ---
 title       : News
-subtitle    : Tracking POG Meeting, 2015-07-27
+subtitle    : Tracking POG Meeting, 2015-08-24
 author      : V.Innocente, M.Rovere
 job         : CERN
 framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
@@ -15,69 +15,78 @@ mode        : selfcontained # {standalone,draft}
 ---
 ## CMSSW_7_6_X release cycle
 
-# CMSSW_7_6_0_pre1
-#### Changes since CMSSW_7_5_0:
-https://github.com/cms-sw/cmssw/compare/CMSSW_7_5_0...CMSSW_7_6_0_pre1
+# CMSSW_7_6_0_pre2
+#### Changes since CMSSW_7_6_0_pre1:
+https://github.com/cms-sw/cmssw/compare/CMSSW_7_6_0_pre1...CMSSW_7_6_0_pre2
 
+1. [10347](http://github.com/cms-sw/cmssw/pull/10347)  from @arizzi: Better fix to handle the error in the PVsorting (76X PR) `reconstruction`
 
-1. [10048](http://github.com/cms-sw/cmssw/pull/10048)  from @MilanoBicocca-pix: Add vtx smearing parameters: nominal beam parameters, realistic centroid `operations`  `simulation`
+1. [10219](http://github.com/cms-sw/cmssw/pull/10219)  from @makortel: Add additional MultiTrackValidator instances to validation `dqm`  `reconstruction`
 
-1. [10083](http://github.com/cms-sw/cmssw/pull/10083)  from @bartokm: Fixing of bunchspacing handling in the SipixelDigitizer Dynamic Inefficiency in 76X `simulation`
+1. [10305](http://github.com/cms-sw/cmssw/pull/10305)  from @makortel: Replace bunch of debug-ifdefs in MultiHitGeneratorFromChi2 with a macro `reconstruction`
 
-1. [10014](http://github.com/cms-sw/cmssw/pull/10014)  from @makortel: Fix MultiTrackValidator efficiency summary and efficiency vs. deltaR plots `analysis`  `dqm`  `geometry`  `reconstruction`  `simulation`
+1. [10066](http://github.com/cms-sw/cmssw/pull/10066)  from @makortel: Fixes to some issues reported by static analyzer in tracking related code `alca`  `dqm`  `reconstruction`  `simulation`
 
-1. [10068](http://github.com/cms-sw/cmssw/pull/10068)  from @makortel: Fix one histogram name in MultiTrackValidator `dqm`
+1. [10231](http://github.com/cms-sw/cmssw/pull/10231)  from @makortel: Transform couts to LogDebug/LogTrace in MultiHitGeneratorFromChi2 `reconstruction`
 
-1. [10090](http://github.com/cms-sw/cmssw/pull/10090)  from @mtosi: fix bug in the plot of number of layers per track profile `dqm`
+1. [10238](http://github.com/cms-sw/cmssw/pull/10238)  from @mtosi: move PointSeededTrackingRegionsProducer to plugins (forward port of #10237) `reconstruction`
 
-1. [10094](http://github.com/cms-sw/cmssw/pull/10094)  from @mtosi: fix rec hits vs ls in tracking DQM code `dqm`
-
-1. [9979](http://github.com/cms-sw/cmssw/pull/9979)  from @ramankhurana: Edm pick events crab3 updates from cmssw 7 4 0 `analysis`
-
-1. [10016](http://github.com/cms-sw/cmssw/pull/10016)  from @makortel: Simplify class stucture of hit generators `reconstruction`
-
-1. [9949](http://github.com/cms-sw/cmssw/pull/9949)  from @makortel: Generalize makeTrackValidationPlots.py script `dqm`
-
-1. [10006](http://github.com/cms-sw/cmssw/pull/10006)  from @threus: Fix QTest for offline Tracking DQM 76x `dqm`
+1. [10222](http://github.com/cms-sw/cmssw/pull/10222)  from @MilanoBicocca-pix: Vtx smearing parameters for realistic 50ns collisions 13 TeV `simulation`
 
 ---
 ## CMSSW_7_6_X release cycle
+# CMSSW_7_6_0_pre3
+#### Changes since CMSSW_7_6_0_pre2:
+https://github.com/cms-sw/cmssw/compare/CMSSW_7_6_0_pre2...CMSSW_7_6_0_pre3
 
-# CMSSW_7_6_0_pre1
-#### Changes since CMSSW_7_5_0:
-https://github.com/cms-sw/cmssw/compare/CMSSW_7_5_0...CMSSW_7_6_0_pre1
+1. [10500](http://github.com/cms-sw/cmssw/pull/10500)  from @VinInn: Fix customise for RunI `reconstruction`
 
-1. [9904](http://github.com/cms-sw/cmssw/pull/9904)  from @makortel: Add ObjectSelectorStreamProducer template and use it for RecoTrackViewRefSelector `analysis`  `dqm`  `reconstruction`
+1. [10580](http://github.com/cms-sw/cmssw/pull/10580)  from @rovere: Factorise PreSplitting configuration from InitialStep `reconstruction`
 
-1. [9959](http://github.com/cms-sw/cmssw/pull/9959)  from @makortel: Migrate HitPattern to use TrackerTopology `analysis`  `dqm`  `fastsim`  `reconstruction`  `simulation`
+1. [10373](http://github.com/cms-sw/cmssw/pull/10373)  from @VinInn: reimplementation of Track classifiers and Track Collection mergers `analysis`  `fastsim`  `reconstruction`  `simulation`
 
-1. [9737](http://github.com/cms-sw/cmssw/pull/9737)  from @mdhildreth: TrackingParticle updates for pre mixing `operations`  `simulation`
+1. [10409](http://github.com/cms-sw/cmssw/pull/10409)  from @makortel: Fix index increment in MultiTrackValidator for the presence of continues in loop body `dqm`
 
-1. [9858](http://github.com/cms-sw/cmssw/pull/9858)  from @MilanoBicocca-pix: BeamSpot Fitter: added parameters to the migrad functor to supersede EDM defaults `alca`  `reconstruction`
+1. [10126](http://github.com/cms-sw/cmssw/pull/10126)  from @mtosi: update track candidate DQM code `dqm`
 
-1. [9882](http://github.com/cms-sw/cmssw/pull/9882)  from @makortel: Update tracking MC validation scripts `dqm`
+1. [10384](http://github.com/cms-sw/cmssw/pull/10384)  from @MilanoBicocca-pix: [IOMC]: update vertex smearing parameters for realistic 13 TeV 50ns collisions `simulation`
 
-1. [9834](http://github.com/cms-sw/cmssw/pull/9834)  from @MilanoBicocca-pix: Offline DQM: fix d0-phi plot under AlcaBeamMonitor/Validation `dqm`
-
-1. [9798](http://github.com/cms-sw/cmssw/pull/9798)  from @makortel: Refactor RecoTrackSelector and RecoTrackRefSelector `analysis`  `reconstruction`
+1. [10306](http://github.com/cms-sw/cmssw/pull/10306)  from @makortel: Return TrackingRegions by unique_ptr in TrackingRegionProducer `alca`  `fastsim`  `hlt`  `reconstruction` 
 
 
 ---
 ## Data Taking related News
 
-* We have been (happily) taking data for the past weeks and we
-  delivered most of the results we promised few months back to Physics
-  Coordination.
-* A HUGE thanks to everybody who promptly performed all the studies.
+* We have been (finally) taking data with 25ns (and 50ns again)
+  buch-crossing for the past days with magnet on.
 
-* The results are nicely summarized in a common DP note [[link]](http://cds.cern.ch/record/2037373/files/DP2015_016.pdf?version=1) and in a central TWiki page [[link]](https://twiki.cern.ch/twiki/bin/view/CMSPublic/PublicPlotsEPS2015)
+* We created a Twiki Page to collect the public results produced for
+  EPS 2015: you can find it
+  [[here]](https://twiki.cern.ch/twiki/bin/view/CMSPublic/TrackingPOGPlotsEPS2015). Please
+  take your time and fill it up with the results you obtained that
+  were approved in the official DP note
+  [[link]](http://cds.cern.ch/record/2037373/files/DP2015_016.pdf?version=1).
 
-* We, as Tracking POG, would like to have dedicated TWiki pages for each single contribution that has been approved for EPS in a TWiki page that will be linked from the main Tracking POG Results page ([[link]](https://twiki.cern.ch/twiki/bin/view/CMSPublic/PhysicsResultsTRK))
-   * Please create the page and either link it directly from within the main page or send us the link to your TWiki.
+* The final goal is to produce a public PAS that contains the most
+  relevant results obtained with the first data collected. The idea is
+  that <font class="bold red">each individual group/responsible
+  will produce an AN that contains all the details and studies
+  performed</font>.
 
-* New samples with proper PU and beamspot has been requested by us and have been announced today ([[link]](https://hypernews.cern.ch/HyperNews/CMS/get/relval/3909.html) and link to samples: [[link]](http://cms-project-relval.web.cern.ch/cms-project-relval/relval_stats/2015_07_24_2_0.txt))
-   * Feel free to use them for both Data/Mc comparison and for assessing if the shifted BS is affecting your studies.
+* All the ANs will then be <font class="red bold">merged</font> into
+  the final PAS.
 
---- &singleimage w1:90% image:images/20150727_TrackingPOGAgenda.png
+* So far we envisage the following contribution:
+
+1. $D^*$ analysis
+1. Efficiency using T&P
+1. $V^0$ Studies
+1. Data/MC
+
+* We will privately contact the main responsibles for each
+  contribution to arrange a more detailed plan.
+
+
+--- &singleimage w1:90% image:images/20150824_TrackingPOGAgenda.png
 
 ## Today's Agenda
